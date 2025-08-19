@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="os_theme_butterfly.os_todo" owl="1">
+        <div t-ref="root" class="os-settings-panel toggle-slide toggle-slide-right todo h-100" data-content="todoPanel" data-toggle-overlay="true" data-toggle-body="true" data-toggle-screen="any">
+            <div class="os-settings-head justify-content-between bg-white">
+                <h6 class="mb-0">TODO</h6>
+                <a class="os-settings-close toggle btn btn-icon btn-trigger me-n2 middle text-primary" data-target="todoPanel" href="#">
+                    <em class="icon osi osi-cross"/>
+                </a>
+            </div>
+            <div class="os-opt-panel p-2" data-simplebar="">
+                <div class="add_todo">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" t-ref="input" placeholder="Add To Do..." aria-label="Add To Do..."/>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" t-on-click="ev => this.addTodo(ev)">Add</button>
+                        </div>
+                    </div>
+                    <div id="msg"/>
+                </div>
+                <div class="pt-2">
+                    <div t-if="is_filter or records.length > 0" class="d-flex justify-content-between mb-3 border-bottom">
+                        <div class="tasks-clear button-group">
+                            <button class="btn btn-warning btn-sm me-2" t-if="there_is_completed" t-on-click="ev => this.clearCompleted(ev)">
+                                <i class="fa fa-check"/>
+                                Clear Completed
+                            </button>
+                            <button class="btn  btn-danger btn-sm" t-on-click="ev => this.clearAll(ev)">
+                                <i class="fa fa-trash"/>
+                                Clear All
+                            </button>
+                        </div>
+                        <OS_Dropdown
+                                class="'dropdown tasks-item-drodown ms-auto'"
+                                togglerClass="`btn btn-sm btn-link btn-icon`"
+                                menuClass="'dropdown-menu-end'">
+                            <t t-set-slot="toggler">
+                                <em class="icon osi osi-filter-fill"/>
+                            </t>
+
+                            <OS_DropdownItem class="'dropdown-item px-2 py-1'" onSelected="() => this.filter('all')">
+                                <span>All</span>
+                            </OS_DropdownItem>
+                            <OS_DropdownItem class="'dropdown-item px-2 py-1'" onSelected="() => this.filter('pending')">
+                                <span>Pending</span>
+                            </OS_DropdownItem>
+                            <OS_DropdownItem class="'dropdown-item px-2 py-1'" onSelected="() => this.filter('completed')">
+                                <span>Completed</span>
+                            </OS_DropdownItem>
+                        </OS_Dropdown>
+                    </div>
+                    <t t-if="records.length > 0">
+                        <t t-foreach="records" t-as="record" t-key="record_index">
+                            <div t-att-id="record.id" class="tasks-item-toggle align-items-center d-inline-flex border w-100 p-2" t-att-sequence="record.sequence" t-att-class="record.is_done ? 'completed' : ''">
+                                <i class="os_js_sequence_handler fa fa-arrows me-2 text-muted"/>
+
+                                <div class="custom-control custom-checkbox col-auto pe-0">
+                                    <input type="checkbox" t-att-data-id="record.id" class="custom-control-input" t-att-class="record.is_done ? 'is_done' : ''" t-att-checked="record.is_done" t-on-click="ev => this.toggleComplete(ev)" t-attf-id="toggleComplete{{record.id}}"/>
+                                    <label class="custom-control-label" t-attf-for="toggleComplete{{record.id}}"/>
+                                </div>
+                                <div class="todo_content col-auto ps-0 todo_textarea" t-att-data-id="record.id" t-on-focusout="ev => this._onFocusout(ev)" disabled="true">
+                                    <t t-esc="record.name"/>
+                                </div>
+                                <OS_Dropdown
+                                        class="'dropdown tasks-item-drodown ms-auto'"
+                                        togglerClass="`btn btn-sm btn-link btn-icon`"
+                                        menuClass="'dropdown-menu-end'">
+                                        <t t-set-slot="toggler">
+                                           <em class="icon osi osi-more-h"/>
+                                        </t>
+
+                                    <OS_DropdownItem dataset="{ id: record.id }" class="'dropdown-item px-2 py-1'" t-on-click="ev => this.edit_todo(ev)">
+                                        <em class="icon osi osi-edit me-1"/>
+                                        <span>Edit</span>
+                                    </OS_DropdownItem>
+                                    <OS_DropdownItem dataset="{ id: record.id }" class="'dropdown-item px-2 py-1'" t-on-click="ev => this.delete_todo(ev)">
+                                        <em class="icon osi osi-trash  me-1"/>
+                                        <span>Delete</span>
+                                    </OS_DropdownItem>
+
+                                </OS_Dropdown>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="text-center">
+                            <div class="pt-4 pb-4">
+                                <span class="svg-icon svg-icon-4x">
+                                    <t t-call="os_theme_butterfly.no_records"/>
+                                </span>
+                            </div>
+                            <div class="pb-5">
+                                <h3 class="fs-16px mb-2">
+                                    No
+                                    <span t-if="is_filter">
+                                        <t t-if="is_filter==='pending'">pending</t>
+                                        <t t-if="is_filter==='completed'">completed</t>
+                                    </span>
+                                    Todo!
+                                </h3>
+                            </div>
+                        </div>
+                    </t>
+
+                </div>
+            </div>
+        </div>
+
+    </t>
+</templates>

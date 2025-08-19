@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Rule: Users only see their own call records -->
+    <record id="call_detail_record_user_rule" model="ir.rule">
+        <field name="name">Call Detail - User Own Records</field>
+        <field name="model_id" ref="model_call_detail_record"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('setu_dialer.group_call_user'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record id="lean_manual_lead_user_rule" model="ir.rule">
+        <field name="name">Lean Manual Lead - User Own Records</field>
+        <field name="model_id" ref="setu_dialer.model_lean_manual_lead"/>
+        <field name="domain_force">[('employee_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('setu_dialer.group_call_user'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record id="lean_manual_lead_admin_rule" model="ir.rule">
+        <field name="name">Lean Manual Lead - Admin Full Access</field>
+        <field name="model_id" ref="setu_dialer.model_lean_manual_lead"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('setu_dialer.group_call_admin'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="hr_employee_see_own_rule" model="ir.rule">
+        <field name="name">HR Employee - See Own Record Only</field>
+        <field name="model_id" ref="hr.model_hr_employee"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="active" eval="True"/>
+        <field name="global" eval="False"/> <!-- Only apply to custom views -->
+        <field name="groups" eval="[(4, ref('setu_dialer.group_see_own_employee'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+</odoo>

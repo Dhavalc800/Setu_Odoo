@@ -1,0 +1,43 @@
+# See LICENSE file for full copyright and licensing details.
+
+{
+    'name': 'Setu Customisation',
+    'version': '16.0.1.0.0',
+    'category': '',
+    'license': 'LGPL-3',
+    'summary': 'Setu Customisation',
+    'depends': ['base', 'crm', 'auth_oauth', 'project', 'hr_attendance', 'scs_tatatele_integration', 'hr_holidays', 'scs_project_extended', 'sale_management'],
+    'data': [
+        'security/ir.model.access.csv',
+        'security/lead_data_rule.xml',
+        'data/data_sequence.xml',
+        'data/ir_cron.xml',
+        'views/lead_details_views.xml',
+        'views/crm_lead_views.xml',
+        'views/rm_numbers_views.xml',
+        'views/sale_order_views.xml',
+        'views/hr_job_views.xml',
+        'views/hr_employee_views.xml',
+        'views/employee_branch_view.xml',
+        'views/project_task_import_views.xml',
+        'views/res_config_settings_view.xml',
+        'views/hr_attendance_views.xml',
+        'views/customer_source_views.xml',
+        # 'views/project_task_views.xml',
+        'views/product_template_views.xml',
+        'views/funding_service_month_views.xml',
+        'views/agreement_status_views.xml',
+        'views/attandance_msg_history_views.xml',
+        'views/res_partner_views.xml',
+        'views/agreement_views.xml',
+        # 'views/bdm_meeting_request_views.xml',
+        # 'views/project_task_export_views.xml',
+        # 'views/project_task_export_action.xml',
+        'wizard/import_refund_excel_view.xml',
+        # 'wizard/lead_details_wizard_views.xml',
+        'wizard/update_assignee_wizard.xml',
+    ],
+
+    'installable': True,
+    
+}

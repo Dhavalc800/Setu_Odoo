@@ -1,0 +1,82 @@
+<odoo>
+    <data>
+        <record id="lead_details_tree_view_inherit" model="ir.ui.view">
+            <field name="name">lead.details.tree.inherit</field>
+            <field name="model">lead.details</field>
+            <field name="inherit_id" ref="scs_tatatele_integration.lead_details_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="replace">
+                    <tree>
+                        <field name="lead_id"/>
+                        <field name="lead_partner_id"/>
+                        <field name="formatted_phone_number"/>
+                        <field name="lead_email"/>
+                        <field name="lead_source"/>
+                        <field name="company_type"/>
+                        <field name="lead_slab"/>
+                        <field name="lead_disposition"/>
+                        <field name="assign_user_id"/>
+                        <field name="lead_service"/>
+                        <field name="campaign_name"/>
+                        <field name="state" widget="badge"/> 
+                    </tree>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="lead_details_form_view_inherit" model="ir.ui.view">
+            <field name="name">lead.details.form.inherit</field>
+            <field name="model">lead.details</field>
+            <field name="inherit_id" ref="scs_tatatele_integration.lead_details_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="replace">
+                    <form>
+                        <header>
+                            <button name="action_lead" type="object" string="Generate Lead" attrs="{'invisible': [('crm_lead_id', '!=', False)]}" class="oe_highlight"/>
+                            <field name="state" widget="statusbar" statusbar_visible="not_created,created" on_change="1" modifiers='{"readonly": true}'/>
+                        </header>
+                        
+                        <sheet>
+                            <div class="oe_button_box" name="button_box">
+                                <button class="oe_stat_button" type="object" name="get_leads" attrs="{'invisible': [('crm_lead_id', '==', False)]}" icon="fa-sitemap">
+                                    <field name="lead_id" options="{'no_create': True, 'no_open': True}" widget="statinfo"/>
+                                </button>
+                            </div>
+
+                            <h1>
+                                <field name="sequence_id" invisible="1"/>
+                                <field name="lead_id" readonly="1"/>
+                            </h1>
+                            <group>
+                                <group>
+                                    <field name="crm_lead_id" invisible="1"/>
+                                    <field name="lead_partner_id" options="{'no_create': True, 'no_open': True}" required="True"/>
+                                    <field name="lead_name" invisible="1" string="Lead Name"/>
+                                    <field name="formatted_phone_number" readonly="False" required="True" string="Phone"/>
+                                    <field name="phone_number" string="Contact" invisible="1" required="1"/>
+                                    <field name="lead_email" string="Email"/>
+                                    <field name="lead_source" string="Source"/>
+                                    <field name="company_type" string="Company Type"/>
+                                </group>
+                                <group>
+                                    <field name="lead_slab" string="Slab"/>
+                                    <field name="lead_disposition" string="Disposition"/>
+                                    <field name="assign_user_id" options="{'no_create': True, 'no_open': True}" string="Added By"/>
+                                    <field name="lead_service" string="Service"/>
+                                    <field name="campaign_name" string="Campaign Name"/>
+                                    <field name="crm_phone" invisible="1"/>
+                                </group>
+                            </group>
+                        </sheet>
+                        <div class="oe_chatter">
+                            <!-- <field name="message_follower_ids" widget="mail_followers" /> -->
+                            <field name="activity_ids" widget="mail_activity" />
+                            <field name="message_ids" widget="mail_thread" />
+                        </div>
+                    </form>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

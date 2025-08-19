@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="web.PivotView.Buttons" t-inherit-mode="extension" owl="1">
+          <xpath expr="//button[hasclass('btn-secondary')][1]" position="attributes">
+              <attribute name="class" remove="btn-secondary" add="btn-white btn-dim btn-outline-light" separator=" "/>
+          </xpath>
+        <xpath expr="//button[hasclass('btn-secondary')][1]" position="attributes">
+              <attribute name="class" remove="btn-secondary" add="btn-white btn-dim btn-outline-light" separator=" "/>
+          </xpath>
+        <xpath expr="//button[hasclass('btn-secondary')][1]" position="attributes">
+              <attribute name="class" remove="btn-secondary" add="btn-white btn-dim btn-outline-light" separator=" "/>
+          </xpath>
+      </t>
+</templates>

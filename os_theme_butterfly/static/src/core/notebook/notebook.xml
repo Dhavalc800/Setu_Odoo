@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+   <!-- NOTEBOOK -->
+    <t t-inherit="web.Notebook" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[contains(@t-attf-class, 'o_notebook')]" position="attributes">
+          <attribute name="t-ref">notebookRef</attribute>
+        </xpath>
+        <xpath expr="//div[contains(@t-attf-class, 'o_notebook')]" position="before">
+            <hr t-if="alignement=='vertical'"/>
+        </xpath>
+        <xpath expr="//div[contains(@class, 'o_notebook_headers')]" position="before">
+            <t t-if="!isMobile and alignement === 'horizontal'">
+                <div class="scroller scroller-left" t-on-click="()=>this.onClickScrollLeft()">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 128 128" style="enable-background:new 0 0 512 512" xml:space="preserve" class="" height="30" width="30"><g><path id="Left_Arrow_4_" d="m84 108c-1.023 0-2.047-.391-2.828-1.172l-40-40c-1.563-1.563-1.563-4.094 0-5.656l40-40c1.563-1.563 4.094-1.563 5.656 0s1.563 4.094 0 5.656l-37.172 37.172 37.172 37.172c1.563 1.563 1.563 4.094 0 5.656-.781.781-1.805 1.172-2.828 1.172z"  class="" fill="currentColor"></path></g></svg>
+                </div>
+                <div class="scroller scroller-right" t-on-click="()=>this.onClickScrollRight()">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 128 128" xml:space="preserve" class="" width="30" height="30" style="enable-background:new 0 0 30 30"><g><path id="Right_Arrow_4_" d="m44 108c-1.023 0-2.047-.391-2.828-1.172-1.563-1.563-1.563-4.094 0-5.656l37.172-37.172-37.172-37.172c-1.563-1.563-1.563-4.094 0-5.656s4.094-1.563 5.656 0l40 40c1.563 1.563 1.563 4.094 0 5.656l-40 40c-.781.781-1.805 1.172-2.828 1.172z"  class="" fill="currentColor"></path></g></svg>
+                </div>
+            </t>
+        </xpath>
+        <xpath expr="//div[contains(@t-attf-class, 'o_notebook')]" position="attributes">
+          <attribute name="t-attf-class">os_notebook o_notebook d-flex w-100 {{ !isMobile and alignement === 'horizontal' ? 'os-horizontal-notebook' : '' }} {{ alignement === 'horizontal' ? 'horizontal flex-column' : 'vertical align-items-start' }} {{ props.className }}</attribute>
+        </xpath>
+        <xpath expr="//ul[contains(@t-attf-class, 'nav-tabs')]" position="attributes">
+          <attribute name="t-attf-class">nav {{ !isMobile and alignement === 'horizontal' ? 'notebook-list' : '' }} {{ alignement === 'horizontal' ? 'nav-tabs  flex-row flex-nowrap' : 'flex-column nav-tabs-vertical w-100' }}</attribute>
+        </xpath>
+        <xpath expr="//div[contains(@class, 'o_notebook_headers')]" position="attributes">
+            <attribute name="t-attf-class"> {{ alignement === 'horizontal' ? 'wrapper w-100' : 'col-md-3 pl-md-0' }}</attribute>
+        </xpath>
+        <xpath expr="//div[contains(@class, 'o_notebook_content')]" position="attributes">
+            <attribute name="t-attf-class">{{ alignement === 'horizontal' ? '' : 'col px-3' }}</attribute>
+        </xpath>
+  </t>
+</templates>

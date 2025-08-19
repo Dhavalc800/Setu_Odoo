@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+        <record id="view_lead_call_history_tree" model="ir.ui.view">
+            <field name="name">lead.call.history.tree</field>
+            <field name="model">lead.call.history</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="lead_id"/>
+                    <field name="campaign_id"/>
+                    <field name="lead_list_id"/>
+                    <field name="phone"/>
+                    <field name="user_id"/>
+                    <field name="disposition_id"/>
+                    <field name="opportunity_name"/>
+                    <field name="expected_revenue"/>
+                    <field name="call_time"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_lead_call_history_form" model="ir.ui.view">
+            <field name="name">lead.call.history.form</field>
+            <field name="model">lead.call.history</field>
+            <field name="arch" type="xml">
+                <form string="Call History">
+                    <group>
+                        <field name="lead_id"/>
+                        <field name="campaign_id" readonly="1"/>
+                        <field name="lead_list_id" readonly="1"/>
+                        <field name="phone" readonly="1"/>
+                        <field name="is_interested" invisible="1"/>
+                        <field name="opportunity_name" attrs="{'invisible': [('is_interested', '!=', True)]}"/>
+                        <field name="expected_revenue" attrs="{'invisible': [('is_interested', '!=', True)]}"/>
+                        <field name="user_id"/>
+                        <field name="disposition_id" options="{'no_open': True}"/>
+                        <field name="call_time"/>
+                        <field name="remark"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_lead_call_history_pivot" model="ir.ui.view">
+            <field name="name">lead.call.history.pivot</field>
+            <field name="model">lead.call.history</field>
+            <field name="arch" type="xml">
+                <pivot string="Lead Call History Analysis">
+                    <field name="disposition_id" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="action_lead_call_history" model="ir.actions.act_window">
+            <field name="name">Call History</field>
+            <field name="res_model">lead.call.history</field>
+            <field name="view_mode">tree,form,pivot</field>
+        </record>
+    </data>
+</odoo>

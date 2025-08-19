@@ -1,0 +1,11 @@
+<odoo>
+    <record id="report_column_name" model="report.column">
+        <field name="name">name</field>
+    </record>
+    <record id="report_column_email" model="report.column">
+        <field name="name">email</field>
+    </record>
+    <record id="report_column_phone" model="report.column">
+        <field name="name">phone</field>
+    </record>
+</odoo>

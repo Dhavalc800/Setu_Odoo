@@ -1,0 +1,11 @@
+<odoo>
+  <record id="pro_forma_invoice_account_move" model="ir.actions.server">
+        <field name="name">Pro-Forma Invoice</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_view_types">form</field>
+        <field name="binding_type">report</field>
+        <field name="state">code</field>
+        <field name="code">action = record.action_print_pro_forma_invoice()</field>
+    </record>
+</odoo>

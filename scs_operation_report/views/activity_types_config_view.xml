@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="operation_activity_type_config_form_view" model="ir.ui.view">
+        <field name="name">operation.activity.type.config.form.view</field>
+        <field name="model">activity.type.config</field>
+        <field name="arch" type="xml">
+            <form string="Operation Activity Type">
+                <sheet>
+                    <group name="operation_activity_type_config" string="Operation Activity Type Config">
+                        <group col="3">
+                            <field name="name" required="1"/>
+                            <field name="company_id" />
+                        </group>
+                        <group col="3">
+                            <field name="project_ids" widget="many2many_tags" required="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="operation_activity_type_config_tree_view" model="ir.ui.view">
+        <field name="name">operation.activity.type.config.tree.view</field>
+        <field name="model">activity.type.config</field>
+        <field name="arch" type="xml">
+            <tree string="Operation Activity Type">
+                <field name="name" />
+                <field name="project_ids" widget="many2many_tags"/>
+                <field name="company_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_operation_activity_type_config">
+        <field name="name">Operation Activity Type Config</field>
+        <field name="res_model">activity.type.config</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="operation_activity_type_config_tree_view" />
+    </record>
+
+    <menuitem
+            id="project_operation_activity_type"
+            name="Project Activity Type"
+            parent="project.menu_project_config"
+            sequence="6"/>
+
+    <menuitem id="activity_type_config_master_config"
+        parent="scs_operation_report.project_operation_activity_type"
+        action="action_operation_activity_type_config"
+        name="Operation Activity Type" />
+
+</odoo>

@@ -1,0 +1,109 @@
+/* Dashboard Cards - Base Styles */
+.oe_card_dashboard {
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    background: white;
+    margin-bottom: 0;
+    border-left: 4px solid transparent; /* Prepare for colored accents */
+}
+
+.oe_card_dashboard:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.12), 0 10px 10px rgba(0,0,0,0.10);
+    transform: translateY(-2px);
+}
+
+.oe_card_dashboard .card-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.oe_card_dashboard .card-title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.oe_card_dashboard .card-title field {
+    display: block;
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+/* Color Variants */
+.oe_card_dashboard.intro-card {
+    background-color: #e1f5fe;
+    border-left-color: #03a9f4;
+}
+.oe_card_dashboard.intro-card .card-title {
+    color: #0288d1;
+}
+
+.oe_card_dashboard.prospect-card {
+    background-color: #e8f5e9;
+    border-left-color: #4caf50;
+}
+.oe_card_dashboard.prospect-card .card-title {
+    color: #388e3c;
+}
+
+.oe_card_dashboard.revenue-card {
+    background-color: #fff8e1;
+    border-left-color: #ffc107;
+}
+.oe_card_dashboard.revenue-card .card-title {
+    color: #ffa000;
+}
+
+.oe_card_dashboard.tacktime-card {
+    background-color: #ffebee;
+    border-left-color: #f44336;
+}
+.oe_card_dashboard.tacktime-card .card-title {
+    color: #d32f2f;
+}
+
+/* Time Off Table */
+.o_list_view .o_list_table thead {
+    background-color: #f8f9fa;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+.o_list_view .o_list_table th {
+    border-bottom: 2px solid #dee2e6;
+    padding: 12px 16px;
+}
+
+.o_list_view .o_list_table td {
+    padding: 12px 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid #eee;
+}
+
+/* Status Badges */
+.o_status {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.o_status_draft {
+    background-color: #f5f5f5;
+    color: #7f8c8d;
+}
+
+.o_status_to_approve {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.o_status_approved {
+    background-color: #d4edda;
+    color: #155724;
+}

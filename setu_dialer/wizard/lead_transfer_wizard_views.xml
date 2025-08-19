@@ -1,0 +1,37 @@
+<odoo>
+    <data>
+        <record id="view_lead_transfer_wizard_form" model="ir.ui.view">
+            <field name="name">lead.transfer.wizard.form</field>
+            <field name="model">lead.transfer.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Transfer Leads">
+                    <group>
+                        <field name="from_employee_id"/>
+                        <field name="to_employee_id"/>
+                        <field name="lead_ids" mode="tree,kanban"
+                            context="{'default_employee_id': to_employee_id}"
+                            attrs="{'invisible': [('from_employee_id', '=', False)]}" create="false">
+                            <tree editable="bottom">
+                                <field name="company_name"/>
+                                <field name="email"/>
+                                <field name="phone"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button name="action_transfer_leads" type="object" class="btn btn-primary" string="Transfer"/>
+                        <button string="Cancel" class="btn btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Wizard Action -->
+        <record id="action_lead_transfer_wizard" model="ir.actions.act_window">
+            <field name="name">Transfer Leads</field>
+            <field name="res_model">lead.transfer.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="export_logging_view_form" model="ir.ui.view">
+        <field name="name">export.logging.form</field>
+        <field name="model">export.logging</field>
+        <field name="arch" type="xml">
+            <form string="Export Logging">
+                <sheet>
+                    <group>
+                        <field name="user_id"/>
+                        <field name="model"/>
+                        <field name="created_on"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="export_logging_tree" model="ir.ui.view">
+        <field name="name">export.logging.tree</field>
+        <field name="model">export.logging</field>
+        <field name="arch" type="xml">
+            <tree string="Export Logging">
+                <field name="user_id"/>
+                <field name="model"/>
+                <field name="created_on"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_export_logging" model="ir.actions.act_window">
+        <field name="name">Export Logging</field>
+        <field name="res_model">export.logging</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_export_logging"
+              name="Export Logging"
+              parent="base.menu_administration"
+              action="action_export_logging"
+              sequence="70"/>
+</odoo>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	    <!--Inherit Tree view to make treeview as in Green or Red color -->
+	    <record id="view_task_form2_inherited_erp" model="ir.ui.view">
+	        <field name="name">project.task.tree</field>
+	        <field name="model">project.task</field>
+	        <field eval="2" name="priority"/>
+	        <field name='inherit_id' ref='hr_timesheet.view_task_form2_inherited'/>
+	        <field name="arch" type="xml">
+				<xpath expr="//notebook/page/field[@name='timesheet_ids']/tree/field[@name='employee_id']" position="after">
+                	<field name="timesheet_type"/>
+                	<field name="ticket_no" optional="hide"/>
+            	</xpath>
+            	<xpath expr="//notebook/page/field[@name='timesheet_ids']/tree/field[@name='name']" position="replace">
+                	<field name="name" required="0" style="white-space: normal;word-break: break-word;"/>
+            	</xpath>
+	        </field>
+	    </record>
+
+	    <!--Inherit Tree view to make treeview as in Green or Red color -->
+	    <record id="inherit_view_project_task_tree2" model="ir.ui.view">
+	        <field name="name">project.task.tree</field>
+	        <field name="model">project.task</field>
+	        <field eval="2" name="priority"/>
+	        <field name='inherit_id' ref='project.view_task_tree2'/>
+	        <field name="arch" type="xml">
+	            <xpath expr="//tree/field[@name='sequence']" position="after">
+	                <field name="id"/>
+	            </xpath>
+	        </field>
+	    </record>
+	    
+
+         <record id="hr_timesheet.act_hr_timesheet_line" model="ir.actions.act_window">
+            <field name="name">My Timesheets</field>
+            <field name="res_model">account.analytic.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('project_id', '!=', False)]</field>
+            <field name="context">{
+                "search_default_week":1, "search_default_mine":1,
+            }</field>
+            <field name="search_view_id" ref="hr_timesheet.hr_timesheet_line_search"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Record a new activity
+              </p><p>
+                You can register and track your workings hours by project every
+                day. Every time spent on a project will become a cost and can be re-invoiced to
+                customers if required.
+              </p>
+            </field>
+        </record> 
+
+    <!-- Inherit Menu for activity Analysis -->
+     <menuitem id="hr_timesheet.menu_hr_activity_analysis" 
+    	parent="hr_timesheet.menu_timesheets_reports" 
+        action="hr_timesheet.act_hr_timesheet_report" name="Activity Analysis"/>
+
+    <!-- Inherited view to add a field -->
+    <record id ="res_company_view_hr" model="ir.ui.view">
+        <field name="name">res.company.view.hr</field>
+        <field name="model">res.company</field>
+        <field name ="inherit_id" ref="hr_config.res_company_view_hr"/>
+        <field name="arch" type ="xml">
+            <xpath expr="//group[@name='hr_fiscal_grp']" position="after">
+                <group>
+                    <field name="timesheet_allow_hrs" />
+                </group>
+            </xpath>
+           </field>
+    </record>
+
+     <record id="action_project_timesheet_approval" model="ir.actions.act_window">
+        <field name="name">Team Member Timesheets</field>
+        <field name="res_model">account.analytic.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">['|', '|','|', ('project_id.user_id','=', uid),('employee_id.user_id', 'in', 'project_id.assigns_user_ids.ids'),('project_id.project_leader_id', '=', uid), ('employee_id.user_id', 'in', 'project_id.project_leader_id')]</field>
+    </record> 
+
+    <record id="export_timesheet_entries" model="ir.actions.act_window">
+        <field name="name">Timesheet Entries</field>
+        <field name="res_model">account.analytic.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('task_id', '=', active_id)]</field>
+        <field name="context">{ 'search_default_task_id': [active_id],
+                    'default_task_id': active_id,}</field>
+        <field name="binding_model_id" ref="project.model_project_task"/>
+        <field name="binding_view_types">form</field>
+    </record>
+    
+</odoo>

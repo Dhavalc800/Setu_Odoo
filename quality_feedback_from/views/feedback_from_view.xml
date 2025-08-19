@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="quality_feedback_tree_view" model="ir.ui.view">
+        <field name="name">quality.feedback.tree.view</field>
+        <field name="model">quality.feedback</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="quality_feedback_form_view" model="ir.ui.view">
+        <field name="name">quality.feedback.form.view</field>
+        <field name="model">quality.feedback</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Start Feedback" name="action_start_survey_from"
+                            type="object"
+                            attrs="{'invisible': ['|', ('survey_id', '=', False), ('is_feedback_done', '=', True)]}"/>
+                    <button string="Send Feedback" name="action_send_survey_from"
+                            type="object"
+                            attrs="{'invisible': ['|', ('survey_id', '=', False), ('state', 'in', ('confirm', 'done'))]}" context="{'send_feedback': True}"
+                            />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="new,confirm,done"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_survey_result" type="object" string="Feedback" class="oe_stat_button" icon="fa-edit" attrs="{'invisible': [('survey_count', '=', 0)]}">
+                            <field name="survey_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id" string="Customer Name"/>
+                            <field name="customer_address"/>
+                            <field name="customer_mobile_no" />
+                            <field name="customer_phone_no" />
+                            <field name="customer_email_id"/>
+                            <field name="survey_id" options="{'no_create': True}"/>
+                            <field name="is_feedback_done" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="user_ids" widget="many2many_tags"/>
+                            <field name="state_name" string= "Task Status" readonly="1" />
+                            <field name="project_id" />
+                            <field name="task_id" domain="[('project_id', '=', project_id)]" context="{'feedback': True}"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_quality_feedback" model="ir.actions.act_window">
+        <field name="name">Feedback Request</field>
+        <field name="res_model">quality.feedback</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_quality_feedback"
+        name="Quality"
+        sequence="10"
+        web_icon="quality_feedback_from,static/description/icon.png"
+        groups="quality_feedback_from.group_quality_user"
+    />
+    
+    <menuitem id="sub_menu_quality_feedback" action="action_quality_feedback" parent="menu_quality_feedback"/>
+
+</odoo>

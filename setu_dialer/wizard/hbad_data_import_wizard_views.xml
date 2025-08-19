@@ -1,0 +1,35 @@
+<odoo>
+    <record id="view_hbad_data_import_wizard" model="ir.ui.view">
+        <field name="name">hbad.data.import.wizard.form</field>
+        <field name="model">hbad.data.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import HBAD Data">
+                <group>
+                    <field name="upload_file" filename="filename"/>
+                </group>
+                <div class="oe_button_box" style="margin: 20px;">
+                    <a class="btn btn-primary" href="/hbad/download_sample">
+                        <i class="fa fa-download"/> Download CSV Format
+                    </a>
+                </div>
+                <footer>
+                    <button name="action_import_csv" string="Import" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hbad_data_import_wizard" model="ir.actions.act_window">
+        <field name="name">Import HBAD Data</field>
+        <field name="res_model">hbad.data.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_hbad_data_import"
+        name="Import HBAD Data"
+        parent="project.menu_project_config"
+        groups="setu_dialer.group_hbab_admin"
+        action="action_hbad_data_import_wizard"/>
+</odoo>

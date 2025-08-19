@@ -1,0 +1,20 @@
+<odoo>
+    <data noupdate="1">
+        <record id="seq_lead_details" model="ir.sequence">
+            <field name="name">Lead Details Sequence</field>
+            <field name="code">lead.details</field>
+            <field name="prefix">LD-</field>
+            <field name="padding">4</field>
+        </record>
+
+        <record id="ir_sequence_access" model="ir.model.access">
+            <field name="name">ir_sequence_access</field>
+            <field name="model_id" ref="base.model_ir_sequence"/>
+            <field name="group_id" ref="base.group_user"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+    </data>
+</odoo>

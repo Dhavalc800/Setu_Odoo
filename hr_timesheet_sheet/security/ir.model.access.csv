@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_timesheet_sheet_user,hr_timesheet.sheet,model_hr_timesheet_sheet,base.group_user,1,1,1,0
+access_hr_timesheet_sheet_admin,hr_timesheet.sheet.admin,model_hr_timesheet_sheet,hr_timesheet.group_timesheet_manager,1,1,1,1
+access_hr_timesheet_sheet_line,hr_timesheet.sheet.line,model_hr_timesheet_sheet_line,hr_timesheet.group_hr_timesheet_user,1,1,1,1
+access_hr_timesheet_sheet_new_analytic_line,hr_timesheet.sheet.new.analyticline,model_hr_timesheet_sheet_new_analytic_line,hr_timesheet.group_hr_timesheet_user,1,1,1,1
+access_timesheet_refuse_reason,access_timesheet_refuse_reason,model_timesheet_refuse_reason,base.group_user,1,1,1,1

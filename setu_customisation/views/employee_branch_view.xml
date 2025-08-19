@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+        <record id="view_employee_branch_tree_inherit" model="ir.ui.view">
+            <field name="name">employee.branch.tree.inherit</field>
+            <field name="model">employee.branch</field>
+            <field name="inherit_id" ref="scs_project_extended.view_employee_branch_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="company_ids" widget="many2many_tags"/>   
+                </xpath>            
+            </field>
+        </record>
+
+        <record id="view_employee_branch_form_inherit" model="ir.ui.view">
+            <field name="name">employee.branch.form.inherit</field>
+            <field name="model">employee.branch</field>
+            <field name="inherit_id" ref="scs_project_extended.view_employee_branch_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="company_ids" widget="many2many_tags"/>   
+                </xpath>            
+            </field>
+        </record>
+
+        <menuitem id="scs_project_extended.menu_employee_branch"
+            name="Employee Branches"
+            parent="hr.menu_human_resources_configuration"
+            groups="setu_customisation.group_branch_admin"/>
+
+    </data>
+</odoo>

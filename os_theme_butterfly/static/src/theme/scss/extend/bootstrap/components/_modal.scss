@@ -1,0 +1,207 @@
+
+/////////    Modals    ///////////////
+///////////////////////////////////////
+$modal-fade-transform: translate(0, -30px);
+$modal-fade-transform-revarse: translate(0, -10px);
+$modal-show-transform: none !important;
+$modal-transition: transform .3s ease-out;
+$modal-scale-transform: scale(.95);
+
+$modal-inner-padding: 1.25rem;
+$modal-header-padding-y: 1rem;
+$modal-header-padding-x: $modal-inner-padding;
+
+
+$modal-custom-padding: 1.5rem;
+$modal-custom-padding-sm: 1.25rem;
+$modal-custom-padding-md: 2.25rem;
+$modal-custom-padding-lg: 3.75rem;
+
+$modal-body-custom-padding-x: 1.5rem;
+$modal-body-custom-padding-x-sm: 1.25rem;
+$modal-body-custom-padding-x-md: 2.5rem;
+$modal-body-custom-padding-x-lg: 3.75rem;
+
+$modal-header-custom-padding-xy: 1rem $modal-custom-padding;
+$modal-header-custom-padding-xy-sm: 0.75rem $modal-body-custom-padding-x-sm;
+
+$modal-footer-custom-padding-xy: 1rem $modal-custom-padding;
+$modal-footer-custom-padding-xy-sm: 0.75rem $modal-body-custom-padding-x-sm;
+
+.modal{
+    &-content{
+        position: relative;
+        min-height: 40px;
+        box-shadow: $modal-content-box-shadow-xs;
+        > .close{
+            position: absolute;
+            top: .75rem;
+            right: .75rem;
+            height: 2.25rem;
+            width: 2.25rem;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            color: $base-text;
+            z-index: 1;
+            transition: all .3s;
+        }
+    }
+    &-body{
+        .stretched{
+            border-radius: 0;
+            &.alert{
+                border: none;
+                &-icon{
+                    padding-left: $modal-inner-padding + $alert-icon-width;
+                }
+            }
+        }
+
+        &-md{
+            padding: ($modal-custom-padding-md - 0.5) $modal-body-custom-padding-x-sm;
+            .stretched{
+                margin-left: - $modal-body-custom-padding-x-sm;
+                margin-right: - $modal-body-custom-padding-x-sm;
+                padding-left: $modal-body-custom-padding-x-sm;
+                padding-right: $modal-body-custom-padding-x-sm;
+                &.alert-icon{
+                    padding-left: $modal-body-custom-padding-x-md + $alert-icon-width;
+                }
+            }
+        }
+
+        &-lg{
+            padding: $modal-custom-padding-md $modal-body-custom-padding-x-sm;
+            .stretched{
+                margin-left: - $modal-body-custom-padding-x-sm;
+                margin-right: - $modal-body-custom-padding-x-sm;
+                padding-left: $modal-body-custom-padding-x-sm;
+                padding-right: $modal-body-custom-padding-x-sm;
+                &.alert-icon{
+                    padding-left: $modal-body-custom-padding-x-md + $alert-icon-width;
+                }
+            }
+        }
+    }
+    &-footer{
+        &-stretch{
+            justify-content: stretch;
+        }
+        &-between{
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: -.25rem 0;
+            > div{
+                padding: .25rem 0;
+            }
+        }
+    }
+    &-dialog{
+        display: flex;
+        align-items: center;
+        min-height: subtract(100%, $modal-dialog-margin * 2);
+        &::before {
+          height: subtract(100vh, $modal-dialog-margin * 2);
+        }
+        .modal.fade &{
+            transform: $modal-fade-transform-revarse;
+        }
+        .modal.zoom &{
+            transform: $modal-scale-transform;
+            transition: $modal-transition;
+        }
+        &-top{
+            align-items: flex-start;
+            .modal.fade &{
+                transform: $modal-fade-transform;
+            }
+        }
+        &-bottom{
+            align-items: flex-end;
+        }
+    }
+}
+
+@include media-breakpoint-up(sm){
+    .modal-dialog{
+        min-height: subtract(100%, $modal-dialog-margin-y-sm-up * 2);
+        &::before {
+          height: subtract(100vh, $modal-dialog-margin-y-sm-up * 2);
+        }
+    }
+    .modal{
+        &-body{
+            padding: $modal-custom-padding $modal-body-custom-padding-x;
+            .stretched{
+                margin-left: - $modal-body-custom-padding-x;
+                margin-right: - $modal-body-custom-padding-x;
+                padding-left: $modal-body-custom-padding-x;
+                padding-right: $modal-body-custom-padding-x;
+                &.alert-icon{
+                    padding-left: $modal-body-custom-padding-x + $alert-icon-width;
+                }
+            }
+            &-sm{
+                padding: $modal-custom-padding-sm $modal-body-custom-padding-x-sm;
+                .stretched{
+                    margin-left: - $modal-body-custom-padding-x-sm;
+                    margin-right: - $modal-body-custom-padding-x-sm;
+                    padding-left: $modal-body-custom-padding-x-sm;
+                    padding-right: $modal-body-custom-padding-x-sm;
+                    &.alert-icon{
+                        padding-left: $modal-body-custom-padding-x-sm + $alert-icon-width;
+                    }
+                }
+            }
+            &-md{
+                padding: $modal-custom-padding-md $modal-body-custom-padding-x-md;
+                .stretched{
+                    margin-left: - $modal-body-custom-padding-x-md;
+                    margin-right: - $modal-body-custom-padding-x-md;
+                    padding-left: $modal-body-custom-padding-x-md;
+                    padding-right: $modal-body-custom-padding-x-md;
+                    &.alert-icon{
+                        padding-left: $modal-body-custom-padding-x-md + $alert-icon-width;
+                        > .icon{
+                            left: $modal-body-custom-padding-x-md;
+                        }
+                    }
+                }
+            }
+            &-lg{
+                padding: $modal-custom-padding-lg $modal-body-custom-padding-x-lg;
+                .stretched{
+                    margin-left: - $modal-body-custom-padding-x-lg;
+                    margin-right: - $modal-body-custom-padding-x-lg;
+                    padding-left: $modal-body-custom-padding-x-lg;
+                    padding-right: $modal-body-custom-padding-x-lg;
+                    &.alert-icon{
+                        padding-left: $modal-body-custom-padding-x-lg + $alert-icon-width;
+                    }
+                }
+            }
+        }
+        &-header{
+            padding: $modal-header-custom-padding-xy;
+            &-sm {
+                padding: $modal-header-custom-padding-xy-sm;
+            }
+        }
+        &-footer{
+            padding: $modal-footer-custom-padding-xy;
+            &-sm {
+                padding: $modal-footer-custom-padding-xy-sm;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-up(md){
+    .modal-md{
+        max-width: 600px;
+    }
+}

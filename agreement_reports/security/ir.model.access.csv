@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+agreement_reports.access_agreement_details,access_agreement_details,agreement_reports.model_agreement_details,base.group_user,1,1,1,1
+agreement_legal.access_agreement_sale_user,agreement sale user,model_agreement,sales_team.group_sale_salesman,1,0,1,0
+agreement_legal.access_agreement_line_sale_user,agreement line sale users,model_agreement_line,sales_team.group_sale_salesman,1,0,1,0
+access_agreement_full,Full access on agreement grp,model_agreement,base.group_system,1,1,1,0
+agreement_legal.access_agreement_manager,agreement manager,model_agreement,agreement_legal.group_agreement_manager,1,1,1,0
+agreement.access_agreement_full,Full access on agreement grp,agreement.model_agreement,sales_team.group_sale_manager,1,1,1,0
+

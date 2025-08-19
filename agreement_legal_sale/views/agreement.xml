@@ -1,0 +1,60 @@
+<!-- Copyright 2019 Open Source Integrators
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <!-- Agreement Form View -->
+    <record id="agreement_sale_form_view" model="ir.ui.view">
+        <field name="name">agreement.form.view</field>
+        <field name="model">agreement</field>
+        <field name="inherit_id" ref="agreement_legal.partner_agreement_form_view" />
+        <field name="arch" type="xml">
+            <page name="signature" position="after">
+                <page name="sales" string="Sales">
+                    <group>
+                        <group id="sale_left">
+                            <field name="sale_id" readonly="1" />
+                            <field name="salesperson" readonly="1" />
+                            <field name="booking_type"/>
+                        </group>
+                        <group id="sale_right" />
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+
+    <record id="booking_agreement_list_view_inherit" model="ir.ui.view">
+        <field name="name">booking.agreement.list.view.inherit</field>
+        <field name="model">agreement</field>
+        <field name="inherit_id" ref="agreement_legal.partner_agreement_list_view" />
+        <field name="arch" type="xml">
+            <field name="stage_id" position="after">
+                <field name="booking_type"/>
+                <field name="salesperson"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="booking_partner_agreement_search_view_inherit" model="ir.ui.view">
+        <field name="name">booking.agreement.list.view.inherit</field>
+        <field name="model">agreement</field>
+        <field name="inherit_id" ref="agreement_legal.partner_agreement_search_view" />
+        <field name="arch" type="xml">
+            <field name="agreement_type_id" position="after">
+                <field name="booking_type"/>
+            </field>
+            <filter name="group_status" position="after">
+                <filter name="group_booking_type" string="Booking Type" context="{'group_by':'booking_type'}"/>
+            </filter>
+        </field>
+    </record>
+
+    
+
+    <menuitem
+        id="agreement.agreement_menu"
+        action="agreement.agreement_action"
+        sequence="100"
+    />
+
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+    <t t-inherit="mail.ChatterTopbar" t-inherit-mode="extension">
+        <xpath expr="//button[contains(@class, 'o_ChatterTopbar_buttonSendMessage')]" position="replace">
+            <button class="o_ChatterTopbar_button o_ChatterTopbar_buttonSendMessage btn text-nowrap me-2"
+                type="button"
+                t-att-class="{
+                    'o-active btn-odoo': chatterTopbar.chatter.composerView and !chatterTopbar.chatter.composerView.composer.isLog,
+                    'btn-odoo': !chatterTopbar.chatter.composerView,
+                    'btn-light': chatterTopbar.chatter.composerView and chatterTopbar.chatter.composerView.composer.isLog,
+                }"
+                t-att-disabled="!chatterTopbar.chatter.canPostMessage"
+                data-hotkey="m"
+                t-on-click="chatterTopbar.chatter.onClickSendMessage"
+            >
+            Sent Email to Client
+            </button>
+        </xpath>
+    </t>
+</templates>

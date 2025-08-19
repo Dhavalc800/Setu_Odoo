@@ -1,0 +1,97 @@
+<odoo>
+    <data>
+        <record id="view_lead_callback_info_tree" model="ir.ui.view">
+            <field name="name">lead.callback.info.tree</field>
+            <field name="model">lead.callback.info</field>
+            <field name="arch" type="xml">
+                <tree string="Callback Leads" default_order="callback_time desc">
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="campaign_id"/>
+                    <field name="lead_list_id1"/>
+                    <field name="lead_id"/>
+                    <field name="is_fetched_callback"/>
+                    <field name="callback_time"/>
+                    <field name="user_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_lead_callback_info_form" model="ir.ui.view">
+            <field name="name">lead.callback.info.form</field>
+            <field name="model">lead.callback.info</field>
+            <field name="arch" type="xml">
+                <form string="Callback Lead Info">
+                    <sheet>
+                        <group>
+                            <field name="lead_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="phone"/>
+                            <field name="call_time"/>
+                            <field name="remark"/>
+                            <field name="disposition_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="campaign_id" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="lead_list_id1" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="is_fetched_callback"/>
+                            <field name="callback_time"/>
+                            <field name="user_id" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_lead_callback_info_search" model="ir.ui.view">
+            <field name="name">lead.callback.info.search</field>
+            <field name="model">lead.callback.info</field>
+            <field name="arch" type="xml">
+                <search string="Callback Leads Search">
+                    <!-- Basic search fields -->
+                    <field name="lead_id"/>
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="call_time"/>
+                    
+                    <!-- Filter by date ranges -->
+                    <filter string="Today's Callbacks" name="today" domain="[('callback_time','&gt;=',context_today().strftime('%Y-%m-%d 00:00:00')),('callback_time','&lt;=',context_today().strftime('%Y-%m-%d 23:59:59'))]"/>
+                    <filter string="Future Callbacks" name="future" domain="[('callback_time','&gt;=',context_today().strftime('%Y-%m-%d 00:00:00'))]"/>
+                    <filter string="Past Callbacks" name="past" domain="[('callback_time','&lt;',context_today().strftime('%Y-%m-%d 00:00:00'))]"/>
+                    
+                    <!-- Grouping options -->
+                    <group expand="0" string="Group By">
+                        <filter string="Campaign" name="group_by_campaign" context="{'group_by':'campaign_id'}"/>
+                        <filter string="Lead List" name="group_by_lead_list" context="{'group_by':'lead_list_id1'}"/>
+                        <filter string="User" name="group_by_user" context="{'group_by':'user_id'}"/>
+                        <filter string="Callback Date" name="group_by_date" context="{'group_by':'callback_time:day'}"/>
+                    </group>
+                    
+                    <!-- Default sort -->
+                    <field name="callback_time" invisible="1"/>
+                    <field name="user_id" invisible="1"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_lead_callback_info_pivot" model="ir.ui.view">
+            <field name="name">lead.callback.info.pivot</field>
+            <field name="model">lead.callback.info</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <pivot string="Lead Callback Info">
+                    <field name="lead_id" type="row"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="action_lead_callback_info" model="ir.actions.act_window">
+            <field name="name">Callback Leads</field>
+            <field name="res_model">lead.callback.info</field>
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="search_view_id" ref="view_lead_callback_info_search"/>
+        </record>
+
+    </data>
+</odoo>

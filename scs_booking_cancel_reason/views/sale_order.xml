@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="sale_inherit_form_view" model="ir.ui.view">
+        <field name="name">sale.order.inherit.form.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='other_information']//field[@name='client_order_ref']" position="after">
+                <field name="cancellation_reason"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

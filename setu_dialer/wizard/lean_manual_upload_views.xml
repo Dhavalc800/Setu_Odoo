@@ -1,0 +1,35 @@
+<odoo>
+    <!-- Wizard Form -->
+    <record id="view_lean_manual_upload_wizard_form" model="ir.ui.view">
+        <field name="name">lean.manual.upload.wizard.form</field>
+        <field name="model">lean.manual.upload.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Upload Manual Leads">
+                <group>
+                    <field name="upload_file" filename="file_name"/>
+                </group>
+                <div class="oe_button_box" style="margin: 20px;">
+                    <a class="btn btn-primary" href="/lean/manual/lead/download_format">
+                        <i class="fa fa-download"/> Download CSV Format
+                    </a>
+                </div>
+                <footer>
+                    <button name="action_import_csv" type="object" string="Import" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to Open Wizard -->
+    <record id="action_lean_manual_upload_wizard" model="ir.actions.act_window">
+        <field name="name">Upload Manual Leads</field>
+        <field name="res_model">lean.manual.upload.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menu Under Configuration -->
+    <!-- <menuitem id="menu_lean_manual_upload_root" name="Lean Manual Upload" parent="base.menu_config" sequence="99"/>
+    <menuitem id="menu_lean_manual_upload_wizard" name="Upload Leads" parent="menu_lean_manual_upload_root" action="action_lean_manual_upload_wizard"/> -->
+</odoo>

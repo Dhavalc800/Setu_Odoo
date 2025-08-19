@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="web_tata_teleservice_action" model="ir.actions.client">
+            <field name="name">Tata Teleservice</field>
+            <field name="tag">tata_tele_service</field>
+            <field name="target">fullscreen</field>
+        </record>
+
+        <menuitem name="Tata TeleService"
+            id="menu_tata_teleservice"
+            sequence="95"
+            groups="base.group_user"
+            action="web_tata_teleservice.web_tata_teleservice_action"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-inherit="web.ControlPanel.Small" t-inherit-mode="extension" owl="1">
+        <xpath expr="//button[hasclass('o_enable_searchview')]" position="attributes">
+            <attribute name="class" add="text-body pe-0" separator=" "/>
+            <attribute name="t-att-class">state.showSearchBar ? 'osi osi-arrow-left' : 'osi osi-search'</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('o_cp_bottom_right')]" position="attributes">
+            <attribute name="class" add="justify-content-end" separator=" "/>
+        </xpath>
+        <xpath expr="//nav[hasclass('o_cp_switch_buttons')]//button" position="attributes">
+            <attribute name="class" remove="btn-light" add="btn-white btn-dim btn-outline-light me-1" separator=" "/>
+        </xpath>
+        <xpath expr="//nav[hasclass('o_cp_switch_buttons')]//Dropdown" position="attributes">
+            <attribute name="menuClass">'d-inline-flex p-2'</attribute>
+            <attribute name="togglerClass">'os_selected_view_btn text-body btn btn-link btn-sm pe-0'</attribute>
+         </xpath>
+    </t>
+
+    <t t-inherit="web.ControlPanelSearchDialog" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('o_mobile_search')]" position="attributes">
+            <attribute name="class" add="os_modal_mobile_search" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_mobile_search_header')]" position="attributes">
+            <attribute name="class" add="os_modal_mobile_search_header" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_mobile_search_header')]//button[1]//strong" position="replace"/>
+        <xpath expr="//div[hasclass('o_mobile_search_header')]//button[1]//i" position="replace">
+            <t t-call="os_theme_butterfly.search_back_2"/>
+        </xpath>
+    </t>
+
+    <t t-inherit="web.ControlPanel" t-inherit-mode="extension" owl="1">
+         <xpath expr="//div[hasclass('o_control_panel')]" position="attributes">
+            <attribute name="t-attf-class" add="os_owl_control_panel" separator=" "/>
+        </xpath>
+    </t>
+
+    <t t-inherit="web.ControlPanel.Regular" t-inherit-mode="extension" owl="1">
+        <xpath expr="//SearchBar" position="attributes">
+             <attribute name="isToggleSearch">true</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('o_cp_top_right')]" position="attributes">
+            <attribute name="class" add="justify-content-end align-items-center" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_cp_top_left')]//t[1]" position="before">
+            <h3 class="os-block-title page-title my-2" t-if="breadcrumbs and breadcrumbs[0]">
+                <t t-esc="breadcrumbs[0].name"/>
+            </h3>
+        </xpath>
+        <xpath expr="//div[hasclass('o_cp_bottom_right')]" position="attributes">
+            <attribute name="class" add="justify-content-end" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_cp_bottom_right')]//div[hasclass('o_search_options')]" position="replace"/>
+        <xpath expr="//div[hasclass('o_cp_top_right')]" position="after">
+            <div t-if="env.searchModel" class="o_search_options position-static d-flex flex-nowrap" role="search">
+                <t t-foreach="searchMenus" t-as="menu" t-key="menu.key">
+                    <t t-component="menu.Component"/>
+                </t>
+            </div>
+        </xpath>
+        <xpath expr="//*[hasclass('o_cp_switch_buttons')]//button" position="attributes">
+            <attribute name="class" remove="btn-light" add="btn-white btn-dim btn-outline-light" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_cp_bottom')]" position="attributes">
+            <attribute name="class" add="mt-3" separator=" "/>
+        </xpath>
+    </t>
+
+</templates>

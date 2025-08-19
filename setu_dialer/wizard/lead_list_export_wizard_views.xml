@@ -1,0 +1,27 @@
+<odoo>
+    <record id="view_lead_data_import_wizard_form" model="ir.ui.view">
+        <field name="name">lead.data.import.wizard.form</field>
+        <field name="model">lead.data.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Lead Data CSV">
+                <group>
+                    <field name="lead_list_id" invisible="1"/>
+                    <field name="file" filename="file_name"/>
+                    <field name="file_name"/>
+                </group>
+                <footer>
+                    <button name="action_import_csv" type="object" string="Import CSV" class="btn-primary"/>
+                    <button name="action_download_sample_csv" type="object" string="Download Sample CSV" class="btn-secondary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_lead_data_import_wizard" model="ir.actions.act_window">
+        <field name="name">Import Lead Data</field>
+        <field name="res_model">lead.data.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

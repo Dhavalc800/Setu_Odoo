@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="web.TataTeleService" owl="1">
+       <div style="overflow: auto;height: 100%;">
+            <iframe src="https://cloudphone.tatateleservices.com/dialer/login" 
+                    class="col-md-12 col-12"
+                    style="height: 90%;"
+                    title="Iframe Example"/>
+       </div>
+    </t>
+
+</templates>

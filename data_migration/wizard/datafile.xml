@@ -1,0 +1,26 @@
+<odoo>
+    <record id="view_data_import_wizard_form" model="ir.ui.view">
+        <field name="name">data.import.wizard.form</field>
+        <field name="model">data.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import datas from Excel">
+                <group>
+                    <field name="file" filename="file_name"/>
+                    <field name="file_name"/>
+                    <field name="start_row"/>
+                </group>
+                <footer>
+                    <button string="Import" type="object" name="action_import_file" class="btn-primary" data-hotkey="a"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_data_import_wizard" model="ir.actions.act_window">
+        <field name="name">Import datas</field>
+        <field name="res_model">data.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

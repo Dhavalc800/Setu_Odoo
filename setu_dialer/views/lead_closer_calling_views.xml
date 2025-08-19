@@ -1,0 +1,103 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_lead_closer_calling_tree" model="ir.ui.view">
+        <field name="name">lead.closer.calling.tree</field>
+        <field name="model">lead.closer.calling</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="lead_id"/>
+                <field name="company_name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="state"/>
+                <field name="disposition_id"/>
+                <field name="call_status"/>
+                <field name="call_duration"/>
+                <field name="call_date"/>
+                <field name="employee_id"/>
+                <field name="user_id"/>
+                <field name="bdm_id"/>
+                <field name="interested" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_lead_closer_calling_form" model="ir.ui.view">
+        <field name="name">lead.closer.calling.form</field>
+        <field name="model">lead.closer.calling</field>
+        <field name="arch" type="xml">
+            <form string="Lead Closer Calling">
+                <header>
+                    <button 
+                        name="action_create_opportunity" 
+                        string="Create Opportunity" 
+                        type="object" 
+                        class="btn-primary"
+                        attrs="{'invisible': [('interested','=',False)]}"/>
+                    <field name="interested" invisible="1"/>
+                    <field name="is_callback" invisible="1"/>
+                </header>
+                <sheet>
+                    <group string="Lead Info">
+                        <field name="employee_id" invisible="1" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="lead_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="user_id" invisible="1" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="closer_user_id" invisible="0"/>
+                        <field name="company_name"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                        <field name="state"/>
+                        <field name="source"/>
+                        <field name="service"/>
+                        <field name="bdm_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="slab"/>
+                    </group>
+
+                    <group string="Lead Disposition">
+                        <field name="dynamic_summary"/>
+                        <field name="disposition_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="opportunity_name" attrs="{'invisible': [('interested', '=', False)]}"/>
+                        <field name="expected_revenue" attrs="{'invisible': [('interested', '=', False)]}"/>
+                        <field name="remark"/>
+                        <field name="call_back_date" attrs="{'invisible': [('is_callback', '=', False)]}"/>
+                    </group>
+
+                    <group string="Call Details" col="2">
+                        <field name="client_name"/>
+                        <field name="caller_number"/>
+                        <field name="destination_number"/>
+                        <field name="call_status"/>
+                        <field name="caller_operator"/>
+                        <field name="destination_operator"/>
+                        <field name="call_type"/>
+                        <field name="caller_circle"/>
+                        <field name="destination_circle"/>
+                        <field name="call_duration"/>
+                        <field name="conversation_duration"/>
+                        <field name="call_date"/>
+                        <field name="caller_status"/>
+                        <field name="destination_status"/>
+                        <field name="hangup_cause"/>
+                        <field name="recording_path"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_lead_closer_calling" model="ir.actions.act_window">
+        <field name="name">Lead Closer Calling</field>
+        <field name="res_model">lead.closer.calling</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first closer call record</p>
+        </field>
+    </record>
+</odoo>

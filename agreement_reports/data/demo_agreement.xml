@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_report_agreement_document_data">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.basic_layout">
+                    <div class="page" style="font-size:111%;">
+                        <div class="col-12" style="text-align:center;">
+                            <h3>CONSULTANCY SERVICE AGREEMENT</h3>
+                            <!-- <span t-field="doc.create_template"/> -->
+                        </div>
+                        <br/><br/>
+                        <div class="col-12" >
+                            <p>
+                                <b>THIS SERVICES AGREEMENT</b> _________________________________ is entered into this _________________________________, by and between
+                                the _____________________________________having its principal
+                                place of business at at 502, 5th floor, I-Square Corporate Park, Near CIMS Hospital, Science City Road, Ahmedabad - 380060
+                                and ___________________________________having its principal place of business at 
+                                ___________________________________________.
+                            </p>
+                        </div>
+                            <br/>
+                            <br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><b>1.</b></div>
+                            <div class="col-11"><b>Definitions:</b></div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-1"><span></span></div>
+                            <div class="col-1" style="text-align:left;"><span>i.</span></div>
+                            <div class="col-8"><p><b>Incubator:</b> Business incubator is an organization that 
+                            helps start-up companies and individual entrepreneurs to develop their 
+                            businesses by providing a full-scale range of services starting with management 
+                            training and office space and ending with venture capital financing.</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1"><span></span></div>
+                            <div class="col-1" style="text-align:left;"><span>ii.</span></div>
+                            <div class="col-8"><p><b>Service Provider:</b> The person who is giving specified service 
+                            in this agreement in exchange for a payment.</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1"><span></span></div>
+                            <div class="col-1" style="text-align:left;"><span>i.</span></div>
+                            <div class="col-8"><p><b>Service Receiver::</b>  Service receiver is a person who receives 
+                            or avails the service provided by the service provider.</p></div>
+                        </div>  
+                        <br/><br/>
+                        <div class="col-12" >
+                            <p>
+                                <b>WHEREAS,</b> the service provider is ready and willing to 
+                                provide this consultancy services for the purpose of assisting
+                                the service receiver to avail such financial assistance.
+                            </p>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>2.</span></div>
+                            <div class="col-11"><p>
+                                <b>WHEREAS,</b> service provider will be providing all the necessary 
+                                information and guidance for the purpose of making an application to 
+                                the incubators (nodal institution).
+                            </p></div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>3.</span></div>
+                            <div class="col-11"><p>
+                                <b>WHEREAS,</b> service provider will be providing necessary 
+                                guidance and advice to the service receiver to appear before
+                                 Jury Committee at the time of reviewing of profile of the service receiver. 
+                            </p></div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>4.</span></div>
+                            <div class="col-11"><p>
+                                <b>WHEREAS,</b> the service provider will also provide necessary 
+                                advice and guidance while negotiating with the incubator.
+
+                            </p></div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>5.</span></div>
+                            <div class="col-11"><p>
+                                <b>WHEREAS,</b> the service provider will also provide necessary 
+                                guidance for the purpose of monitoring and reporting of performance 
+                                of the service receiver to the incubator.
+                            </p></div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><b>6.</b></div>
+                            <div class="col-11"><b>Covenants of Service Receiver:</b></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1"><span></span></div>
+                            <div class="col-1" style="text-align:left;"><span>i.</span></div>
+                            <div class="col-8"><p><b>WHEREAS, </b> the service receiver acknowledges 
+                            that, the amount paid to the service provider is non-refundable.</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1"><span></span></div>
+                            <div class="col-1" style="text-align:left;"><span>ii.</span></div>
+                            <div class="col-8"><p><b>WHEREAS, </b>the service receiver shall pay 
+                            an amount of <b>Rs. _________/- + GST INR</b> as consultancy fees to the service 
+                            provider as follows:</p>
+                            <span><b>First Stage:</b> ___% of the amount at the time of signing and executing the agreement.</span>
+                            <span><b>Second Stage:</b>   Remaining ___% of the amount after approval of application.</span></div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><b>7.</b></div>
+                            <div class="col-11"><b>Covenants of Service Provider:</b></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1"><span></span></div>
+                            <div class="col-1" style="text-align:left;"><span>i.</span></div>
+                            <div class="col-8"><p><b>WHEREAS,</b> the service provider assures and 
+                            is obliged to maintain secrecy of the information/documents provided by
+                            the service receiver and undertakes under no circumstances, the said
+                            information will not be released to anyone except to the service receiver
+                            or its authorized representative. </p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1"><span></span></div>
+                            <div class="col-1" style="text-align:left;"><span>ii.</span></div>
+                            <div class="col-8"><p><b>WHEREAS, </b> the Service Provider will be preparing all the documents 
+                            that are required for the purpose of filing an application. On receipt of required 
+                            data and details from the Service receiver and after preparing required 
+                            reports and documents, Service Provider will submit the application on 
+                            behalf of the Service Receiver. </p></div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>8.</span></div>
+                            <div class="col-11"><p>
+                                <b>Term:</b>This agreement shall be valid, effective, and binding on both the Parties 
+                                for a tenure of 1 (One) year commencing from the date of execution.
+                            </p></div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>9.</span></div>
+                            <div class="col-11"><p>
+                                <b>Termination:</b>Either party may terminate this Agreement at any 
+                                time by giving prior written notice of not less than thirty (30) days 
+                                to the other party by assigning the reason for the termination. 
+                                Termination under any of the provisions of this Agreement shall 
+                                be without prejudice to the service provider’s right to get paid 
+                                by the service receiver for the service rendered till the date of Termination.
+
+                            </p></div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>10.</span></div>
+                            <div class="col-11"><p>
+                                <b>Relationship:</b>Each Party hereto is an independent contractor, 
+                                responsible for its own actions. Nothing in this Agreement shall be
+                                deemed to constitute or form an employment relationship, partnership, 
+                                agency or other form of business relationship. Neither party shall have 
+                                the right or authority to create any obligation, whether express or implied, 
+                                on behalf of the other.
+
+                            </p></div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>11.</span></div>
+                            <div class="col-11"><p>
+                                <b>Third Parties:</b> This Agreement does not and shall not be 
+                                deemed to confer upon any third party any right to claim damages 
+                                to bring suit, or other proceeding against either the service 
+                                receiver or service provider because of any term contained in this Agreement.
+
+                            </p></div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>12.</span></div>
+                            <div class="col-11"><p>
+                                <b>Entire Agreement:</b>This Agreement constitutes the entire 
+                                agreement and understanding between the parties and supersedes 
+                                any prior agreement or understanding relating to the subject 
+                                matter of this Agreement.
+
+                            </p></div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>13.</span></div>
+                            <div class="col-11"><p>
+                                <b>Modification:</b>This Agreement may be modified or amended only 
+                                by a duly authorized written instrument executed by the parties 
+                                hereto by way of mutual understanding.
+
+                            </p></div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>14.</span></div>
+                            <div class="col-11"><p>
+                                <b>Severability:</b>If any of the provisions of this Agreement 
+                                shall be invalid or unenforceable, such invalidity or unenforceability 
+                                shall not invalidate or render unenforceable the entire Agreement, 
+                                but rather the entire Agreement shall be construed as if not containing 
+                                the particular invalid or unenforceable provision or provisions, and the 
+                                rights and obligations of the party shall be construed and enforced 
+                                accordingly, to effectuate the essential intent and purposes of this Agreement.
+
+                            </p></div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>15.</span></div>
+                            <div class="col-11"><p>
+                                <b>Enforcement and Waiver:</b> The failure of either party in any 
+                                one or more instances to insist upon strict performance of any of 
+                                the terms and provisions of this Agreement, shall not be construed 
+                                as a waiver of the right to assert any such terms and provisions on 
+                                any future occasion or of damages caused thereby.
+                            </p></div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>16.</span></div>
+                            <div class="col-11"><p>
+                                <b>Effective Date:</b>The effective date of this Agreement shall be 
+                                the date first written above regardless of the date when the Agreement 
+                                is actually signed or executed by both the parties.
+                            </p></div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>17.</span></div>
+                            <div class="col-11"><p>
+                                <b>Governing Law:</b>This Agreement shall be governed, in all respects 
+                                in accordance with the laws of India and subject to the jurisdiction of 
+                                Courts in Ahmedabad.
+
+                            </p></div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>18.</span></div>
+                            <div class="col-11"><p>
+                                <b>Notices:</b> Any and all notices, demands, or other communications 
+                                required or desired to be given hereunder by any party hereto shall be 
+                                in writing and shall be validly given or made to another party if 
+                                personally served or if sent by Registered A/D. Post or by facsimile 
+                                at the address mentioned herein or the last known address of the 
+                                Recipient party. Any party hereto may change its address by a written 
+                                notice given in the manner provided above.
+                            </p></div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>19.</span></div>
+                            <div class="col-11"><p>
+                                <b>Arbitration: </b> All disputes, differences and/or claims arising 
+                                out of this agreement shall be first settled amicably by the parties 
+                                inter-se. On failure of an amicable settlement, either Party may refer 
+                                the dispute arising out of the terms of this agreement to arbitration 
+                                in accordance with the provision contained in the Arbitration and 
+                                Conciliation Act, 1996, and rules and regulations framed there under. 
+                                The Parties, once the arbitration is invoked by way of Notice, 
+                                appoint a mutually agreeable sole Arbitrator as per law. If the 
+                                parties fail to come to an agreement for appointment of an arbitrator, 
+                                the parties shall take a recourse for the appointment of arbitrator 
+                                under Arbitration and Conciliation Act, 1996. The orders and award 
+                                passed by the Arbitrator shall be final and binding on all the parties 
+                                concerned. The arbitration proceedings shall be conducted in English 
+                                and the venue of the Arbitration shall be at Ahmedabad, Gujarat.
+                            </p></div>
+                        </div>
+                        <br/><br/>
+                        <div class="row">
+                            <div class="col-1" style="text-align:left;"><span>20.</span></div>
+                            <div class="col-11"><p>
+                                <b>Counterpart:</b> This Agreement may be executed in one or more 
+                                counterparts, each of which will be deemed an original by which 
+                                together will constitute one and the same instrument.
+                            </p></div>
+                        </div>
+                        <br/><br/>
+                        <div class="col-12" >
+                            <p>
+                                <b>IN WITNESS WHEREOF,</b>the parties have caused their duly authorized 
+                                representatives to sign this<b>SERVICES AGREEMENT</b>as of the date first written above.
+                            </p>
+                        </div>
+                        <br/><br/>
+                        <table class="table table-sm table-bordered" style="border-color:black;">
+                            <thead>
+                                <tr>
+                                    <th style="width:50%;height:100px;text-align:left;" ><p>Signed and delivered for and on behalf of</p></th>
+                                    <th style="width:50%;height:100px;text-align:left;" ><p>I have read and understood the provisions of this Agreement and hereby accept the same.</p></th>
+                                </tr>
+                                <tr>
+                                    <th style="width:50%;height:100px;text-align:left;" ><b>Name:</b><span t-field="doc.company_id.name" /></th>
+                                    <th style="width:50%;height:100px;text-align:left;" ><b>Name:</b><span t-field="doc.partner_id.name" /></th>
+                                </tr>
+                                <tr>
+                                    <th style="width:50%;height:100px;text-align:left;" ><b>Title:</b></th>
+                                    <th style="width:50%;height:100px;text-align:left;" ><b>Title:</b></th>
+                                </tr>
+                                <tr>
+                                    <th style="width:50%;height:100px;text-align:left;" >Date:</th>
+                                    <th style="width:50%;height:100px;text-align:left;" >Date:</th>
+                                </tr>
+                                <tr>
+                                    <th style="width:50%;height:100px;text-align:left;" >Signature:</th>
+                                    <th style="width:50%;height:100px;text-align:left;" >Signature:</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

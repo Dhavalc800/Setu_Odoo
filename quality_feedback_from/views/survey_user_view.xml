@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="survey_user_input_inherit_form_view" model="ir.ui.view">
+	    <field name="name">survey.user.input.inherit.form.view</field>
+	    <field name="model">survey.user_input</field>
+	    <field name="inherit_id" ref="survey.survey_user_input_view_form"/>
+	    <field name="arch" type="xml">
+			<xpath expr="//field[@name='access_token']" position="after">
+				<field name="project_id"/>
+				<field name="task_id" />
+				<field name="is_negative"/>
+	 		</xpath>
+			<xpath expr="//div[@name='button_box']" position="inside">
+				<field name="complimentary_count" invisible='1' />
+                <button name="action_view_complimentary_service" type="object" string="Complimentary Services" class="oe_stat_button" icon="fa-gear" attrs="{'invisible': [('complimentary_count', '=', 0)]}">
+                    <field name="complimentary_count" widget="statinfo" string = "Complimentary Services"/>
+                </button>
+            </xpath>
+            <xpath expr="//header" position="inside">
+				<button string="Create Complimentary Service " name="create_complimentary_service"
+                 type="object" class="oe_highlight" attrs="{'invisible': ['|', ('is_negative', '=', False), ('complimentary_count', '>', 0)]}" />
+	 		</xpath>
+			<xpath expr="//sheet/group/group/field[@name='test_entry']" position="after">
+				<field name="customer_id" />
+				<field name="customer_email" />
+	 		</xpath>
+			<xpath expr="//widget[@name='web_ribbon']" position="attributes">
+				<attribute name="invisible">1</attribute>
+	 		</xpath>
+			<xpath expr="//sheet/group/group/field[@name='test_entry']" position="attributes">
+				<attribute name="invisible">1</attribute>
+	 		</xpath>
+			<xpath expr="//field[@name='access_token']" position="attributes">
+				<attribute name="invisible">1</attribute>
+	 		</xpath>
+			<xpath expr="//field[@name='partner_id']" position="attributes">
+				<attribute name="invisible">1</attribute>
+	 		</xpath>
+			<xpath expr="//field[@name='email']" position="attributes">
+				<attribute name="invisible">1</attribute>
+	 		</xpath>
+	    </field>
+	</record>
+</odoo>

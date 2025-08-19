@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-inherit="web.FormControlPanel" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('o_cp_top_left')]" position="attributes">
+            <attribute name="class" add="flex-column" remove="align-items-center" separator=" "/>
+        </xpath>
+        <xpath expr="//t[@t-slot='control-panel-breadcrumb']" position="before">
+            <h3 class="os-block-title page-title my-2" t-if="breadcrumbs and breadcrumbs[0]">
+                <t t-esc="breadcrumbs[0].name"/>
+            </h3>
+        </xpath>
+    </t>
+</templates>

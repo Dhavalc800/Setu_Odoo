@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_lead_list_data_tree" model="ir.ui.view">
+        <field name="name">lead.list.data.tree</field>
+        <field name="model">lead.list.data</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="lead_active" widget="boolean_toggle"/>
+                <field name="list_date"/>
+                <field name="campaign_id" options="{'no_create': True}"/>
+                <field name="used_lead_count"/>
+                <field name="not_used_lead_count"/>
+                <!-- <field name="total_lead_count"/> -->
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_lead_list_data_form" model="ir.ui.view">
+        <field name="name">lead.list.data.form</field>
+        <field name="model">lead.list.data</field>
+        <field name="arch" type="xml">
+            <form string="Campaigns List">
+                <header>
+                    <button name="action_open_export_wizard" 
+                        string="Import Leads" 
+                        type="object" 
+                        class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_leads"
+                            type="object"
+                            string="Leads"
+                            class="oe_stat_button"
+                            icon="fa-users">
+                            <field name="lead_data_ids" widget="statinfo" />
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="lead_active" widget="boolean_toggle"/>
+                        <field name="list_description"/>
+                        <field name="list_date"/>
+                        <field name="campaign_id" domain="[('cmp_active','=',True)]" options="{'no_create': True}"/>
+                        <field name="report_column_ids" widget="many2many_tags"/>
+                    </group>
+                    <notebook>
+                        <page string="Imported Leads">
+                            <field name="lead_data_ids" invisible="0"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_lead_list_data" model="ir.actions.act_window">
+        <field name="name">Lead List</field>
+        <field name="res_model">lead.list.data</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

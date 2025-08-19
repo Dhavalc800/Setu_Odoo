@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_lead_details_wizard,access.lead.details.wizard,setu_customisation.model_lead_details_wizard,base.group_user,1,1,1,1
+access_rm_numbers,access.rm.numbers,setu_customisation.model_rm_numbers,base.group_user,1,1,1,1
+access_project_task_import_wizard,Project Task Import Wizard,model_project_task_import_wizard,,1,1,1,1
+access_attandance_msg_history,access.attandance.msg.history,model_attandance_msg_history,base.group_user,1,1,1,1
+access_res_partner_credentials,access.res.partner.credentials,model_res_partner_credentials,base.group_user,1,1,1,1
+access_funding_service_month,access.funding.service.month,model_funding_service_month,base.group_user,1,1,1,1
+access_customer_source,access.customer.source,model_customer_source,base.group_user,1,1,1,1
+access_agreement_status,access.agreement.status,model_agreement_status,base.group_user,1,1,1,1
+access_import_refund_excel,access.import.refund.excel,model_import_refund_excel,base.group_user,1,1,1,1
+access_update_assignee_wizard,access.update.assignee.wizard,model_update_assignee_wizard,base.group_user,1,1,1,1

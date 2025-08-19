@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_invoice_readonly_account,access.invoice.readonly.account,account.model_account_move,sales_team_security.group_booking_invoice_readonly,1,0,0,0
+access_invoice_readonly_account_line,access.invoice.readonly.account.line,account.model_account_move_line,sales_team_security.group_booking_invoice_readonly,1,0,0,0
+access_invoice_readonly_sale,access.invoice.readonly.sale,sale.model_sale_order,sales_team_security.group_booking_invoice_readonly,1,0,0,0
+access_invoice_readonly_provider,access.invoice.readonly.provider,payment.model_payment_provider,sales_team_security.group_booking_invoice_readonly,1,0,0,0

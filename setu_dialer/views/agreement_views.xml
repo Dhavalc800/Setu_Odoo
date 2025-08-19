@@ -1,0 +1,45 @@
+<odoo>
+    <record id="view_inherit_agreement_list" model="ir.ui.view">
+        <field name="name">agreement.list.inherit</field>
+        <field name="model">agreement</field>
+        <field name="inherit_id" ref="agreement_legal.partner_agreement_list_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='agreement_type_id']" position="after">
+                <field name="product_ids" widget="many2many_tags" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_agreement_inherit_form" model="ir.ui.view">
+        <field name="name">agreement.form.inherit</field>
+        <field name="model">agreement</field>
+        <field name="inherit_id" ref="agreement_legal.partner_agreement_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_send_welcome_email"
+                    type="object"
+                    string="Send Welcome Email"
+                    attrs="{'invisible': [('stage', '!=', 'call_verified')]}"
+                    class="btn-primary"
+                    icon="fa-envelope"/>
+                <button name="action_send_not_pick_email"
+                    string="Send Not Pick Email"
+                    type="object"
+                    class="btn-primary"
+                    icon="fa-envelope"
+                    attrs="{'invisible': [('stage', '!=', 'not_pick')]}"/>
+                <!-- <button name="action_activate_agreement_projects"
+                    type="object"
+                    string="Activate Agreement"
+                    class="btn-primary"
+                    attrs="{'invisible': [('stage_id', '=', False)]}"/> -->
+
+            </xpath>
+            <xpath expr="//field[@name='agreement_type_id']" position="after">
+                <field name="stage"/>
+                <field name="assign_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit': True}"/>
+                <field name="agreement_status"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

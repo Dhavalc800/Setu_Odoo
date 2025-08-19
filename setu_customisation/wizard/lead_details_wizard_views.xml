@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+
+        <record id="view_lead_details_wizard" model="ir.ui.view">
+            <field name="name">lead.details.wizard.form</field>
+            <field name="model">lead.details.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Generate Lead">
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="name" placeholder="Enter Lead Opportunity" required="1"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                        <field name="crm_phone" invisible="1"/>
+                        <field name="expected_revenue" widget="monetary"/>
+                        <field name="assign_user_id" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button string="Create" type="object" name="create_lead" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo> 

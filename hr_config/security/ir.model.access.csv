@@ -1,0 +1,20 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+hr.access_hr_employee_user,hr.employee user,hr.model_hr_employee,hr.group_hr_user,1,0,0,0
+hr.access_hr_contrat_user,hr.contract user,hr_contract.model_hr_contract,hr.group_hr_user,1,0,0,0
+hr.access_hr_employee_manager,hr.employee manager,hr.model_hr_employee,hr.group_hr_manager,1,1,1,1
+access_emp_level_report_manager,emp.level,model_hr_emp_level,hr_config.group_reporting_manager,1,0,0,0
+access_emp_level_hr_mngr,emp.level.mngr,model_hr_emp_level,hr.group_hr_manager,1,1,1,1
+access_emp_level_hr_ofcr,emp.level.ofcr,model_hr_emp_level,hr.group_hr_user,1,0,0,0
+access_emp_level_hr_emp,emp.level.emp,model_hr_emp_level,base.group_user,1,0,0,0
+access_hr_empl_level_management,hr.emp.level,model_hr_emp_level,hr_config.group_reporting_manager,1,1,1,1
+hr.access_hr_resource_calendar_user,hr.employee.resource.calendar.user,resource.model_resource_calendar,hr.group_hr_user,1,0,0,0
+
+access_hr_checklist_line_hr_mngr,hr.checklist.line.manager,model_hr_checklist_line,hr.group_hr_manager,1,1,1,1
+access_hr_checklist_line_officer,hr.checklist.line.officer,model_hr_checklist_line,hr.group_hr_user,1,1,0,0
+access_hr_checklist_manager,model_hr_checklist.manager,model_hr_checklist,hr.group_hr_manager,1,1,1,1
+access_hr_checklist_officer,model_hr_checklist.officer,model_hr_checklist,hr.group_hr_user,1,1,0,0
+access_hr_checklist_head_manager,access_hr_checklist_head,model_hr_checklist_head,hr.group_hr_manager,1,1,1,1
+access_hr_checklist_head_officer,access_hr_checklist_head,model_hr_checklist_head,hr.group_hr_user,1,1,0,0
+access_hr_checklist_line_user,hr.checklist.line.employee,model_hr_checklist_line,hr_config.group_hr_resource,1,1,1,0
+access_hr_checklist_employee,model_hr_checklist.employee,model_hr_checklist,hr_config.group_hr_resource,1,1,1,0
+access_hr_checklist_head_employee,access_hr_checklist_head,model_hr_checklist_head,hr_config.group_hr_resource,1,1,1,0

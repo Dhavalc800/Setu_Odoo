@@ -1,0 +1,39 @@
+<odoo>
+    <record id="view_lead_upload_wizard" model="ir.ui.view">
+        <field name="name">lead.upload.wizard.form</field>
+        <field name="model">lead.upload.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Upload Leads">
+                <group>
+                    <field name="file" filename="file_name"/>
+                    <field name="file_name"/>
+                    <!-- Download Format Buttons -->
+                </group>
+                <div style="margin: 20px 0;">
+                    <a class="btn btn-primary"
+                        href="/lead/download_format"
+                        style="margin-right: 10px; width: 600px; display: inline-block; text-align: center;">
+                        <i class="fa fa-download"/> Download CSV Format
+                    </a><br/><br/>
+                    <a class="btn btn-success"
+                        href="/lead/download_format_xls"
+                        style="width: 600px; display: inline-block; text-align: center;">
+                        <i class="fa fa-download"/> Download XLS Format
+                    </a>
+                </div>
+
+                <footer>
+                    <button name="action_upload" type="object" string="Upload" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_upload_leads_window" model="ir.actions.act_window">
+        <field name="name">Upload Leads</field>
+        <field name="res_model">lead.upload.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

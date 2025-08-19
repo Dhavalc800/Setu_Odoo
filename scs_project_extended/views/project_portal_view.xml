@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_task" inherit_id="project.portal_my_task">
+        <xpath expr="//div[@id='task_content']//div[@id='card']//div[@id='card_body']/div[3]/div[1]" position="replace"/>
+    </template>
+</odoo>

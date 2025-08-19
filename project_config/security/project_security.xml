@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- PMS Group -->
+    <record id="module_category_pms" model="ir.module.category">
+            <field name="name">PMS</field>
+            <field name="sequence">12</field>
+    </record>
+
+    <!-- Project Coordinator Group -->
+    <record id="project_config.group_project_coordinator" model="res.groups">
+        <field name="category_id" ref="base.module_category_services_project"/>
+        <field name="name">Project Coordinator</field>
+        <field name="implied_ids" eval="[(4, ref('project.group_project_user'))]"/>
+    </record>
+
+    <!-- Project Manager Group -->
+    <record id="project_config.group_project_manager_custom" model="res.groups">
+        <field name="category_id" ref="base.module_category_services_project"/>
+        <field name="name">Project Manager</field>
+        <field name="implied_ids" eval="[(4, ref('project_config.group_project_coordinator'))]"/>
+    </record>
+
+<!--    <record id="project.group_project_manager" model="res.groups">-->
+<!--        <field name="implied_ids" eval="[(5, ref('project.group_project_user'))]"/>-->
+<!--    </record>-->
+
+    <!-- Added Project Manager Group to implied_ids of Administrator-->
+    <record id="project.group_project_manager" model="res.groups">
+        <field name="implied_ids" eval="[(5, 0, 0),(4, ref('project_config.group_project_manager_custom'))]"/>
+    </record>
+
+
+
+    <!-- As Discussed with team Removed Project Leader Group as it does not need anymore -->
+
+    <!--    &lt;!&ndash; Project Leader Group &ndash;&gt;-->
+<!--    <record id="project_config.group_project_leader" model="res.groups">-->
+<!--        <field name="category_id" ref="base.module_category_services_project"/>-->
+<!--        <field name="name">Project Leader</field>-->
+<!--        <field name="implied_ids" eval="[(4, ref('project.group_project_user'))]"/>-->
+<!--    </record>-->
+
+
+<!--    <record id="project.group_project_manager" model="res.groups">-->
+<!--        <field name="name">Project Manager</field>-->
+<!--        <field name="category_id" ref="base.module_category_services_project"/>-->
+<!--        <field name="implied_ids" eval="[(4, ref('project_config.group_project_coordinator'))]"/>-->
+<!--        <field name="users" eval="[(4, ref('base.user_root'))]"/>-->
+<!--    </record>-->
+
+
+    <!-- Project Viewer Group -->
+    <record id="project_config.group_project_viewer" model="res.groups">
+        <field name="category_id" ref="module_category_pms"/>
+        <field name="name">Project Viewer</field>
+    </record>
+
+    
+    <!--  Edit Timesheet Group  -->
+    <record id="project_config.edit_timesheet" model="res.groups">
+        <field name="category_id" ref="hr_config.module_category_hrms"/>
+        <field name="name">Edit Timesheet</field>
+        <field name="comment">Employees having these access rights can edit timesheet.</field>
+    </record>
+
+    <!-- HR Resource Group -->
+    <record id="hr_config.group_hr_resource" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('base.group_user')),
+                                         (4, ref('project.group_project_user'))
+                                        ]"/>
+    </record>
+
+    <!-- updated  project task record rule-->
+        <record id="project.ir_rule_private_task" model="ir.rule">
+        <field name="name">Project: See private tasks</field>
+        <field name="model_id" ref="project.model_project_task"/>
+        <field name="domain_force">[
+                 ('user_ids', 'in', user.id),
+        ]</field>
+        <field name="groups" eval="[(4,ref('project.group_project_user'))]"/>
+    </record>
+
+    <!-- base project task record rule-->
+<!--    <record id="ir_project_team_users" model="ir.rule">-->
+<!--        <field name="name">Project: See team projects</field>-->
+<!--        <field name="model_id" ref="project.model_project_project"/>-->
+<!--        <field name="domain_force">[('team_id.team_members_ids', '=', [user.id])]</field>-->
+<!--        <field name="groups" eval="[(4,ref('project.group_project_user'))]"/>-->
+<!--    </record>-->
+</odoo>

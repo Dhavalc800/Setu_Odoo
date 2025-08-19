@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_qualification_criteria,access.qualification.criteria,model_qualification_criteria,base.group_user,1,1,1,1
+scs_project_extended.access_project_task_information,access_project_task_information,scs_project_extended.model_project_task_information,base.group_user,1,1,1,1
+scs_project_extended.access_project_task_assignees,access_project_task_assignees,scs_project_extended.model_project_task_assignees,base.group_user,1,1,1,1
+scs_project_extended.access_employee_branch,access_employee_branch,scs_project_extended.model_employee_branch,base.group_user,1,1,1,1

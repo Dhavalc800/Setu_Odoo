@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="res_partner_form_view_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Credentials" groups="project_config.group_project_coordinator,project_config.group_project_manager_custom">
+                        <field name="credentials_ids">
+                            <tree editable="bottom">
+                                <field name="link"/>
+                                <field name="user_email"/>
+                                <field name="phone"/>
+                                <field name="password" password="True" widget="CopyClipboardChar"/>
+                                <button name="toggle_password_visibility" type="object" icon="fa-eye" string="View"/>
+                                <button name="generate_password" type="object" icon="fa-key" string="Generate Password"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</odoo>

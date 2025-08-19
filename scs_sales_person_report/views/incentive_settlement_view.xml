@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="incentive_settelement_tree_view" model="ir.ui.view">
+        <field name="name">incentive.settlement.tree.view</field>
+        <field name="model">incentive.settlement</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="incentive_settelement_form_view" model="ir.ui.view">
+        <field name="name">incentive.settlement.form.view</field>
+        <field name="model">incentive.settlement</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+<!--                    <button name="set_to_draft" type="object" string="Set to Draft" class="oe_highlight" states="cancel"/>-->
+                    <button name="create_incentive_lines" type="object" string="Get Collection" class="oe_highlight" states="draft"/>
+                    <button name="action_review" type="object" string="Review" class="oe_highlight" states="draft"/>
+                    <button name="settle_entries" type="object" string="Settle" class="oe_highlight" states="review"/>
+<!--                    <button name="action_cancel" type="object" string="Cancel" class="oe_highlight" states="review,settle"/>-->
+                    <button name="generate_xlsx" type="object" string="Data dump" class="oe_highlight" states="review,settle"/>
+                    <button name="check_and_adjust_settlement" type="object" string="Adjust settlement" class="oe_highlight" states="settle" context="{'adjust_settlement': True}"/>
+                    <field name="state" widget="statusbar" nolabel="1" readonly="1" statusbar_visible="draft,review,settle"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <label for="refund_percentage" />
+                            <div>
+                                <field name="refund_percentage" class="oe_inline" nolabel="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <span class="o_form_label oe_inline">%</span>
+                            </div>
+                            <label for="incentive_percentage" />
+                            <div>
+                                <field name="incentive_percentage" class="oe_inline" nolabel="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <span class="o_form_label oe_inline">%</span>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="date_from" widget="daterange" options="{'related_end_date': 'date_to'}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="date_to" widget="daterange" options="{'related_start_date': 'date_from'}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Incentive Details">
+                            <field name="incentive_lines" nolabel="1" readonly="1">
+                                <form>
+                                    <group>
+                                        <field name="incentive_settlement_id" invisible="1" options="{'no_open': True}"/>
+                                        <field name="sales_person_id" options='{"no_open": True}'/>
+                                        <field name="collection_amount"/>
+                                        <field name="refund_amount"/>
+                                        <field name="incentive_amount"/>
+                                        <field name="adjustment_amount"/>
+                                    </group>
+                                    <group>
+                                        <field name="sale_order_ids" widget="many2many_tags" options="{'no_open': True}" readonly="1"/>
+                                        <field name="payment_ids" widget="many2many_tags" options="{'no_open': True}" readonly="1"/>
+                                        <field name="refund_payment_ids" widget="many2many_tags" options="{'no_open': True}" readonly="1"/>
+                                    </group>
+                                </form>
+                                <tree editable="bottom">
+                                    <field name="incentive_settlement_id" invisible="1" options="{'no_open': True}"/>
+                                    <field name="sales_person_id" options='{"no_open": True}'/>
+                                    <field name="collection_amount"/>
+                                    <field name="refund_amount"/>
+                                    <field name="incentive_amount"/>
+                                    <field name="adjustment_amount"/>
+                                    <field name="sale_order_ids" widget="many2many_tags" optional="hide" options="{'no_open': True}"/>
+                                    <field name="payment_ids" widget="many2many_tags" optional="hide" options="{'no_open': True}"/>
+                                    <field name="refund_payment_ids" widget="many2many_tags" optional="hide" options="{'no_open': True}"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_incentive_settlement">
+        <field name="name">Incentive Settlement</field>
+        <field name="res_model">incentive.settlement</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_incentive_settlement"
+              name="Incentive Settlement"
+              parent="scs_sales_person_report.incentive_report_menu"
+              action="action_incentive_settlement"
+    />
+
+</odoo>

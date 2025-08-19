@@ -1,0 +1,221 @@
+<odoo>
+    <record id="mail_template_welcome_agreement" model="mail.template">
+        <field name="name">Welcome Email - Agreement</field>
+        <field name="email_from">onboarding@setu.co.in</field>
+        <field name="reply_to">rm@setu.co.in</field>
+        <field name="subject">Welcome to Setu Group of Companies – Onboarding Confirmation &amp; Next Steps</field>
+        <field name="email_to">{{ object.partner_id.email }}</field>
+        <field name="model_id" ref="agreement.model_agreement"/>
+        <field name="body_html" type="html">
+            <div>
+                <p>Dear <t t-esc="object.partner_id.name or ''"/>,  </p>
+
+                <p>Greetings from Setu Group of Companies!</p>
+
+                <p>We are delighted to welcome you aboard. At Setu Group, we pride ourselves on delivering exceptional services that are thoughtfully tailored to meet your business needs. With years of experience and a strong customer-centric approach, we strive to foster lasting partnerships grounded in trust, transparency, and excellence.</p>
+
+                <p>We are pleased to inform you that your details have been successfully verified by our executive. Below is a summary of the information we have confirmed:</p>
+
+                <ul>
+                    <li><strong>Company Name:</strong> <t t-esc="object.partner_id.name or ''"/></li>
+                    <li><strong>Mobile Number:</strong> <t t-esc="object.partner_id.mobile or object.phone or ''"/></li>
+                    <li><strong>Email Address:</strong> <t t-esc="object.partner_id.email or ''"/></li>
+                    <li><strong>Services:</strong>
+                        <ul>
+                            <t t-foreach="object.line_ids" t-as="line">
+                                <li><t t-esc="line.product_id.name"/></li>
+                            </t>
+                        </ul>
+                    </li>
+                    <li><strong>Amount Received:</strong> <t t-esc="object.payment_received or 0.00"/></li>
+                    <li><strong>Total Amount:</strong> <t t-esc="object.total_amount or 0.00"/></li>
+                </ul>
+
+                <p>Our team is here to assist you at every step to ensure a smooth and productive experience. Should you have any questions or require support, please feel free to reach out to us at rm@setu.co.in.</p>
+                
+                <img t-att-src="'%s/setu_dialer/static/img/customer_support.png' % (object.get_base_url())" alt="Customer Support" style="width: 200px;"/>
+
+                <p>Please note: This is an automated message. Do not reply to this email.</p>
+
+                <p>Thank you for choosing Setu Group of Companies. We look forward to working closely with you and contributing to your business success.</p>
+
+                <p>Warm regards,<br/>Team Setu<br/>Setu Group of Companies</p>
+            </div>
+            <div id=":2d1" class="ii gt" jslog="20277; u014N:xr6bB; 1:WyIjdGhyZWFkLWY6MTgzMzU0MjQwMjcyMzMyMDMyMXxtc2ctZjoxODMzNTQyNDAyNzIzMzIwMzIxIl0.; 4:WyIjbXNnLWY6MTgzMzU0MjQwMjcyMzMyMDMyMSIsbnVsbCxudWxsLG51bGwsMSwwLFsxLDAsMF0sMTA3LDc4MyxudWxsLG51bGwsbnVsbCxudWxsLG51bGwsMSxudWxsLG51bGwsWzBdLG51bGwsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLDAsMF0.">
+                <div id=":2d0" class="a3s aiL ">
+                    <div dir="ltr">
+                        <div class="adM"><br clear="all"/></div>
+                        <div class="adM"><br /></div><span class="gmail_signature_prefix">--<span class="gmail_default" style="font-family:&quot;trebuchet ms&quot;,sans-serif;font-size:small"></span></span>
+                        <div dir="ltr" class="gmail_signature" data-smartmail="gmail_signature">
+                            <div dir="ltr">
+                                <table style="color:rgb(34,34,34);border:none;border-collapse:collapse">
+                                    <tbody>
+                                        <tr style="height:0pt">
+                                            <td style="vertical-align:top;padding:5pt;overflow:hidden">
+                                                <p dir="ltr" style="line-height:1.2;margin-top:0pt;margin-bottom:0pt"><a href="http://www.setu.co.in/" style="color:rgb(17,85,204)" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://www.setu.co.in/&amp;source=gmail&amp;ust=1748688700932000&amp;usg=AOvVaw1hhblatVsoowOOgHzEOGhM"><span style="font-size:10pt;font-family:Roboto,sans-serif;background-color:transparent;vertical-align:baseline"><span style="border:none;display:inline-block;overflow:hidden;width:126px;height:28px"><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXc-LQma4Baiq_VsEd9ocVSTPtrnIPnEMfb3k9JJlSDOT-E5AWm_Nym4a_lVrMmuR_ysBCEKa2uEbPAP97nmD-rMoob5sHDc_txSDZ5f3hgs3OllywfEBhPlb9dlxhtbWXVXaCI_zeKrzGOsHrjWU7OqqcuM?key=ErhHz6oycUl803dyPyjO6w" width="126" height="32.63391113281249" style="margin-left:0px" class="CToWUd" data-bit="iit"/></span></span></a></p>
+                                            </td>
+                                            <td style="vertical-align:top;padding:5pt;overflow:hidden"><span style="font-family:&quot;trebuchet ms&quot;,sans-serif;font-size:large;font-weight:700">SETU GROUP<span class="gmail_default" style="font-family:&quot;trebuchet ms&quot;,sans-serif;font-size:small"></span> OF COMPANIES</span><br />
+                                                <p dir="ltr" style="line-height:1.2;margin-top:0pt;margin-bottom:0pt"><span style="font-size:9pt;font-family:Spectral,serif;background-color:transparent;vertical-align:baseline"></span></p>
+                                            </td>
+                                            <td style="vertical-align:top;padding:5pt;overflow:hidden">
+                                                <p dir="ltr" style="line-height:1.2;text-align:center;margin-top:0pt;margin-bottom:0pt">
+                                                    <a href="https://www.instagram.com/setugroup/" target="_blank">
+                                                        <span style="display:inline-block;width:19px;height:20px">
+                                                        <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXeMJ-Y6KBcWfVUnKJIDYnC0Ic8EbL99x8yvzn4fha4WU4eYRtMUqE5jhb_SWlJUC75lMWR4uzZHP6AuidM5M4J_dLYOPOcNlgyrRvVfcnxeqH1BTUDDmCE-tItKZ308nQSskRZmN2p1lOLa-aNCvSK7-vI8?key=ErhHz6oycUl803dyPyjO6w" width="19" height="19" style="margin-right:8px;" />
+                                                        </span>
+                                                    </a>
+
+                                                    <a href="https://www.youtube.com/channel/UCJRUMTW8E13okgbFDAJ3E9Q" target="_blank">
+                                                        <span style="display:inline-block;width:19px;height:19px">
+                                                        <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXe1USNX8o5jBchU_qEMPlZKpvh5C28wOLgRUy8HKM-eKUXufxWbQmfxtVvp1levs-1J-coVGY1Cq_yuiWqJKbZtZ29WsUSaE0Nv74oJyM3oINo_XT8mrtZuUVZ0PNAs8rMAW0SLyxGRlLTcQkpM6mhljaY?key=ErhHz6oycUl803dyPyjO6w" width="19" height="19" style="margin-right:8px;" />
+                                                        </span>
+                                                    </a>
+
+                                                    <a href="https://www.facebook.com/Setu/" target="_blank">
+                                                        <span style="display:inline-block;width:19px;height:19px">
+                                                        <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXcVwUZ2GXakpk1vDeME-16RP63sVnf_4bqrrMOo5bUr6Y5EUlUkgyt7ZSH4ie_W7hPS8Qc50dUDKbOEqhoRDAKeYWXmO34HWblnys49vfOlkcTb-HBUvQu6FPN05Q9bpu2MSnmZyAq8UYstyqLItm-_mG_q?key=ErhHz6oycUl803dyPyjO6w" width="19" height="19" style="margin-right:8px;" />
+                                                        </span>
+                                                    </a>
+
+                                                    <a href="https://www.linkedin.com/company/setu-group/" target="_blank">
+                                                        <span style="display:inline-block;width:19px;height:19px">
+                                                        <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdNvm0Fl1HCbghpBwcYibUqnsB5yZh6UjZGX_76cIhaOUwUaZYdNsbb23SnY4Q-7-hfli3oqlBKbm9HEqnRl6XXkI2PbAbOF4OcSbEEHJ5-WP80sbysVSfAeLNspQCYEN271DjX0RlOZiGuKwN4HkFdhlQ?key=ErhHz6oycUl803dyPyjO6w" width="19" height="19" style="margin-right:8px;" />
+                                                        </span>
+                                                    </a>
+
+                                                </p>
+                                                <p dir="ltr" style="line-height:1.2;text-align:center;margin-top:0pt;margin-bottom:0pt"><a href="http://www.setu.co.in/" style="color:rgb(17,85,204)" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://www.setu.co.in/&amp;source=gmail&amp;ust=1748688700932000&amp;usg=AOvVaw1hhblatVsoowOOgHzEOGhM"><span style="font-size:9pt;font-family:Spectral,serif;color:rgb(0,0,0);background-color:transparent;vertical-align:baseline">www.setu.co.in</span></a></p>
+                                                <p dir="ltr" style="line-height:1.2;text-align:center;margin-top:0pt;margin-bottom:0pt"><br /></p>
+                                                <p dir="ltr" style="line-height:1.2;text-align:center;margin-top:0pt;margin-bottom:0pt"><a href="https://setu.co.in/contact-us" style="color:rgb(17,85,204)" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://setu.co.in/contact-us&amp;source=gmail&amp;ust=1748688700932000&amp;usg=AOvVaw2gYxfPCaybwKWBo5nFSlD7"><span style="font-size:10pt;font-family:Roboto,sans-serif;background-color:transparent;vertical-align:baseline"><span style="border:none;display:inline-block;overflow:hidden;width:104px;height:24px"><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXefNegz9p42jtNoy12-tmnklujEhtF8zZhSaa7LEpn3MPqb_3-urufRSZFk-YJmOeFOTsYqEKVukg4ygThsHUGMFAEudT62JgBiQw1ecVwvOpcPjABeBceRD9NzO0BWHyErOlFmj2evZV7LvD9uCTSmtao?key=ErhHz6oycUl803dyPyjO6w" width="104" height="24" style="margin-left:0px;margin-top:0px" class="CToWUd" data-bit="iit"/></span></span></a></p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <br />
+                    <p dir="ltr"><b>
+                            <font size="1" face="Sans Serif" color="#000000"><img src="https://ci3.googleusercontent.com/meips/ADKq_Na3CF74yMu-sYYTGHQ1rzojhtc5IGwY-WHiIZ6xzO8tuZlyt4DmKoqUkB8rzWBfMsRkcnjKlpGEZ-jdNmT2SD3P-JXHfz1KKxY=s0-d-e1-ft#https://dunsregistered.com/Images/Standard-Seal.png" class="CToWUd" data-bit="iit"/><br />Disclaimer: We are a Start-up consultant in India and professionals in Start-up consultation and understand the requirements of today’s enterprises. We are merely a consultancy service-providing company and not in any affiliation/ collaboration with any Government/Non-Government Agency/Institutions/<span></span>Organizati<span></span><span></span><span></span><span></span><span></span><span></span>on/Department</font>
+                        </b></p>
+                    <p dir="ltr"><b>
+                            <font size="1" face="Sans Serif" color="#000000">Payments for services are only accepted in the name of Setu Services Private Limited, Setu Consultancy Services, Setu Financial Services Private Limited, Setu Digital Services Private Limited, and the type of account is solely "Current Account" via NEFT/IMPS, RTGS, and digital payment wallets (Cash Free, Razor pay, Aggrepay), and we do not accept payments on personal accounts or under any other name.</font>
+                        </b></p>
+                </div>
+                <div class="yj6qo"></div>
+                <div class="yj6qo"></div>
+                <div class="yj6qo"></div>
+            </div>
+        </field>
+    </record>
+
+    <record id="mail_template_not_pick_agreement" model="mail.template">
+        <field name="name">Not Picked - Onboarding Email</field>
+        <field name="email_from">onboarding@setu.co.in</field>
+        <field name="reply_to">rm@setu.co.in</field>
+        <field name="subject">Let’s Get Started with Your Onboarding at Setu</field>
+        <field name="email_to">{{ object.partner_id.email }}</field>
+        <field name="model_id" ref="setu_dialer.model_agreement"/>
+        <field name="body_html" type="html">
+            <div>
+                <p>Dear <t t-esc="object.partner_id.name or ''"/>,</p>
+
+                <p>Greetings from Setu Group of Companies!</p>
+
+                <p>We recently tried to reach you as part of your onboarding process but were unable to connect. To ensure everything moves forward smoothly with your selected services, we’d appreciate it if you could take a moment to review the details below:</p>
+
+                <ul>
+                    <li><strong>Company Name:</strong> <t t-esc="object.partner_id.name or ''"/></li>
+                    <li><strong>Mobile Number:</strong> <t t-esc="object.partner_id.mobile or object.phone or ''"/></li>
+                    <li><strong>Email Address:</strong> <t t-esc="object.partner_id.email or ''"/></li>
+                    <li><strong>Services:</strong>
+                        <ul>
+                            <t t-foreach="object.line_ids" t-as="line">
+                                <li><t t-esc="line.product_id.name"/></li>
+                            </t>
+                        </ul>
+                    </li>
+                    <li><strong>Amount Received:</strong> <t t-esc="object.payment_received or ''"/></li>
+                    <li><strong>Total Amount:</strong> <t t-esc="object.total_amount or ''"/></li>
+                </ul>
+
+                <p>If the information above is accurate, no further steps are needed at this stage. If you notice any discrepancies or need to make changes, feel free to reach out to us at <a href="mailto:rm@setu.co.in">rm@setu.co.in</a> and we’ll be happy to assist you.</p>
+
+                <p>We’re excited to have you on board and look forward to supporting your business journey.</p>
+
+                <img t-att-src="'%s/setu_dialer/static/img/customer_support.png' % (object.get_base_url())" alt="Customer Support" style="width: 200px;"/>
+
+                <p><em>Please note: This is an automated message. Do not reply to this email.</em></p>
+
+                <p>Warm regards,<br/>Team Setu<br/>Setu Group of Companies</p>
+            </div>
+            <div id=":2d1" class="ii gt" jslog="20277; u014N:xr6bB; 1:WyIjdGhyZWFkLWY6MTgzMzU0MjQwMjcyMzMyMDMyMXxtc2ctZjoxODMzNTQyNDAyNzIzMzIwMzIxIl0.; 4:WyIjbXNnLWY6MTgzMzU0MjQwMjcyMzMyMDMyMSIsbnVsbCxudWxsLG51bGwsMSwwLFsxLDAsMF0sMTA3LDc4MyxudWxsLG51bGwsbnVsbCxudWxsLG51bGwsMSxudWxsLG51bGwsWzBdLG51bGwsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLDAsMF0.">
+                <div id=":2d0" class="a3s aiL ">
+                    <div dir="ltr">
+                        <div class="adM"><br clear="all"/></div>
+                        <div class="adM"><br /></div><span class="gmail_signature_prefix">--<span class="gmail_default" style="font-family:&quot;trebuchet ms&quot;,sans-serif;font-size:small"></span></span>
+                        <div dir="ltr" class="gmail_signature" data-smartmail="gmail_signature">
+                            <div dir="ltr">
+                                <table style="color:rgb(34,34,34);border:none;border-collapse:collapse">
+                                    <tbody>
+                                        <tr style="height:0pt">
+                                            <td style="vertical-align:top;padding:5pt;overflow:hidden">
+                                                <p dir="ltr" style="line-height:1.2;margin-top:0pt;margin-bottom:0pt"><a href="http://www.setu.co.in/" style="color:rgb(17,85,204)" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://www.setu.co.in/&amp;source=gmail&amp;ust=1748688700932000&amp;usg=AOvVaw1hhblatVsoowOOgHzEOGhM"><span style="font-size:10pt;font-family:Roboto,sans-serif;background-color:transparent;vertical-align:baseline"><span style="border:none;display:inline-block;overflow:hidden;width:126px;height:28px"><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXc-LQma4Baiq_VsEd9ocVSTPtrnIPnEMfb3k9JJlSDOT-E5AWm_Nym4a_lVrMmuR_ysBCEKa2uEbPAP97nmD-rMoob5sHDc_txSDZ5f3hgs3OllywfEBhPlb9dlxhtbWXVXaCI_zeKrzGOsHrjWU7OqqcuM?key=ErhHz6oycUl803dyPyjO6w" width="126" height="32.63391113281249" style="margin-left:0px" class="CToWUd" data-bit="iit"/></span></span></a></p>
+                                            </td>
+                                            <td style="vertical-align:top;padding:5pt;overflow:hidden"><span style="font-family:&quot;trebuchet ms&quot;,sans-serif;font-size:large;font-weight:700">SETU GROUP<span class="gmail_default" style="font-family:&quot;trebuchet ms&quot;,sans-serif;font-size:small"></span> OF COMPANIES</span><br />
+                                                <p dir="ltr" style="line-height:1.2;margin-top:0pt;margin-bottom:0pt"><span style="font-size:9pt;font-family:Spectral,serif;background-color:transparent;vertical-align:baseline"></span></p>
+                                            </td>
+                                            <td style="vertical-align:top;padding:5pt;overflow:hidden">
+                                                <p dir="ltr" style="line-height:1.2;text-align:center;margin-top:0pt;margin-bottom:0pt">
+                                                    <a href="https://www.instagram.com/setugroup/" target="_blank">
+                                                        <span style="display:inline-block;width:19px;height:20px">
+                                                        <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXeMJ-Y6KBcWfVUnKJIDYnC0Ic8EbL99x8yvzn4fha4WU4eYRtMUqE5jhb_SWlJUC75lMWR4uzZHP6AuidM5M4J_dLYOPOcNlgyrRvVfcnxeqH1BTUDDmCE-tItKZ308nQSskRZmN2p1lOLa-aNCvSK7-vI8?key=ErhHz6oycUl803dyPyjO6w" width="19" height="19" style="margin-right:8px;" />
+                                                        </span>
+                                                    </a>
+
+                                                    <a href="https://www.youtube.com/channel/UCJRUMTW8E13okgbFDAJ3E9Q" target="_blank">
+                                                        <span style="display:inline-block;width:19px;height:19px">
+                                                        <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXe1USNX8o5jBchU_qEMPlZKpvh5C28wOLgRUy8HKM-eKUXufxWbQmfxtVvp1levs-1J-coVGY1Cq_yuiWqJKbZtZ29WsUSaE0Nv74oJyM3oINo_XT8mrtZuUVZ0PNAs8rMAW0SLyxGRlLTcQkpM6mhljaY?key=ErhHz6oycUl803dyPyjO6w" width="19" height="19" style="margin-right:8px;" />
+                                                        </span>
+                                                    </a>
+
+                                                    <a href="https://www.facebook.com/Setu/" target="_blank">
+                                                        <span style="display:inline-block;width:19px;height:19px">
+                                                        <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXcVwUZ2GXakpk1vDeME-16RP63sVnf_4bqrrMOo5bUr6Y5EUlUkgyt7ZSH4ie_W7hPS8Qc50dUDKbOEqhoRDAKeYWXmO34HWblnys49vfOlkcTb-HBUvQu6FPN05Q9bpu2MSnmZyAq8UYstyqLItm-_mG_q?key=ErhHz6oycUl803dyPyjO6w" width="19" height="19" style="margin-right:8px;" />
+                                                        </span>
+                                                    </a>
+
+                                                    <a href="https://www.linkedin.com/company/setu-group/" target="_blank">
+                                                        <span style="display:inline-block;width:19px;height:19px">
+                                                        <img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdNvm0Fl1HCbghpBwcYibUqnsB5yZh6UjZGX_76cIhaOUwUaZYdNsbb23SnY4Q-7-hfli3oqlBKbm9HEqnRl6XXkI2PbAbOF4OcSbEEHJ5-WP80sbysVSfAeLNspQCYEN271DjX0RlOZiGuKwN4HkFdhlQ?key=ErhHz6oycUl803dyPyjO6w" width="19" height="19" style="margin-right:8px;" />
+                                                        </span>
+                                                    </a>
+
+                                                </p>
+                                                <p dir="ltr" style="line-height:1.2;text-align:center;margin-top:0pt;margin-bottom:0pt"><a href="http://www.setu.co.in/" style="color:rgb(17,85,204)" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://www.setu.co.in/&amp;source=gmail&amp;ust=1748688700932000&amp;usg=AOvVaw1hhblatVsoowOOgHzEOGhM"><span style="font-size:9pt;font-family:Spectral,serif;color:rgb(0,0,0);background-color:transparent;vertical-align:baseline">www.setu.co.in</span></a></p>
+                                                <p dir="ltr" style="line-height:1.2;text-align:center;margin-top:0pt;margin-bottom:0pt"><br /></p>
+                                                <p dir="ltr" style="line-height:1.2;text-align:center;margin-top:0pt;margin-bottom:0pt"><a href="https://setu.co.in/contact-us" style="color:rgb(17,85,204)" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://setu.co.in/contact-us&amp;source=gmail&amp;ust=1748688700932000&amp;usg=AOvVaw2gYxfPCaybwKWBo5nFSlD7"><span style="font-size:10pt;font-family:Roboto,sans-serif;background-color:transparent;vertical-align:baseline"><span style="border:none;display:inline-block;overflow:hidden;width:104px;height:24px"><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXefNegz9p42jtNoy12-tmnklujEhtF8zZhSaa7LEpn3MPqb_3-urufRSZFk-YJmOeFOTsYqEKVukg4ygThsHUGMFAEudT62JgBiQw1ecVwvOpcPjABeBceRD9NzO0BWHyErOlFmj2evZV7LvD9uCTSmtao?key=ErhHz6oycUl803dyPyjO6w" width="104" height="24" style="margin-left:0px;margin-top:0px" class="CToWUd" data-bit="iit"/></span></span></a></p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <br />
+                    <p dir="ltr"><b>
+                            <font size="1" face="Sans Serif" color="#000000"><img src="https://ci3.googleusercontent.com/meips/ADKq_Na3CF74yMu-sYYTGHQ1rzojhtc5IGwY-WHiIZ6xzO8tuZlyt4DmKoqUkB8rzWBfMsRkcnjKlpGEZ-jdNmT2SD3P-JXHfz1KKxY=s0-d-e1-ft#https://dunsregistered.com/Images/Standard-Seal.png" class="CToWUd" data-bit="iit"/><br />Disclaimer: We are a Start-up consultant in India and professionals in Start-up consultation and understand the requirements of today’s enterprises. We are merely a consultancy service-providing company and not in any affiliation/ collaboration with any Government/Non-Government Agency/Institutions/<span></span>Organizati<span></span><span></span><span></span><span></span><span></span><span></span>on/Department</font>
+                        </b></p>
+                    <p dir="ltr"><b>
+                            <font size="1" face="Sans Serif" color="#000000">Payments for services are only accepted in the name of Setu Services Private Limited, Setu Consultancy Services, Setu Financial Services Private Limited, Setu Digital Services Private Limited, and the type of account is solely "Current Account" via NEFT/IMPS, RTGS, and digital payment wallets (Cash Free, Razor pay, Aggrepay), and we do not accept payments on personal accounts or under any other name.</font>
+                        </b></p>
+                </div>
+                <div class="yj6qo"></div>
+                <div class="yj6qo"></div>
+                <div class="yj6qo"></div>
+            </div>
+        </field>
+    </record>
+</odoo>

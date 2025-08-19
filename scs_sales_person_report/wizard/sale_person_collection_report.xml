@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="sale_person_collection_report_tree_view" model="ir.ui.view">
+        <field name="name">sale.person.collection.report.tree.view</field>
+        <field name="model">sale.person.collection.report</field>
+        <field name="arch" type="xml">
+            <tree>
+                <header>
+                    <button name="generate_xlsx" type="object" string="Data dump" class="oe_highlight" groups="sales_team.group_sale_manager"/>
+                </header>
+                <field name="date_from" optional="hide"/>
+                <field name="date_to" optional="hide"/>
+                <field name="user_id"/>
+                <field name="team_id"/>
+                <field name="refund_percentage"/>
+                <field name="refund_amount"/>
+                <field name="deduction_amount"/>
+                <field name="collection_amount" string="Collection"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

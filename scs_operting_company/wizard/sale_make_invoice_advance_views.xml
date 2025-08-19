@@ -1,0 +1,12 @@
+<odoo>
+	<record id="view_sale_advance_payment_inv_inehrit_operting_compnay" model="ir.ui.view">
+        <field name="name">Invoice Orders</field>
+        <field name="model">sale.advance.payment.inv</field>
+        <field name="inherit_id" ref="sale.view_sale_advance_payment_inv"/>
+        <field name="arch" type="xml">
+        	<field name="advance_payment_method" position="after">
+        		<field name="operating_company_id" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+        	</field>
+        </field>
+    </record>
+</odoo>

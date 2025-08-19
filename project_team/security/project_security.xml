@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_project_team_users" model="ir.rule">
+        <field name="name">Project: See team projects</field>
+        <field name="model_id" ref="project.model_project_project"/>
+        <field name="domain_force">[('members_ids', '=', [user.id])]</field>
+        <field name="groups" eval="[(4,ref('project.group_project_user'))]"/>
+    </record>
+
+    <record id="group_auto_change_manager_setting" model="res.groups">
+        <field name="name">Auto Change Manager</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+</odoo>

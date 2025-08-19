@@ -1,0 +1,75 @@
+<odoo>
+    <record id="view_lead_management_tree" model="ir.ui.view">
+        <field name="name">lead.management.tree</field>
+        <field name="model">lead.management</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom" class="excel-style-tree" decoration-info="update_dispostion_time == False">
+                <field name="name" readonly="1"/>
+                <field name="date" invisible="1" readonly="1"/>
+                <field name="time_slot" invisible="1" readonly="1"/>
+                <field name="email" readonly="1"/>
+                <!-- Replace masked_phone and button neatly -->
+                <field name="masked_phone" widget="CopyClipboardChar" readonly="1"/>
+                <button name="action_fetch_phone"
+                        string="Show"
+                        type="object"
+                        attrs="{'invisible': [('is_fetch', '=', True)]}"
+                        class="btn btn-link btn-sm text-primary"
+                        icon="fa-eye"/>
+
+                <!-- Keep real phone hidden -->
+                <field name="phone" invisible="1"/>
+                <field name="is_fetch" invisible="1"/>
+                <field name="slab" readonly="1"/>
+                <field name="service" readonly="1"/>
+                <field name="source" readonly="1"/>
+                <field name="type" readonly="1"/>
+                <field name="city" readonly="1"/>
+                <field name="lead_type" readonly="1"/>
+                <!-- <field name="sale_person_name" readonly="1"/> -->
+                <field name="dispostion_id" domain="[('is_show','=',True)]" options="{'no_create': True, 'no_open': True}"/>
+                <field name="datetime"/>
+                <field name="remarks"/>
+                <field name="meeting_user_id" options="{'no_create': True, 'no_open': True}"/>
+                <field name="lead_status_id" options="{'no_create': True, 'no_open': True}"/>
+                <field name="reschedule_date"/>
+                <field name="cancel_reason_id" options="{'no_create': True, 'no_open': True}"/>
+                <field name="user_id" readonly="1"/>
+                <field name="update_dispostion_time" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_lead_management_pivot" model="ir.ui.view">
+        <field name="name">lead.management.pivot</field>
+        <field name="model">lead.management</field>
+        <field name="arch" type="xml">
+            <pivot string="Lead Disposition Pivot">
+                <field name="dispostion_id" type="row"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_lead_management_search" model="ir.ui.view">
+        <field name="name">lead.management.search</field>
+        <field name="model">lead.management</field>
+        <field name="arch" type="xml">
+            <search string="Lead Management Search">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="user_id"/>
+                <!-- <filter string="My Leads" name="my_leads" domain="[('user_id', '=', uid)]"/> -->
+            </search>
+        </field>
+    </record>
+
+    <record id="action_lead_management" model="ir.actions.act_window">
+        <field name="name">Lead Dispositions</field>
+        <field name="res_model">lead.management</field>
+        <field name="view_mode">tree,pivot</field>
+        <field name="view_id" ref="view_lead_management_tree"/>
+        <field name="search_view_id" ref="view_lead_management_search"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,28 @@
+<odoo>
+    <record id="view_pysical_meeting_wizard_form" model="ir.ui.view">
+        <field name="name">pysical.meeting.wizard.form</field>
+        <field name="model">pysical.meeting.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Assign For Pysical Meeting">
+                <group>
+                    <field name="user_id"/>
+                    <field name="meeting_datetime"/>
+                </group>
+                <footer>
+                    <button string="Assign" type="object" name="action_pysical_meeting" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_assign_pysical_meeting" model="ir.actions.server">
+        <field name="name">Assign For Pysical Meeting</field>
+        <field name="model_id" ref="setu_dialer.model_pysical_meeting"/>
+        <field name="binding_model_id" ref="setu_dialer.model_pysical_meeting"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_pysical_meeting_wizard()
+        </field>
+    </record>
+</odoo>

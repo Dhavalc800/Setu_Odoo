@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="dummy_dashboard_template" name="Dummy Dashboard Template">
+        <!-- This is a placeholder QWeb template to fix the asset loading error. -->
+        <div class="o_dummy_dashboard">
+            <t t-esc="'Dashboard Loaded Successfully'" />
+        </div>
+    </template>
+</odoo>

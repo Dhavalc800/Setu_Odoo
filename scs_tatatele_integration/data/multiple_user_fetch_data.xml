@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+<!--    <record id="fetch_multiple_user" model="ir.config_parameter">-->
+<!--        <field name="key">fetch_multiple_user</field>-->
+<!--        <field name="value">False</field>-->
+<!--    </record>-->
+
+    <record id="tata_multiple_users_cron" model="ir.cron">
+        <field name="name">Fetch Multiple users</field>
+        <field name="model_id" ref="model_res_users"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_fetch_multiple_user()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="True"/>
+        <field name="doall" eval="False"/>
+<!--        <field name="nextcall" eval="(DateTime.now() + timedelta(hours=2)).strftime('%Y-%m-%d %H:%M:%S')"/>-->
+    </record>
+
+    <record id="tata_call_recordings_cron" model="ir.cron">
+        <field name="name">Call Details Recordings</field>
+        <field name="model_id" ref="model_call_record_details"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_call_recordings()</field>
+        <field name="interval_number">10</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+    <record id="sequence_call_group" model="ir.sequence">
+        <field name="name">Call Detail</field>
+        <field name="code">call.detail</field>
+        <field name="prefix">CALL/</field>
+        <field name="padding">4</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+
+</odoo>

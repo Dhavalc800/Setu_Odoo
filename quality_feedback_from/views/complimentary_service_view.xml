@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="complimentary_service_tree_view" model="ir.ui.view">
+        <field name="name">complimentary.service.tree.view</field>
+        <field name="model">complimentary.service</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="customer_id" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="complimentary_service_form_view" model="ir.ui.view">
+        <field name="name">complimentary.service.form.view</field>
+        <field name="model">complimentary.service</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Approve" name="action_approve"
+                            type="object" attrs="{'invisible': [('state', '!=', 'new')]}"
+                            groups="quality_feedback_from.group_quality_admin"/>
+                    <button string="Reject" name="action_reject"
+                            type="object" attrs="{'invisible': [('state', '!=', 'new')]}"
+                            groups="quality_feedback_from.group_quality_admin"/>
+                    <button string="Confirm" name="action_confirm"
+                            type="object" attrs="{'invisible': ['|', ('state', '!=', 'approve'), ('is_confirm', '=', True)]}"
+                            context="{'project_id': complimentary_project_id,
+                            'customer_id': customer_id, 'task_id': old_task_id}"
+                            groups="quality_feedback_from.group_quality_admin"/>
+                    <field
+                        name="state"
+                        widget="statusbar"
+                    />
+                    <field name="is_confirm" invisible="1" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_complimentary_services" type="object" string="Complimentary Task" class="oe_stat_button" icon="fa-edit" attrs="{'invisible': [('complimentary_services_count', '=', 0)]}">
+                            <field name="complimentary_services_count" widget="statinfo" string="Complimentary Task"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="customer_id" string="Customer Name"/>
+                            <field name="customer_address"/>
+                            <field name="customer_mobile_no" />
+                            <field name="customer_phone_no" />
+                            <field name="customer_email_id"/>
+                            <field name="assignee"/>
+                        </group>
+                        <group>
+                            <field name="old_project_id" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="old_task_id" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                            <field name="complimentary_project_id"
+                            attrs="{'invisible': [('state', '!=', 'approve')]}" string="Complimentary Service"/>
+                            <!-- <field name="complimentary_task_id" context="{'project_id': complimentary_project_id,
+                            'customer_id': customer_id, 'task_id': old_task_id}"
+                            attrs="{'invisible': ['|', ('state', '!=', 'approve'), ('complimentary_project_id', '=', False)]}"
+                            domain="[('project_id', '=', complimentary_project_id)]"/> -->
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_complimentary_service" model="ir.actions.act_window">
+        <field name="name">Complimentary Service</field>
+        <field name="res_model">complimentary.service</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem id="sub_menu_complimentary_service" action="action_complimentary_service" 
+    parent="quality_feedback_from.menu_quality_feedback" sequence="20"
+    groups="quality_feedback_from.group_quality_admin"/>
+
+</odoo>

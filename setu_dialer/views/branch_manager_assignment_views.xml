@@ -1,0 +1,54 @@
+<odoo>
+    <record id="view_branch_manager_assignment_form" model="ir.ui.view">
+        <field name="name">branch.manager.assignment.form</field>
+        <field name="model">branch.manager.assignment</field>
+        <field name="arch" type="xml">
+            <form string="Branch Manager Assignment">
+                <sheet>
+                    <group>
+                        <field name="lead_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="source"/>
+                        <field name="phone"/>
+                        <field name="disposition_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="call_by"/>
+                        <field name="opportunity_name"/>
+                        <field name="expected_revenue"/>
+                        <field name="service"/>
+                        <field name="call_date_time"/>
+                        <field name="branch_manager_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="closer_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="team_id" invisible="1" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="member_ids" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_branch_manager_assignment_tree" model="ir.ui.view">
+        <field name="name">branch.manager.assignment.tree</field>
+        <field name="model">branch.manager.assignment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="lead_id"/>
+                <field name="source"/>
+                <field name="phone"/>
+                <field name="disposition_id"/>
+                <field name="call_by"/>
+                <field name="opportunity_name"/>
+                <field name="expected_revenue" sum="Expected Revenue"/>
+                <field name="service"/>
+                <field name="call_date_time"/>
+                <field name="closer_id"/>
+                <field name="branch_manager_id"/>
+                <field name="team_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_branch_manager_assignment" model="ir.actions.act_window">
+        <field name="name">Branch Manager Overview</field>
+        <field name="res_model">branch.manager.assignment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

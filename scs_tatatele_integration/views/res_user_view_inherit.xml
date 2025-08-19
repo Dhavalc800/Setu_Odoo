@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_users_view_form_inherit_tata" model="ir.ui.view">
+        <field name="name">res.users.form.inherit.tata</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="tata_tele_config" string="Tata Tele Config">
+                    <group>
+                        <field name="is_tatatele_admin"/>
+                        <field name="host" force_save="1"/>
+<!--                        <field name="active" force_save="1"/>-->
+<!--                        <field name="access_token" readonly="1" force_save="1"/>-->
+                        # Removed Readonly attribute.
+                        <field name="access_token"/>
+                        <field name="tata_email" string="Email"/>
+                        <field name="tata_password" string="Password"/>
+                        <button name="generate_access_token" type="object" string="Generate Token"
+                                icon="fa-television"
+                                confirm="Do you want to generate Access Token?"/>
+                    </group>
+                </page>
+                <page name="agent_details" string="Agent Details">
+                    <group>
+                        <group string=" ">
+                            <field name="tatateleuserid"/>
+                            <field name="last_seen_id" invisible="1"/>
+                            <field name="agent_id"/>
+                            <field name="agent_extension_id"/>
+                            <field name="agent_name"/>
+                            <field name="agent_number"/>
+                        </group>
+                        <group string=" ">
+                            <field name="follow_me_number"/>
+                            <field name="alternate_numbers"/>
+                        </group>
+                        <group string=" ">
+                            <field name="intercom"/>
+                            <field name="custom_status"/>
+                        </group>
+                        <group string=" ">
+                            <field name="is_verified"/>
+                            <field name="is_login_based_calling_enabled"/>
+                        </group>
+                        <group string=" ">
+                            <field name="timegroup_id"/>
+                            <field name="timegroup_name"/>
+                        </group>
+                        <group string=" ">
+                            <field name="calls_answered"/>
+                            <field name="calls_missed"/>
+                        </group>
+                        <group string=" ">
+                            <field name="departmentid"/>
+                            <field name="department_name"/>
+                            <field name="tatatele_department_id"/>
+                        </group>
+                        <group string=" ">
+                            <field name="team_id"/>
+                            <field name="team_name"/>
+                        </group>
+                        <group string=" ">
+                            <field name="updated_at"/>
+                            <field name="created_at"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_form_inherit_phone" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.phone</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="phone" position="replace">
+                <field name="phone" string="Phone"/>
+            </field>
+            <field name="phone" position="after">
+                <button name="click_to_call" type="object" icon="fa-phone" string="Call" attrs="{'invisible': [('phone', '=', False)]}"/>
+            </field>
+        </field>
+        </record>
+
+    <record model="ir.ui.view" id="res_users_view_search_inherit_tatatele">
+        <field name="name">res.users.view.search.inherit.tatatele</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <separator/>
+                <field name="tatateleuserid" string="TATA User ID"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_update_tatatele_user_details" model="ir.actions.server">
+        <field name="name">Update Tata tele user Details</field>
+        <field name="model_id" ref="base.model_res_users"/>
+<!--        <field name="groups_id" eval="[(4, ref('base.group_erp_manager'))]"/>-->
+        <field name="binding_model_id" ref="base.model_res_users"/>
+        <field name="state">code</field>
+        <field name="code">records.action_update_tata_user_details()</field>
+    </record>
+
+    <record id="hr_user_view_form_tata_tele" model="ir.ui.view">
+        <field name="name">hr.user.preferences.view.form.tatatele.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="hr.res_users_view_form_profile"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Tata Tele">
+                    <group>
+                        <group string="Tata Tele">
+                            <field name="tata_email" string="Email" help="Tata tele login credentials"/>
+                            <field name="tata_password" string="Password"/>
+                        </group>
+                        <group string="">
+                            <field name="tatateleuserid" string="TATA UserID"/>
+                            <field name="agent_id" string="AgentID"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

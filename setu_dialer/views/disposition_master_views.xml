@@ -1,0 +1,52 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_disposition_queue_tree" model="ir.ui.view">
+        <field name="name">disposition.master.tree</field>
+        <field name="model">disposition.master</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="lead_id"/>
+                <field name="campaign_id"/>
+                <field name="lead_list_id"/>
+                <field name="disposition_id"/>
+                <field name="call_by"/>
+                <field name="disposition_time"/>
+                <field name="disposition_from"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_disposition_queue_form" model="ir.ui.view">
+        <field name="name">disposition.master.form</field>
+        <field name="model">disposition.master</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="lead_id"/>
+                        <field name="campaign_id"/>
+                        <field name="lead_list_id"/>
+                        <field name="disposition_id"/>
+                        <field name="call_by"/>
+                        <field name="disposition_time"/>
+                        <field name="disposition_from"/>
+                        <field name="total_calls"/>
+                        <field name="ans_calls"/>
+                        <field name="miss_calls"/>
+                        <field name="total_duration"/>
+                        <field name="max_duration"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record> 
+
+    <!-- Action -->
+    <record id="action_disposition_master" model="ir.actions.act_window">
+        <field name="name">Disposition Master</field>
+        <field name="res_model">disposition.master</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

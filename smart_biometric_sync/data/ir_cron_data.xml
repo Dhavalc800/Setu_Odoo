@@ -1,0 +1,62 @@
+<odoo>
+    <data noupdate="0">
+        <record id="cron_fetch_attendance_data_morning" model="ir.cron">
+            <field name="name">Fetch Attendance Data - Morning</field>
+            <field name="model_id" ref="model_hr_attendance"/>
+            <field name="state">code</field>
+            <field name="code">model.fetch_attendance_data()</field>
+            <field name="interval_type">days</field>  
+            <field name="interval_number">1</field>  
+            <field name="numbercall">-1</field>  
+            <field name="active" eval="True"/>
+            <!-- <field name="nextcall" eval="(datetime.datetime.now().replace(hour=10, minute=18, second=0, microsecond=0))"/> -->
+        </record>
+
+        <!-- Afternoon Cron Job: 01:58 PM -->
+        <record id="cron_fetch_attendance_data_afternoon" model="ir.cron">
+            <field name="name">Fetch Attendance Data - Afternoon</field>
+            <field name="model_id" ref="model_hr_attendance"/>
+            <field name="state">code</field>
+            <field name="code">model.fetch_attendance_data()</field>
+            <field name="interval_type">days</field>
+            <field name="interval_number">1</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="True"/>
+            <!-- <field name="nextcall" eval="(datetime.datetime.now().replace(hour=13, minute=58, second=0, microsecond=0))"/> -->
+        </record>
+
+        <!-- Evening Cron Job: 06:28 PM -->
+        <record id="cron_fetch_attendance_data_evening" model="ir.cron">
+            <field name="name">Fetch Attendance Data - Evening</field>
+            <field name="model_id" ref="model_hr_attendance"/>
+            <field name="state">code</field>
+            <field name="code">model.fetch_attendance_data()</field>
+            <field name="interval_type">days</field>
+            <field name="interval_number">1</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="True"/>
+            <!-- <field name="nextcall" eval="(datetime.datetime.now().replace(hour=18, minute=28, second=0, microsecond=0))"/> -->
+        </record>
+
+        <!-- <record id="cron_fetch_attendance_data" model="ir.cron">
+            <field name="name">Fetch Attendance Data</field>
+            <field name="model_id" ref="model_hr_attendance"/>
+            <field name="state">code</field>
+            <field name="code">model.fetch_attendance_data()</field>
+            <field name="interval_number">10</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="True"/>
+        </record> -->
+
+        <record id="cron_update_attendance_dates" model="ir.cron">
+            <field name="name">Update Attendance Dates</field>
+            <field name="model_id" ref="base.model_res_config_settings"/>
+            <field name="state">code</field>
+            <field name="code">model.update_dates_daily()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active">True</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--     <menuitem id="menu_partner_import_wizard" name="Import Partners"
+        parent="base.menu_partner" action="action_partner_import_wizard"/>
+ -->
+    <menuitem id="menu_partner_import_wizard"
+              name="Booking Import data"
+              parent="base.menu_administration"
+              action="action_data_import_wizard"
+              groups="base.group_no_one" />
+
+    <menuitem id="menu_agreement_import_wizard"
+              name="Agreement Import data"
+              parent="base.menu_administration"
+              action="action_data_import_wizard"
+              groups="base.group_no_one" />
+</odoo>

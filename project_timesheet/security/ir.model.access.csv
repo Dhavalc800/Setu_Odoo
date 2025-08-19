@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_project_res,project.project,project.model_project_project,hr_config.group_hr_resource,1,0,0,0
+access_project_task_hr_employee,project.task,project.model_project_task,hr_config.group_hr_resource,1,1,0,0
+access_hr_project_manager,project.project,project.model_project_project,hr.group_hr_manager,1,1,1,1
+access_hr_project_task_manager,project.task,project.model_project_task,hr.group_hr_manager,1,1,1,1
+access_hr_project_reporting_manager,project.project,project.model_project_project,hr_config.group_reporting_manager,1,0,0,0
+access_report_project_task_resource,report.project.task.user,project.model_report_project_task_user,base.group_user,1,0,0,0
+access_timesheet_task_base_user,base_user_timesheet_type,model_timesheet_type,base.group_user,1,0,0,0
+access_timesheet_task_user,hr_user_timesheet_type,model_timesheet_type,hr.group_hr_user,1,0,0,0
+access_timesheet_task_manager,hr_manager_timesheet_type,model_timesheet_type,hr.group_hr_manager,1,1,1,0

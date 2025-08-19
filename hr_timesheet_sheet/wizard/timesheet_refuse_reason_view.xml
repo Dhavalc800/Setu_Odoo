@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- This is wizard form view for the add the Refuse Reason in timesheet -->
+    <record id="timesheet_refuse_reason_form" model="ir.ui.view">
+        <field name="name">timesheet.refuse.reason.form</field>
+        <field name="model">timesheet.refuse.reason</field>
+        <field name="arch" type="xml">
+            <form string="Refuse Reason">
+                <sheet>
+                    <label for="name">Refuse Reason</label>
+                    <field name="name" />
+                </sheet>
+                <footer>
+                <button name="timesheet_refuse_reason" string="Confirm" type="object" class="oe_highlight"/>
+                <button string="Cancel" class="btn-default" special="cancel"/>
+            </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

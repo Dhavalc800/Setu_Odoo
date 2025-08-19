@@ -1,0 +1,80 @@
+<odoo>
+    <data>
+        <record id="sale_order_form_view_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group['sales_person']/field[@name='user_id']" position="after">
+                    <field name="rm_number_id" attrs="{'invisible': [('booking_type', '!=', 'hbab')]}" groups="sales_team.group_sale_salesman_all_leads, sales_team.group_sale_manager" options="{'no_create': True, 'no_edit': True}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                    <field name="customer_source_id" required="1" domain="[('is_active', '=', True)]" options="{'no_create': True, 'no_open': True, 'no_create_edit': True}" />
+                </xpath>
+
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="customer_email" readonly="1"/>
+                    <field name="customer_phone" readonly="1"/>
+                </xpath>
+
+                <xpath expr="//group[@name='sales_person']" position="after">
+                    <group string="PI Information">
+                        <field name="pi_generated_by" readonly="1"/>
+                        <field name="pi_generated_on" readonly="1"/>
+                        <field name="is_refund" invisible="1"/>
+                    </group>
+
+                    <group string="Agreement Information" groups="setu_customisation.group_agreement_info" attrs="{'invisible': [('booking_type', '!=', 'hbab')]}">
+                        <field name="agreement_active_date" />
+                        <field name="funding_month_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="expired_date" />
+                        <field name="agreement_status_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="agreement_close_date"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='booking_type']" position="after">
+                    <field name="incorporation_date" attrs="{'required': [('has_seed_fund', '=', True)]}"/>
+                    <field name="closer_id"  invisible="1" options="{'no_create': True, 'no_open': True}"/>
+                    <field name="closer_user_id" options="{'no_create': True, 'no_open': True}"/>
+                    <field name="has_seed_fund" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//div[@name='button_box']" position="before">
+                    <widget name="web_ribbon" bg_color="bg-danger" title="Refund" attrs="{'invisible': [('is_refund', '!=', True)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_quotation_tree_with_onboarding" model="ir.ui.view">
+            <field name="name">sale.order.tree.optimized</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="limit">40</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_order_view_search_inherit" model="ir.ui.view">
+            <field name="name">sale.order.inherit.search.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='campaign_id']" position="after">
+                    <field name="expired_date"/>
+                </xpath>
+                <xpath expr="//filter[@name='filter_create_date']" position="after">
+                    <filter string="Expired Date" name="filter_expired_date" date="expired_date"/>
+                </xpath>
+                <xpath expr="//filter[@name='filter_create_date']" position="after">
+                    <group expand="1" string="Group By">
+                        <filter string="Expired Date" name="filter_expired_date" context="{'group_by': 'expired_date:month'}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

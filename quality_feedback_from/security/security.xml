@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="quality_feedback_from.module_category_quality" model="ir.module.category">
+        <field name="name">Quality</field>
+        <field name="sequence">11</field>
+    </record>
+
+    <!-- Quality User Group -->
+    <record id="group_quality_user" model="res.groups">
+        <field name="category_id" ref="quality_feedback_from.module_category_quality"/>
+        <field name="name">Quality User</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- Quality Admin Group -->
+    <record id="group_quality_admin" model="res.groups">
+        <field name="category_id" ref="quality_feedback_from.module_category_quality"/>
+        <field name="name">Quality Admin</field>
+        <field name="implied_ids" eval="[(4, ref('quality_feedback_from.group_quality_user'))]"/>
+    </record>
+
+    <record id="ir_rule_quality_feedback_user" model="ir.rule">
+        <field name="name">Quality: project feedback user see their records.</field>
+        <field name="model_id" ref="quality_feedback_from.model_quality_feedback"/>
+        <field name="domain_force">[('project_id.feedback_user_id', 'in', [user.id])]</field>
+        <field name="groups" eval="[(4,ref('quality_feedback_from.group_quality_user'))]"/>
+    </record>
+
+    <record id="ir_rule_quality_feedback_admin" model="ir.rule">
+        <field name="name">Quality Admin: can see quality feedback records.</field>
+        <field name="model_id" ref="quality_feedback_from.model_quality_feedback"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4,ref('quality_feedback_from.group_quality_admin'))]"/>
+    </record>
+
+    <record id="ir_rule_complimentary_service_admin" model="ir.rule">
+        <field name="name">Quality Admin: can see all complimentary records.</field>
+        <field name="model_id" ref="quality_feedback_from.model_complimentary_service"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4,ref('quality_feedback_from.group_quality_admin'))]"/>
+    </record>
+
+    <record id="ir_rule_project_task" model="ir.rule">
+        <field name="name">Quality Admin: can access all Feedback records.</field>
+        <field name="model_id" ref="project.model_project_task"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4,ref('quality_feedback_from.group_quality_admin'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="ir_rule_project_project" model="ir.rule">
+        <field name="name">Quality Admin: can see all complementary services.</field>
+        <field name="model_id" ref="project.model_project_project"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4,ref('quality_feedback_from.group_quality_admin'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+</odoo>

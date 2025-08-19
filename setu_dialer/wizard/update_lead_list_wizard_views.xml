@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record id="view_update_lead_list_wizard_form" model="ir.ui.view">
+            <field name="name">update.lead.list.wizard.form</field>
+            <field name="model">update.lead.list.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Assign Lead List">
+                    <sheet>
+                        <group>
+                            <field name="lead_list_id" required="1"/>
+                            <field name="lead_ids" readonly="1"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Assign Lead List" 
+                                name="action_update_lead_list" 
+                                type="object" 
+                                class="btn-primary"/>
+                        <button string="Cancel" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_assign_lead_list" model="ir.actions.server">
+            <field name="name">Assign to Lead List</field>
+            <field name="model_id" ref="model_lead_data_lead"/>
+            <field name="binding_model_id" ref="model_lead_data_lead"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = records.action_open_assign_wizard()
+            </field>
+        </record>
+    </data>
+</odoo>

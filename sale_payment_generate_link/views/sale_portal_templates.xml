@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="link_expire" name="Payment Status">
+        <t t-call="portal.frontend_layout">
+            <t t-set="page_title" t-value="'Payment Link Expired'" />
+            <t t-set="additional_title">
+                <t t-esc="page_title" />
+            </t>
+            <div class="wrap">
+                <div class="container">
+                    <!-- Portal breadcrumb -->
+                    <t t-call="payment.portal_breadcrumb" />
+                    <!-- Status page -->
+                    <div name="o_payment_status">
+                        <div
+                            class="col-sm-6 mt64 offset-sm-4">
+                            <h4>Payment has already been completed !!</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="campaign_list_tree_view" model="ir.ui.view">
+        <field name="name">campaign.list.tree</field>
+        <field name="model">dialer.campaign</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="campaign_id"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="campaign_list_form_view" model="ir.ui.view">
+        <field name="name">campaign.list.form</field>
+        <field name="model">dialer.campaign</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="campaign_id" force_save="1"/>
+                        <field name="name" force_save="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="campaign_details_tree_view" model="ir.ui.view">
+        <field name="name">campaign.details.tree</field>
+        <field name="model">campaign.details</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="campaignId"/>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="auto_dial_duration"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="campaign_details_form_view" model="ir.ui.view">
+        <field name="name">campaign.details.form</field>
+        <field name="model">campaign.details</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="campaignId" force_save="1"/>
+                            <field name="description"/>
+                            <field name="auto_dial_duration"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Agents">
+                            <field name="user_ids">
+                                <tree create="0" edit="0">
+                                    <field name="agent_id"/>
+                                    <field name="agent_extension_id"/>
+                                    <field name="agent_name"/>
+                                    <field name="team_id"/>
+                                    <field name="team_name"/>
+                                    <field name="department_name"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tatatele_department_tree_view" model="ir.ui.view">
+        <field name="name">tatatele.department.tree</field>
+        <field name="model">tatatele.department</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tatatele_department_form_view" model="ir.ui.view">
+        <field name="name">tatatele_department.form</field>
+        <field name="model">tatatele.department</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="departmentid"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="calls_answered"/>
+                            <field name="calls_missed"/>
+                            <field name="queue_timeout"/>
+                            <field name="use_as_queue"/>
+                        </group>
+                        <group>
+                            <field name="ring_strategy"/>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Agents">
+                            <field name="agent_ids" readonly="True" options='{"no_open": True, "no_create": True}'>
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="agent_name"/>
+                                    <field name="eid"/>
+                                    <field name="time_out"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tatatele_department_act_window" model="ir.actions.act_window">
+        <field name="name">Tatatele Department</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tatatele.department</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="campaign_list_act_window" model="ir.actions.act_window">
+        <field name="name">Campaign List</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">dialer.campaign</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="campaign_details_act_window" model="ir.actions.act_window">
+        <field name="name">Campaign details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">campaign.details</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+
+</odoo>

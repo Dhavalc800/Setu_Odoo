@@ -1,0 +1,87 @@
+<odoo>
+    <data>
+        <record id="ir_cron_update_task_incorp_dates" model="ir.cron">
+            <field name="name">Update Task Incorporation Dates</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="state">code</field>
+            <field name="code">model.update_task_incorporation_dates()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <!-- Morning Check-in Reminder -->
+        <record id="cron_check_late_employees" model="ir.cron">
+            <field name="name">Morning Attendance Check</field>
+            <field name="model_id" ref="setu_customisation.model_hr_attendance"/>
+            <field name="state">code</field>
+            <field name="code">model.check_late_employees()</field>
+            <field name="interval_type">days</field>
+            <field name="interval_number">1</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="True"/>
+            <!-- <field name="nextcall" eval="'2024-03-27 10:20:00'"/> -->
+        </record>
+
+        <!-- Afternoon Half-Day Check -->
+        <record id="cron_check_afternoon_halfday" model="ir.cron">
+            <field name="name">Afternoon Half-Day Check</field>
+            <field name="model_id" ref="setu_customisation.model_hr_attendance"/>
+            <field name="state">code</field>
+            <field name="code">model.check_afternoon_halfday()</field>
+            <field name="interval_type">days</field>
+            <field name="interval_number">1</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="True"/>
+            <!-- <field name="nextcall" eval="'2024-03-27 14:00:00'"/> -->
+        </record>
+
+        <!-- Evening Checkout Reminder -->
+        <record id="cron_check_evening_checkout" model="ir.cron">
+            <field name="name">Evening Checkout Check</field>
+            <field name="model_id" ref="setu_customisation.model_hr_attendance"/>
+            <field name="state">code</field>
+            <field name="code">model.check_evening_checkout()</field>
+            <field name="interval_type">days</field>
+            <field name="interval_number">1</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="True"/>
+            <!-- <field name="nextcall" eval="'2024-03-27 18:30:00'"/> -->
+        </record>
+
+        <record id="cron_auto_checkout_attendance" model="ir.cron">
+            <field name="name">Auto Checkout Unchecked Attendance</field>
+            <field name="model_id" ref="hr_attendance.model_hr_attendance"/>
+            <field name="state">code</field>
+            <field name="code">model.auto_checkout_unchecked_attendance()</field>
+            <field name="interval_type">days</field>
+            <field name="interval_number">1</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="ir_cron_update_closer_user_id" model="ir.cron">
+            <field name="name">Update Closer User ID on Sale Orders</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="state">code</field>
+            <field name="code">model.update_closer_user_ids()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="ir_cron_remove_employee_images" model="ir.cron">
+            <field name="name">Remove Employee Images</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="state">code</field>
+            <field name="code">model.remove_employee_images()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="active">False</field>
+        </record>
+
+    </data>
+</odoo>

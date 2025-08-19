@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_hr_attendance_res_config_settings" model="ir.ui.view">
+        <field name="name">hr.attendance.res.config.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="hr_attendance.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='emails']" position="after">
+                <div class="app_settings_block" data-string="whatsapp" string="Agreement Whatsapp Setting" data-key="whatsapp_setting">
+                    <h2>Agreement WhatsApp Settings</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="ageement_whatsapp_url"/>
+                                <div class="row">
+                                    <div class="text-muted col-lg-10">
+                                        Define the Agreement Whatsapp URL for integration.
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="ageement_whatsapp_url" class="w-75"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="ageement_whatsapp_token"/>
+                                <div class="row">
+                                    <div class="text-muted col-lg-10">
+                                        Define the Agreement Whatsapp Token for integration.
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="ageement_whatsapp_token" class="w-75"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+
+
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="whatsapp" string="Whatsapp Setting" data-key="whatsapp_setting">
+                    <h2>WhatsApp Settings</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="whatsapp_url"/>
+                                <div class="row">
+                                    <div class="text-muted col-lg-10">
+                                        Define the Whatsapp URL for integration.
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="whatsapp_url" class="w-75"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="whatsapp_token"/>
+                                <div class="row">
+                                    <div class="text-muted col-lg-10">
+                                        Define the Whatsapp Token for integration.
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="whatsapp_token" class="w-75"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="morning_message" string="Morning Message"/>
+                                <div class="row">
+                                    <div class="text-muted col-lg-10">
+                                        Define the WhatsApp Morning Message for the send message.
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="morning_message" class="w-75"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="afternoon_message" string="Afternoon Message"/>
+                                <div class="row">
+                                    <div class="text-muted col-lg-10">
+                                        Define the WhatsApp Afternoon Message for the send message.
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="afternoon_message" class="w-75"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="evening_message" string="Evening Message"/>
+                                <div class="row">
+                                    <div class="text-muted col-lg-10">
+                                        Define the WhatsApp Evening Message for the send message.
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="evening_message" class="w-75"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="halfday_message" string="Half Day Message"/>
+                                <div class="row">
+                                    <div class="text-muted col-lg-10">
+                                        Define the WhatsApp Half Day Message for the send message.
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="halfday_message" class="w-75"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="fullday_message" string="Full Day Message"/>
+                                <div class="row">
+                                    <div class="text-muted col-lg-10">
+                                        Define the WhatsApp Full Day Message for the send message.
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16">
+                                        <field name="fullday_message" class="w-75"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

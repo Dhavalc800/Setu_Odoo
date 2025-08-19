@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template>
+    <t t-name="os_theme_butterfly.Pager" t-inherit="web.Pager" t-inherit-mode="extension" owl="1">
+        <xpath expr="//span[hasclass('o_pager_counter')]" position="before">
+            <t t-set="view" t-value="env and env.config and env.config.viewSwitcherEntries.find((v) => v.active)"/>
+            <t t-if="view and view.type != 'calendar' and view.type != 'activity'">
+                <div class="os_cp_refresher d-none d-md-inline-block" role="search" t-ref="reloader">
+                    <ViewReloader t-props="props"/>
+                </div>
+            </t>
+        </xpath>
+    </t>
+</template>

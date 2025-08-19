@@ -1,0 +1,16 @@
+<odoo>
+    <record id="view_users_form_inherit_lead_tracking" model="ir.ui.view">
+        <field name="name">res.users.form.inherit.lead.tracking</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='login']" position="after">
+                <group>
+                    <field name="x_user_lead_id" invisible="1"/>
+                    <field name="daily_lead_fetch_count" invisible="1"/>
+                    <!-- <field name="crm_team_member_ids" invisible="1"/> -->
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

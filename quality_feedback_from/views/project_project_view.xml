@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="project_form_view_inherit_feedback" model="ir.ui.view">
+        <field name="name">project.form.inherit</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="survey_id" required="1"/>
+                <field name="feedback_user_id" required="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

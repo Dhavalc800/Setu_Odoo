@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View with Cards -->
+    <record id="view_dashboard_overview_form" model="ir.ui.view">
+        <field name="name">dashboard.overview.form</field>
+        <field name="model">dashboard.overview</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_update_dashboard_lines"
+                        string="Update Today's Lines"
+                        type="object"
+                        class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="user_id" invisible="1"/>
+                        <field name="employee_id" invisible="1"/>
+                        <field name="manager_id" invisible="1"/>
+                    </group>
+                    <field name="name" invisible="1"/>
+                    <div class="container text-center">
+                        <h1>Dashboard Overview</h1>
+                    </div>
+                    
+                    <!-- <div class="row mt16 mb16" style="margin: 0 -10px;">
+                        <div class="col-md-3" style="padding: 0 10px;">
+                            <div class="card" style="height: 100%; background-color: #e1f5fe; border-left: 4px solid #03a9f4;">
+                                <div class="card-body text-center" style="padding: 15px;">
+                                    <h2 class="card-title" style="margin: 0; font-size: 24px; font-weight: bold; color: #0288d1;">
+                                        <field name="intro_count" style="display: block;" readonly="1"/> INTRO
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3" style="padding: 0 10px;">
+                            <div class="card" style="height: 100%; background-color: #e8f5e9; border-left: 4px solid #4caf50;">
+                                <div class="card-body text-center" style="padding: 15px;">
+                                    <h2 class="card-title" style="margin: 0; font-size: 24px; font-weight: bold; color: #388e3c;">
+                                        <field name="prospect_count" style="display: block;" readonly="1"/> Prospect
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3" style="padding: 0 10px;">
+                            <div class="card" style="height: 100%; background-color: #fff8e1; border-left: 4px solid #ffc107;">
+                                <div class="card-body text-center" style="padding: 15px;">
+                                    <h2 class="card-title" style="margin: 0; font-size: 24px; font-weight: bold; color: #ffa000;">
+                                        <field name="expected_revenue_total" style="display: block;" readonly="1"/> Expected Revenue
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3" style="padding: 0 10px;">
+                            <div class="card" style="height: 100%; background-color: #ffebee; border-left: 4px solid #f44336;">
+                                <div class="card-body text-center" style="padding: 15px;">
+                                    <h2 class="card-title" style="margin: 0; font-size: 24px; font-weight: bold; color: #d32f2f;">
+                                        <field name="talk_time_average" style="display: block;" readonly="1"/> Tack Time
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="container text-center">
+                        <div class="row mt16 mb16 justify-content-center" style="margin: 0 -10px;">
+                            <!-- INTRO Card (Sky Blue) -->
+                            <div class="col-md-3" style="padding: 0 10px;">
+                                <div class="card" style="height: 100%; background-color: #e1f5fe; border-left: 4px solid #03a9f4;">
+                                    <div class="card-body text-center" style="padding: 15px;">
+                                        <h2 class="card-title" style="margin: 0; font-size: 24px; font-weight: bold; color: #0288d1;">
+                                            <field name="intro_count" style="display: block;" readonly="1"/> INTRO
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Prospect Card (Green) -->
+                            <div class="col-md-3" style="padding: 0 10px;">
+                                <div class="card" style="height: 100%; background-color: #e8f5e9; border-left: 4px solid #4caf50;">
+                                    <div class="card-body text-center" style="padding: 15px;">
+                                        <h2 class="card-title" style="margin: 0; font-size: 24px; font-weight: bold; color: #388e3c;">
+                                            <field name="prospect_count" style="display: block;" readonly="1"/> Prospect
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Expected Revenue Card (Yellow) -->
+                            <div class="col-md-3" style="padding: 0 10px;">
+                                <div class="card" style="height: 100%; background-color: #fff8e1; border-left: 4px solid #ffc107;">
+                                    <div class="card-body text-center" style="padding: 15px;">
+                                        <h2 class="card-title" style="margin: 0; font-size: 24px; font-weight: bold; color: #ffa000;">
+                                            <field name="expected_revenue_total" style="display: block;" readonly="1"/> Expected Revenue
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Time Off Requests Section -->
+                    <div class="mt16" style="margin-top: 30px;">
+                        <field name="overview_line_ids" mode="tree,form">
+                            <tree>
+                                <field name="user_id"/>
+                                <field name="lead_id"/>
+                                <field name="disposition_id"/>
+                                <field name="opportunity_name"/>
+                                <field name="expected_revenue"/>
+                                <field name="tack_time" invisible="1"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="user_id"/>
+                                    <field name="lead_id"/>
+                                    <field name="disposition_id"/>
+                                    <field name="opportunity_name"/>
+                                    <field name="expected_revenue"/>
+                                    <field name="tack_time" invisible="1"/>
+                                </group>
+                            </form>
+                        </field>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Tree View -->
+    <!-- <record id="view_dashboard_overview_tree" model="ir.ui.view">
+        <field name="name">dashboard.overview.tree</field>
+        <field name="model">dashboard.overview</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="user_id"/>
+                <field name="lead_id"/>
+                <field name="disposition_id"/>
+                <field name="opportunity_name"/>
+                <field name="expected_revenue"/>
+                <field name="tack_time"/>
+            </tree>
+        </field>
+    </record> -->
+    
+    <!-- Action and Menu Items -->
+    <record id="action_dashboard_overview" model="ir.actions.act_window">
+        <field name="name">Dashboard Overview</field>
+        <field name="res_model">dashboard.overview</field>
+        <field name="view_mode">form</field>
+    </record>
+    
+</odoo>

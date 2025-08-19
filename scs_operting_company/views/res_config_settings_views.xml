@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_scs" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.base.setup</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='companies']/div" position="inside">
+                 <div class="col-12 col-lg-6 o_setting_box" id="operating_company_details_settings">
+                     <div class="o_setting_right_pane">
+                        <div class="w-100">
+                            <label string="Operating Company" for="operating_company_ids" class="col-2 col-lg-3"/>
+                            <field name="operating_company_ids" class="oe_inline ml16"  widget="many2many_tags"
+                                options="{'no_open': True, 'no_create_edit': True, 'create': False}"/>
+                        </div>
+                     </div>
+                 </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

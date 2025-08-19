@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_campaigns_list_tree" model="ir.ui.view">
+        <field name="name">campaigns.list.tree</field>
+        <field name="model">campaigns.list</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="disposition_id"/>
+                <field name="cmp_active" widget="boolean_toggle"/>
+                <field name="fetch_lead_as_per_disposition" widget="boolean_toggle"/>
+                <!-- <field name="user_count"/> -->
+                <field name="active_user_count"/>
+                <field name="used_lead_count"/>
+                <field name="not_used_lead_count"/>
+                <!-- <field name="total_lead_count"/> -->
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_campaigns_list_form" model="ir.ui.view">
+        <field name="name">campaigns.list.form</field>
+        <field name="model">campaigns.list</field>
+        <field name="arch" type="xml">
+            <form string="Campaigns List">
+                <header>
+                    <button name="upload_csv" type="object" string="Upload Campaign Users" attrs="{'invisible': [('select_method_upd', '!=', 'csv')]}" class="oe_highlight"/>
+                    <button name="upload_excel" type="object" string="Upload Campaign Users" attrs="{'invisible': [('select_method_upd', '!=', 'excel')]}" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_campaign_users"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-users">
+                            <field name="user_count" widget="statinfo" string="Users"/>
+                        </button>
+                    
+                        <button type="object" name="action_open_lead_lists"
+                                icon="fa-list" class="oe_stat_button" attrs="{'invisible': [('lead_list_count', '=', 0)]}">
+                            <field name="lead_list_count" widget="statinfo" string="Lead Lists"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="cmp_active"/>
+                    </group>
+
+                    <group string="Date Range" invisible="1">
+                        <group>
+                            <field name="start_date"/>
+                        </group>
+                    
+                        <group>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    
+                    <group string="Disposition Details">
+                        <field name="disposition_id" options="{'no_create': True, 'no_open': True}"/>
+                    </group>
+
+                    <group string="Select Method To Upload User">
+                        <field name="select_method_upd" widget="radio"/>
+                    </group>
+
+                    <group>
+                        <field name="fetch_lead_as_per_disposition" widget="boolean_toggle"/>
+                    </group>
+                    <notebook>
+                        <page string="Campaign Users">
+                            <button name="action_clear_users" type="object" string="Clear All Users" class="btn-danger" />
+                            <field name="user_ids" colspan="2" nolabel="1">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="email"/>
+                                        <field name="daily_lead_fetch_count" invisible="1"/>
+                                    </tree>
+                            </field>
+                        </page>
+
+                        <page string="Fetch Lead From Disposition" attrs="{'invisible': [('fetch_lead_as_per_disposition', '=', False)]}">
+                            <group>
+                                <!-- <field name="filter_campaign_id"/> -->
+                                <field name="filter_lead_list_id" widget="many2many_tags"/>
+                                <field name="filter_disposition_id" domain="[('is_dnd', '=', False)]" widget="many2many_tags"/>
+                                <button name="action_fetch_per_disposition_leads"
+                                    type="object"
+                                    string="Fetch Leads"
+                                    class="btn-primary"
+                                    icon="fa-magic"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_campaigns_list" model="ir.actions.act_window">
+        <field name="name">Campaigns</field>
+        <field name="res_model">campaigns.list</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

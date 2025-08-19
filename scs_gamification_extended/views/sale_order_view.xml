@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="sale_inherit_form_view_gamificatoion" model="ir.ui.view">
+        <field name="name">sale.order.inherit.form.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//page[@name='other_information']//field[@name='client_order_ref']" position="after">
+                <field name="gamification_data_ids">
+                    <tree editable='bottom'>
+                        <field name="salesperson_id"></field>
+                        <field name="percentage"></field>
+                        <field name="order_id"></field>
+                    </tree>
+                </field>
+            </xpath>
+
+            <xpath expr="//button[@name='action_cancel']" position="after">
+                <button name="open_gamification_wizard"
+                            string="Add Salesperson" class="oe_highlight"
+                            type="object"
+                            attrs="{'invisible': [('state', 'not in', ('draft', 'sent', 'sale'))]}"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

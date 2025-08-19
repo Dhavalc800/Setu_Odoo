@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Module Category HRMS -->
+    <record id="module_category_hrms" model="ir.module.category">
+        <field name="name">HRMS</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <!-- Resource Group -->
+    <record id="hr_config.group_hr_resource" model="res.groups">
+        <field name="category_id" ref="hr_config.module_category_hrms"/>
+        <field name="name">Resource</field>
+        <field name="comment">Employees have specific access rights(such as they can see themselves and their subordinates)</field>
+        <field name="implied_ids" eval="[(4, ref('hr.group_hr_user'))]"/>
+    </record>
+
+    <!-- Reporting Manager Group -->
+    <record id="group_reporting_manager" model="res.groups">
+        <field name="category_id" ref="hr_config.module_category_hrms"/>
+        <field name="name">Reporting Manager</field>
+        <field name="comment">Reporting Manager have access rights(such as they can approve and refuse subordinates' leave and Compensatory Work)</field>
+        <field name="implied_ids" eval="[(4, ref('hr_config.group_hr_resource'))]"/>
+    </record>
+
+    <!-- Record Rule::- Employee can see own and child Employees Data-->
+    <record id="hr_employee_rule_user" model="ir.rule">
+        <field name="name">Employee can see its own and child employee's records</field>
+        <field name="model_id" ref="hr.model_hr_employee"/>
+        <field name="domain_force">['|', ('user_id','=', user.id), '|',  ('parent_id','=', False), ('parent_id.user_id','in', [user.id])]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name='perm_create' eval='True'/>
+        <field name='perm_read' eval='True'/>
+        <field name='perm_unlink' eval='True'/>
+        <field name='perm_write' eval='True'/>
+    </record>
+
+    <record id="hr_config_rule_all" model="ir.rule">
+        <field name="name">Manager can see all data himself</field>
+        <field name="model_id" ref="hr.model_hr_employee"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('hr.group_hr_manager'))]"/>
+        <field name='perm_create' eval='True'/>
+        <field name='perm_read' eval='True'/>
+        <field name='perm_unlink' eval='True'/>
+        <field name='perm_write' eval='True'/>
+    </record>
+    
+</odoo>

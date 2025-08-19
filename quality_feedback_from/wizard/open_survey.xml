@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="action_open_survey_view_form" model="ir.ui.view">
+        <field name="name">action.opan.survey.view.form</field>
+        <field name="model">opan.survey</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="survey_id" options="{'no_create': True}"/>
+                </group>
+                <footer>
+                    <button string="Feedback Form" name="action_open_survey_from" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_open_survey_id" model="ir.actions.act_window">
+        <field name="name">Feedback Form</field>
+        <field name="res_model">opan.survey</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+
+
+</odoo>

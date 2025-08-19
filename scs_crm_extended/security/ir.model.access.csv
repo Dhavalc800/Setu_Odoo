@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_crm_team_process_manager,access_crm_team_process_manager,model_crm_team_process,sales_team.group_sale_manager,1,1,1,1
+access_crm_team_process,access_crm_team_process,model_crm_team_process,sales_team.group_sale_salesman_all_leads,1,1,1,1

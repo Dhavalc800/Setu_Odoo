@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="call_record_details_form_view" model="ir.ui.view">
+        <field name="name">call.record.details.form.view</field>
+        <field name="model">call.record.details</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="create_lead" type="object" string="Create Lead" class="oe_highlight"
+                            attrs="{'invisible': ['|', ('disposition_name', '!=', 'Interested'), ('lead_id', '!=', False)]}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group col="4">
+                            <field name="call_record_id" readonly="1"/>
+                            <field name="call_id" readonly="1"/>
+                            <field name="leadid" string="leadId"/>
+                            <field name="call_direction"/>
+                            <field name="description" />
+                            <field name="call_start_date_time" />
+                            <field name="call_end_date_time" />
+                            <field name="broadcast_id" />
+                            <field name="call_duration" />
+                            <field name="answered_seconds" />
+                            <field name="minutes_consumed" />
+                            <field name="hangup_cause" />
+                            <field name="notes" />
+                            <field name="missed_agents_number" />
+                            <field name="missed_agents_name" />
+                        </group>
+                        <group col="4">
+                            <field name="detailed_description"/>
+                            <field name="call_status" />
+                            <field name="recording_url" readonly="1" widget="audio_field"/>
+                            <field name="service" />
+                            <field name="agent_number" />
+                            <field name="agent_number_with_prefix" />
+                            <field name="agent_name" />
+                            <field name="user_id" string="Agent"/>
+                            <field name="client_number" />
+                            <field name="caller_id_num" />
+                            <field name="disposition_name"/>
+                            <field name="is_lead_created" string="Lead Created" readonly="1" force_save="1"/>
+                            <field name="lead_id" string="Lead" readonly="1" force_save="1"/>
+<!--                            <field name="call_flow_type" />-->
+<!--                            <field name="call_flow_name" />-->
+<!--                            <field name="call_flow_num" />-->
+<!--                            <field name="call_flow_dialst" />-->
+<!--                            <field name="call_flow_time" />-->
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tatatele_call_record_details_tree_view" model="ir.ui.view">
+        <field name="name">call.record.details.tree</field>
+        <field name="model">call.record.details</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="missed_agents_number"/>
+                <field name="call_direction"/>
+                <field name="call_status" />
+                <field name="call_start_date_time" />
+                <field name="call_end_date_time" />
+                <field name="call_duration"/>
+                <field name="client_number" />
+                <field name="disposition_name" />
+                <field name="agent_name" />
+                <field name="call_record_id" optional="hide"/>
+                <field name="call_id" optional="hide"/>
+                <field name="leadid" optional="hide"/>
+                <field name="broadcast_id" optional="hide"/>
+                <field name="answered_seconds" optional="hide"/>
+                <field name="minutes_consumed" optional="hide"/>
+                <field name="hangup_cause" optional="hide"/>
+                <field name="missed_agents_name" optional="hide"/>
+                <field name="agent_number" optional="hide"/>
+                <field name="user_id" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tatatele_disposition_interested_tree_view" model="ir.ui.view">
+        <field name="name">disposition.interested.tree</field>
+        <field name="model">call.record.details</field>
+        <field name="arch" type="xml">
+            <tree>
+                <header>
+                    <button name="create_lead" type="object" class="oe_stat_button" string="Create Lead"/>
+                </header>
+<!--                <field name="call_flow_name"/>-->
+<!--                <field name="missed_agents_number"/>-->
+                <field name="name"/>
+                <field name="call_direction"/>
+                <field name="call_duration" />
+                <field name="call_status" />
+                <field name="disposition_name" />
+                <field name="agent_name" />
+                <field name="is_lead_created" string="Lead Created" readonly="1" force_save="1"/>
+                <field name="call_record_id" optional="hide"/>
+                <field name="call_id" optional="hide"/>
+                <field name="leadid" optional="hide"/>
+                <field name="broadcast_id" optional="hide"/>
+                <field name="answered_seconds" optional="hide"/>
+                <field name="minutes_consumed" optional="hide"/>
+                <field name="hangup_cause" optional="hide"/>
+                <field name="missed_agents_name" optional="hide"/>
+                <field name="agent_number" optional="hide"/>
+                <field name="user_id" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="call_recording_view_pivot" model="ir.ui.view">
+        <field name="name">call.recording.view.pivot</field>
+        <field name="model">call.record.details</field>
+        <field name="arch" type="xml">
+            <pivot string="Call Recording" sample="1">
+                <field name="create_date" interval="month" type="row"/>
+<!--                <field name="id"/>-->
+                <field name="call_start_date_time" type="col" interval="month"/>
+                <field name="call_end_date_time" type="col" interval="month"/>
+                <field name="disposition_name" type="col"/>
+                <field name="agent_name" type="col"/>
+                <field name="call_duration"/>
+                <field name="call_id"/>
+                <field name="answered_seconds"/>
+                <field name="hangup_cause"/>
+                <field name="agent_number"/>
+                <field name="call_status" type="col"/>
+                <field name="call_direction"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_call_recording_graph" model="ir.ui.view">
+        <field name="name">call.recording.graph</field>
+        <field name="model">call.record.details</field>
+        <field name="arch" type="xml">
+            <graph string="Call Recordings" sample="1">
+                <field name="call_duration" operator="+"/>
+                <field name="disposition_name" />
+                <field name="agent_name"/>
+                <field name="call_start_date_time" interval="day"/>
+                <field name="answered_seconds"  type='measure'/>
+                <field name="agent_number"/>
+                <field name="call_status" operator="+"/>
+                <field name="call_direction"/>
+                <field name="call_id"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_icall_record_details_search_view" model="ir.ui.view">
+        <field name="name">view.icall.record.details.search.view</field>
+        <field name="model">call.record.details</field>
+        <field name="arch" type="xml">
+            <search string="Call Record Detail Search">
+                <field name="call_status" />
+                <field name="disposition_name" />
+                <field name="client_number" />
+                <field name="agent_number" />
+                <group string="Group By">
+                    <filter
+                        string="Call Status"
+                        name="call_status"
+                        context="{'group_by':'call_status'}"
+                    />
+                </group>
+                <group string="Group By">
+                    <filter
+                        string="Disposition"
+                        name="disposition_name"
+                        context="{'group_by':'disposition_name'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="tatatele_call_record_details_act_window" model="ir.actions.act_window">
+        <field name="name">Tata Tele Call Record Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">call.record.details</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="context">
+            {
+                'default_groupby_call_status': 1,
+            }
+        </field>
+    </record>
+
+    <record id="tatatele_call_record_interested_disposition" model="ir.actions.act_window">
+        <field name="name">Interested Disposition Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">call.record.details</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="domain">[('disposition_name', '=', 'Interested')]</field>
+        <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('tatatele_disposition_interested_tree_view')})]"/>
+    </record>
+</odoo>

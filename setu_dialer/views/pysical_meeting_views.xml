@@ -1,0 +1,167 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_pysical_meeting_tree" model="ir.ui.view">
+        <field name="name">pysical.meeting.tree</field>
+        <field name="model">pysical.meeting</field>
+        <field name="arch" type="xml">
+            <tree string="Pysical Meetings">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="contact"/>
+                <field name="state"/>
+                <field name="district"/>
+                <field name="user_id"/>
+                <field name="meeting_user_id"/>
+                <field name="disposition"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_pysical_meeting_form" model="ir.ui.view">
+        <field name="name">pysical.meeting.form</field>
+        <field name="model">pysical.meeting</field>
+        <field name="arch" type="xml">
+            <form string="Pysical Meeting">
+                <header>
+                    <!-- Button: Fetch Call Data (Visible only to Audit Team) -->
+                    <button name="action_fetch_call_data"
+                            string="Fetch Call Data"
+                            type="object"
+                            class="btn-primary"
+                            groups="setu_dialer.group_audit_team"/>
+
+                    <!-- Stage by BDM (Statusbar for User group) -->
+                    <field name="stage_by_bdm"
+                        widget="statusbar"
+                        statusbar_visible="approve_bdm,not_approve_bdm"
+                        options="{'clickable': '1'}"
+                        groups="setu_dialer.group_pysical_meeting_user"/>
+                </header>
+                <header>
+                    <field name="stage_by_admin"
+                        widget="statusbar"
+                        statusbar_visible="approve,not_approve"
+                        options="{'clickable': '1'}"
+                        groups="setu_dialer.group_pysical_meeting_admin,setu_dialer.group_pysical_meeting_manager"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Basic Information">
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="contact"/>
+                            <field name="type"/>
+                        </group>
+                        <group string="Location Details">
+                            <field name="state"/>
+                            <field name="district"/>
+                            <field name="pincode"/>
+                        </group>
+                        <group string="Business Details">
+                            <field name="slab"/>
+                            <field name="user_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="bdm_branch" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="approved_by" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="bdm_approved_on"/>
+                            <field name="approved_on"/>
+                            <field name="meeting_date"/>
+                            <field name="meeting_user_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="disposition"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Call Details" groups="setu_dialer.group_audit_team">
+                            <group>
+                                <group string="Call Information">
+                                    <field name="client_correlation_id"/>
+                                    <field name="call_datetime"/>
+                                    <field name="client_name"/>
+                                    <field name="call_type"/>
+                                    <field name="overall_call_status"/>
+                                    <field name="hangup_cause"/>
+                                </group>
+                                <group string="Caller Details">
+                                    <field name="caller_number"/>
+                                    <field name="caller_operator_name"/>
+                                    <field name="caller_circle"/>
+                                    <field name="caller_status"/>
+                                </group>
+                                <group string="Destination Details">
+                                    <field name="destination_number"/>
+                                    <field name="destination_operator_name"/>
+                                    <field name="destination_circle"/>
+                                    <field name="destination_status"/>
+                                </group>
+                                <group string="Duration">
+                                    <field name="call_duration"/>
+                                    <field name="conversation_duration"/>
+                                </group>
+                                <group string="Recording">
+                                    <field name="recording" widget="audio_field" colspan="2"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                    
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_pysical_meeting_search" model="ir.ui.view">
+        <field name="name">pysical.meeting.search</field>
+        <field name="model">pysical.meeting</field>
+        <field name="arch" type="xml">
+            <search string="Search Physical Meetings">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="contact"/>
+                <field name="state"/>
+                <field name="district"/>
+                <field name="user_id"/>
+                <field name="meeting_user_id"/>
+                <field name="disposition"/>
+
+                <!-- Filter options -->
+                <filter string="Created Today" name="filter_today" domain="[('create_date', '>=', context_today())]"/>
+                <filter string="My Records" name="filter_my" domain="[('user_id', '=', uid)]"/>
+
+                <!-- Group By options -->
+                <group expand="1" string="Group By">
+                    <filter string="User" name="group_by_user" domain="[]" context="{'group_by': 'user_id'}"/>
+                    <filter string="State" name="group_by_state" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter string="Disposition" name="group_by_dispo" domain="[]" context="{'group_by': 'disposition'}"/>
+                </group>
+                <filter string="Today" name="filter_created_today"
+                    domain="[('create_date', '>=', context_today())]" />
+            </search>
+        </field>
+    </record>
+
+    <record id="view_pysical_meeting_pivot" model="ir.ui.view">
+        <field name="name">pysical.meeting.pivot</field>
+        <field name="model">pysical.meeting</field>
+        <field name="arch" type="xml">
+            <pivot string="Physical Meeting Analysis">
+                <field name="meeting_date" type="row"/>
+                <field name="bdm_branch" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_pysical_meeting" model="ir.actions.act_window">
+        <field name="name">Physical Meetings</field>
+        <field name="res_model">pysical.meeting</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="search_view_id" ref="view_pysical_meeting_search"/>
+        <field name="context">{'search_default_filter_created_today': 1}</field>
+    </record>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="agreement_legal.partner_agreement_contract_document" model="ir.actions.report">
+        <field name="report_name">agreement_reports.custom_report_agreement_document</field>
+        <field name="report_file">agreement_reports.custom_report_agreement_document</field>
+    </record>
+
+    <record id="agreement_legal.partner_agreement_contract_document_preview" model="ir.actions.report">
+        <field name="report_name">agreement_reports.custom_report_agreement_document</field>
+        <field name="report_file">agreement_reports.custom_report_agreement_document</field>
+    </record>
+
+</odoo>

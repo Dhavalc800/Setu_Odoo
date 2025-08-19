@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="qualification_criteria_task_form_view_inherit" model="ir.ui.view">
+        <field name="name">qualification.criteria.task.form.view.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='planned_hours']" position="after">
+                <field name="survey_id" />
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="after">
+                <field name="complimentary_service" invisible="1"></field>
+                <widget name="web_ribbon" title="Complimentry Service" bg_color="bg-info" attrs="{'invisible': [('complimentary_service', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_feedback" type="object" string="FeedBack" class="oe_stat_button" icon="fa-edit" attrs="{'invisible': [('feedback_count', '=', 0)]}">
+                    <field name="feedback_count" widget="statinfo" string = "Feedback"/>
+                </button>
+                <button name="action_view_complimentary_task" type="object" string="FeedBack" class="oe_stat_button" icon="fa-edit" attrs="{'invisible': [('complimentary_task_count', '=', 0)]}">
+                    <field name="complimentary_task_count" widget="statinfo" string = "Complimentry Task"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

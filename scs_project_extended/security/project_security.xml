@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.rule" id="project_manager_rule">
+        <field name="name">Project: project manager only projects</field>
+        <field name="model_id" ref="model_project_project"/>
+        <field name="domain_force">[('user_id', '=', user.id)
+            ]
+        </field>
+        <field name="groups" eval="[(4, ref('project_config.group_project_manager_custom'))]"/>
+        <field name='perm_create' eval='True' />
+	    <field name='perm_read' eval='True' />
+	    <field name='perm_unlink' eval='True' />
+	    <field name='perm_write' eval='True' />
+    </record>
+
+    <!-- Project Coordinator Record Rule -->
+    <record model="ir.rule" id="project_coordinator_rule">
+        <field name="name">Project: project Coordinator can see their only projects</field>
+        <field name="model_id" ref="model_project_project"/>
+        <field name="domain_force">[('project_coordinator_ids','in', [user.id])]
+        </field>
+        <field name="groups" eval="[(4, ref('project_config.group_project_coordinator'))]"/>
+        <field name='perm_create' eval='True' />
+	    <field name='perm_read' eval='True' />
+	    <field name='perm_unlink' eval='True' />
+	    <field name='perm_write' eval='True' />
+    </record>
+
+    <function model="ir.rule" name="write">
+        <value eval="[ref('project.project_public_members_rule')]"/>
+        <value eval="{'domain_force': '[(\'message_partner_ids\', \'in\', [user.partner_id.id])]'}"/>
+    </function>
+
+    <function model="ir.rule" name="write">
+        <value eval="[ref('project.ir_rule_private_task')]"/>
+        <value eval="{'domain_force': '[
+                 (\'user_ids\', \'in\', user.id),
+        ]'}"/>
+    </function>
+	<record id="hr_timesheet_line_group_project_coordinator_rule" model="ir.rule">
+	    <field name="name">Project Coordinator: can his project user timesheet</field>
+	    <field name="model_id" ref="analytic.model_account_analytic_line"/>
+	    <field name="active">True</field>
+<!--	    <field name="domain_force">[('project_id.project_coordinator_ids','in', user.child_ids.ids)]</field>-->
+	    <field name="domain_force">['|', ('project_id.project_coordinator_ids','in', [user.id]), ('project_id.members_ids', 'in', [user.id])]</field>
+	    <field name="groups" eval="[(4, ref('project_config.group_project_coordinator'))]"/>
+	    <field name='perm_create' eval='True' />
+	    <field name='perm_read' eval='True' />
+	    <field name='perm_unlink' eval='True' />
+	    <field name='perm_write' eval='True' />
+	</record>
+    
+    <!-- Contact Readonly Group -->
+    <record id="module_category_scs_contact_readonly" model="ir.module.category">
+        <field name="name">Contact Form</field>
+        <field name="description">Helps you allow the contact form to make Readonly as per user access</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="scs_project_extended.group_restrict_contact_readonly" model="res.groups">
+        <field name="name">Contact Info Readonly</field>
+        <field name="category_id" ref="scs_project_extended.module_category_scs_contact_readonly"/>
+    </record>
+</odoo>

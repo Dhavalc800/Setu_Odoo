@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <!-- Demo data for Project Type in Project -->
+        <record id="demo_data_project_type_1" model="project.type">
+            <field name="name">Software Development</field>
+            <field name="code">Software</field>
+        </record>
+        <record id="demo_data_project_type_2" model="project.type">
+            <field name="name">Mobile Development</field>
+            <field name="code">MOB</field>
+        </record>
+        <record id="demo_data_project_type_3" model="project.type">
+            <field name="name">ERP Development</field>
+            <field name="code">ERP</field>
+        </record>
+        <record id="demo_data_project_type_4" model="project.type">
+            <field name="name">Web Development</field>
+            <field name="code">WEB</field>
+        </record>
+</odoo>

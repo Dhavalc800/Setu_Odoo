@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_equipment_user,equipment.user,model_maintenance_equipment,scs_maintenance.group_equipment_user,1,1,1,1
+access_maintenance_own_system_user,equipment.request.user,maintenance.model_maintenance_request,scs_maintenance.group_equipment_user,1,1,1,1

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--  Buttons to approve timesheet in wizard from toolbar -->
+    <record id="form_view_approve_timesheet_activity" model="ir.ui.view">
+        <field name="name">form.view.appove.timesheet.activity</field>
+        <field name="model">approve.timesheet.activity</field>
+        <field name="arch" type="xml">
+            <form string="Approve Timesheet">
+                <footer>
+                    <button name="approve_timesheet" type="object" string="Approve" class="oe_highlight"/>
+                    <button string="Close" class="oe_highlight" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- A toolbar to approve timesheet -->
+    <act_window id="act_window_timesheet_approve"
+                name="Approve Timesheets"
+                res_model="approve.timesheet.activity"
+                src_model="account.analytic.line"
+                view_type="form"
+                view_mode="form"
+                view_id="form_view_approve_timesheet_activity"
+                groups = "project_config.group_project_manager_custom"
+                key2="client_action_multi"
+                target="new"/> 
+</odoo>

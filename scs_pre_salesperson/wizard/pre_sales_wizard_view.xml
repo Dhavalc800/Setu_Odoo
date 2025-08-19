@@ -1,0 +1,30 @@
+<odoo>
+    <record id="view_pre_sales_wizard_form" model="ir.ui.view">
+        <field name="name">pre.sales.wizard.form</field>
+        <field name="model">pre.sales.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Add Pre-Salesperson">
+                <group>
+                    <field name="pre_salesman_user_id"/>
+                    <field name="pre_sales_percentage" readonly="1"/>
+                </group>
+                <footer>
+                    <button name="apply_pre_salesperson"
+                            string="Apply"
+                            type="object"
+                            class="btn-primary"/>
+                    <button name="remove_pre_salesperson" string="Remove" type="object" class="btn-secondary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pre_sales_wizard" model="ir.actions.act_window">
+        <field name="name">Pre-Sales Wizard</field>
+        <field name="res_model">pre.sales.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,15 @@
+<!-- dashboard_overview_assets.xml -->
+<odoo>
+    <template id="dashboard_overview_list_buttons" inherit_id="web.ListRenderer" name="Dashboard Overview Smart Buttons" owl="1">
+        <xpath expr="//div[hasclass('o_list_renderer')]" position="before">
+            <t t-if="props.list.rendererProps.arch.tag === 'tree' &amp;&amp; props.list.rendererProps.model === 'dashboard.overview'">
+                <div class="d-flex gap-3 mb-3">
+                    <button class="btn btn-outline-primary" type="button">Intro</button>
+                    <button class="btn btn-outline-success" type="button">Prospect</button>
+                    <button class="btn btn-outline-warning" type="button">Expected Revenue</button>
+                    <button class="btn btn-outline-info" type="button">Tack Time</button>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>

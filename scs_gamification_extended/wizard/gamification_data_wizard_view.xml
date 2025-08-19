@@ -1,0 +1,37 @@
+<odoo>
+    <record id="add_salesperson_percantage_from_view" model="ir.ui.view">
+        <field name="name">add.salesperson.percantage.from.view</field>
+        <field name="model">gamification.data.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="salesperson_ids" invisible="1"></field>
+                        <field name="sale_gamification_ids" nolabel="0">
+                            <tree editable='bottom'>
+                                <field name="salesperson_id" domain="[('id', 'not in', parent.salesperson_ids)]"></field>
+                                <field name="percentage" readonly="1" force_save="1"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button
+                            name="add_percentage"
+                            string="Apply Percentage"
+                            class="btn-primary"
+                            type="object"
+                        />
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="add_salesperson_percantage_action" model="ir.actions.act_window">
+        <field name="name">Add Salesperson Parcentage</field>
+        <field name="res_model">gamification.data.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

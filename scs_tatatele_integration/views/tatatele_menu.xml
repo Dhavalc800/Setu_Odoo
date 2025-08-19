@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <menuitem
+                name="Lead Data Store"
+                id="tatatele_root_menu"
+                web_icon="scs_tatatele_integration,static/description/icon.svg"
+                groups="scs_tatatele_integration.group_tatatele_user"
+        />
+        <!-- <menuitem
+                name="Broadcast List"
+                id="broadcast_list_menu"
+                parent="tatatele_root_menu"
+                action="broadcast_list_act_window"
+                sequence="2"
+                groups="scs_tatatele_integration.group_tatatele_admin"
+        /> -->
+
+        <!-- <menuitem
+                name="Fetch Lead"
+                id="fetch_lead_menu"
+                parent="tatatele_root_menu"
+                action="action_fetch_lead"
+                sequence="3"
+                groups="scs_tatatele_integration.group_tatatele_admin"
+        /> -->
+
+        <menuitem
+                name="Lead Details"
+                id="lead_details_menu"
+                parent="tatatele_root_menu"
+                action="lead_details_act_window"
+                sequence="1"
+                groups="scs_tatatele_integration.group_tatatele_admin"
+        />
+        <!-- <menuitem
+                name="Call Record Details"
+                id="tatatele_call_record_details_root_menu"
+                parent="tatatele_root_menu"
+                sequence="6"
+                groups="scs_tatatele_integration.group_tatatele_user"
+        /> -->
+        <!-- <menuitem
+                name="ALL Call Record Details"
+                id="tatatele_call_record_details_menu"
+                parent="tatatele_call_record_details_root_menu"
+                action="tatatele_call_record_details_act_window"
+                sequence="6"
+                groups="scs_tatatele_integration.group_tatatele_admin"
+
+        /> -->
+        <!-- <menuitem
+                name="Interested Disposition"
+                id="tatatele_intrested_disposition_menu"
+                parent="tatatele_call_record_details_root_menu"
+                action="tatatele_call_record_interested_disposition"
+                sequence="6"
+                groups="scs_tatatele_integration.group_tatatele_user,sales_team_security.group_sale_team_manager"
+        /> -->
+        <!-- <menuitem
+                name="Campaign List"
+                id="tatatele_campaign_list_menu"
+                parent="tatatele_root_menu"
+                action="campaign_list_act_window"
+                sequence="7"
+                groups="scs_tatatele_integration.group_tatatele_admin"
+        /> -->
+        <!-- <menuitem
+                name="Campaign Details"
+                id="tatatele_campaign_details_menu"
+                parent="tatatele_root_menu"
+                action="campaign_details_act_window"
+                sequence="8"
+                groups="scs_tatatele_integration.group_tatatele_admin"
+        /> -->
+
+        <!-- <menuitem
+                name="Tatatele Department"
+                id="tatatele_department_menu"
+                parent="tatatele_root_menu"
+                action="scs_tatatele_integration.tatatele_department_act_window"
+                sequence="9"
+                groups="scs_tatatele_integration.group_tatatele_admin"
+        /> -->
+
+        <!-- <menuitem
+                name="User Token"
+                id="user_token_menu"
+                parent="tatatele_root_menu"
+                action="scs_tatatele_integration.action_user_token"
+                sequence="10"
+                groups="scs_tatatele_integration.group_tatatele_admin"
+        /> -->
+</odoo>

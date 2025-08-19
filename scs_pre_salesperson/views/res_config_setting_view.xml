@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_inherited" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.sale.inherited</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]/div[hasclass('app_settings_block')]" position="inside">
+                <h2 class="mt32">Pre-Saleperson</h2>
+                <div class="row mt16 o_settings_container" name="pre_sales_setting_container">
+                    <div class="col-12 col-lg-6 o_setting_box" id="pre_sales_percentage">
+                        <div class="o_setting_left_pane">
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="pre_sales_percentage"/>
+                            <div class="text-muted">
+                                Pre-Saleperson Percentage
+                                <field name="pre_sales_percentage"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

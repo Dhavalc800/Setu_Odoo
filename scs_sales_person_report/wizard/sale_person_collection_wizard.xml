@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="sale_person_collection_wizard_form" model="ir.ui.view">
+        <field name="name">sale.person.collection.wizard.form</field>
+        <field name="model">sale.person.collection.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="refund"/>
+                        </group>
+                        <group>
+                            <field name="date_to"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="fetch_data" type="object" string="Report" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_sales_person_collection_wizard" model="ir.actions.act_window">
+        <field name="name">Sales Person Collection Report</field>
+        <field name="res_model">sale.person.collection.wizard</field>
+        <field name="view_id" ref="sale_person_collection_wizard_form"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

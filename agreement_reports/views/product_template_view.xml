@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="product_template_agreement">
+        <field name="name">product.template.form.hs_code</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Agreement">
+                    <group>
+                        <field name="agreement_line_ids" widget="section_and_note_one2many" mode="tree"
+                            nolabel="1" colspan="2">
+                            <tree editable="bottom">
+                                <field name="agreement_template_id"/>
+                                <field name="min_agreement_amount" style="width:50px;"/>
+                                <field name="max_agreement_amount" style="width:50px;"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+            <!-- <xpath expr="//group[@name='group_general']/field[@name='uom_po_id']" position="after">
+                    <field name="agreement_template_id" required="1"/>
+            </xpath> -->
+        </field>
+    </record>
+
+</odoo>

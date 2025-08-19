@@ -1,0 +1,33 @@
+$o-onboarding-base-time: 0.5s !default;
+$o-onboarding-dot-size: 20px !default;
+$o-onboarding-progress-size: 2px !default;
+//Onboarding
+
+$odoo-onboarding-blue-bg-1: desaturate(darken(#0008C1, 20%), 40%);
+$odoo-onboarding-blue-bg-2: desaturate(darken(#2D31FA, 20%), 40%);
+$odoo-onboarding-blue-ui-1: desaturate(darken(#E6CBA8, 20%), 40%);
+$odoo-onboarding-blue-ui-2: desaturate(darken(#FDF0E0, 20%), 40%);
+
+$odoo-onboarding-orange-bg-1: desaturate(darken(#fb8b24, 20%), 40%);
+$odoo-onboarding-orange-bg-2: desaturate(darken(#fb5607, 20%), 40%);
+$odoo-onboarding-orange-ui-1: desaturate(darken(#599FF1, 20%), 40%);
+$odoo-onboarding-orange-ui-2: desaturate(darken(#68B3C9, 20%), 40%);
+
+$odoo-onboarding-violet-bg-1: desaturate(darken(#a663cc, 20%), 40%);
+$odoo-onboarding-violet-bg-2: desaturate(darken(#6f2dbd, 20%), 40%);
+$odoo-onboarding-violet-ui-1: desaturate(darken(#F39D9B, 20%), 40%);
+$odoo-onboarding-violet-ui-2: desaturate(darken(#FBEEC8, 20%), 40%);
+$o-onboarding-colors: (
+        'blue': (
+                'bg': ($odoo-onboarding-blue-bg-1, $odoo-onboarding-blue-bg-2),
+                'ui': ($odoo-onboarding-blue-ui-1, $odoo-onboarding-blue-ui-2),
+        ),
+        'orange': (
+                'bg': ($odoo-onboarding-orange-bg-1, $odoo-onboarding-orange-bg-2),
+                'ui': ($odoo-onboarding-orange-ui-1, $odoo-onboarding-orange-ui-2),
+        ),
+        'violet': (
+                'bg': ($odoo-onboarding-violet-bg-1, $odoo-onboarding-violet-bg-2),
+                'ui': ($odoo-onboarding-violet-ui-1, $odoo-onboarding-violet-ui-1),
+        ),
+) !default;

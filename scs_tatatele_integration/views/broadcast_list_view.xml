@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="broadcast_list_form_view" model="ir.ui.view">
+        <field name="name">broadcast.list.form.view</field>
+        <field name="model">broadcast.list</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="fetch_list_lead_detail" string="Fetch Lead Details" type="object"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_leads_details" type="object"
+                                class="oe_stat_button" icon="fa-star">
+                            <div class="o_stat_info">
+<!--                                <field name="leads_count" class="o_stat_value"/>-->
+                                <span class="o_stat_text">Leads</span>
+                            </div>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="list_id" string="ListID"/>
+                            <field name="name" string="Name"/>
+                            <field name="create_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Leads">
+                            <field name="lead_details_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="broadcast_list_tree_view" model="ir.ui.view">
+        <field name="name">broadcast.list.tree</field>
+        <field name="model">broadcast.list</field>
+        <field name="arch" type="xml">
+            <tree string="Broadcast List">
+                <field name="list_id" string="ListID" force_save="1"/>
+                <field name="name" string="Name" force_save="1"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_broadcast_list_search" model="ir.ui.view">
+        <field name="name">broadcast.list.search</field>
+        <field name="model">broadcast.list</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="list_id" string="ListID"/>
+                <separator/>
+                <field name="name" string="Name"/>
+            </search>
+        </field>
+    </record>
+    <record id="broadcast_list_act_window" model="ir.actions.act_window">
+        <field name="name">Broadcast List</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">broadcast.list</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_broadcast_list_search"/>
+    </record>
+</odoo>

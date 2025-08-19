@@ -1,0 +1,10 @@
+<odoo>
+    <menuitem
+        id="account_tally_report"
+        action="account_tally_report.action_account_tally_report_wizard"
+        parent="account.menu_finance"
+        sequence="40"
+        groups="account_tally_report.group_use_account_tally_report"
+    />
+
+</odoo>

@@ -1,0 +1,41 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_agreement_status_tree" model="ir.ui.view">
+        <field name="name">agreement.status.tree</field>
+        <field name="model">agreement.status</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_agreement_status_form" model="ir.ui.view">
+        <field name="name">agreement.status.form</field>
+        <field name="model">agreement.status</field>
+        <field name="arch" type="xml">
+            <form string="Agreement Status">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_agreement_status" model="ir.actions.act_window">
+        <field name="name">Agreement Status</field>
+        <field name="res_model">agreement.status</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create the first agreement status</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_agreement_status" name="Agreement Status"
+              parent="sale.menu_sale_config"
+              action="action_agreement_status"/>
+</odoo>

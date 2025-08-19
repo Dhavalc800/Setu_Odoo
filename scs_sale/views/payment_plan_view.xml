@@ -1,0 +1,48 @@
+<odoo>
+	<record id="payment_plan_form" model="ir.ui.view">
+	    <field name="name">payment_plan.form</field>
+	    <field name="model">payment.plan</field>
+	    <field name="arch" type="xml">
+	        <form>
+	            <sheet>
+	                <group>
+	                	<group>
+	                    	<field name="name"/>
+	                    </group>
+	                </group>
+	                <notebook>
+	                	<page string="Details">
+		                	<field name="line_ids" nolabel="1">
+		                		<tree editable="bottom">
+		                			<field name="state" required='1'/>
+		                			<field name="percentage" required='1'/>
+		                			<field name="is_advance"/>
+		                			<field name="payment_id" invisible="1"/>
+		                		</tree>
+		                	</field>
+		                </page>
+	                </notebook>
+	            </sheet>
+	        </form>
+	    </field>
+	</record>
+	 
+	 <record id="payment_plan_tree" model="ir.ui.view">
+	     <field name="name">payment_plan.tree</field>
+	     <field name="model">payment.plan</field>
+	     <field name="arch" type="xml">
+	         <tree>
+	             <field name="name"/>
+	         </tree>
+	     </field>
+	 </record>
+
+	<record id="action_payment_plan" model="ir.actions.act_window">
+	 	<field name="name">Payment Plan</field>
+	 	<field name="res_model">payment.plan</field>
+	 	<field name="view_mode">tree,form</field>
+	 </record>
+
+	<menuitem id="payment_plan_menu" name="Payment Plan" parent="sale.menu_sales_config" action="action_payment_plan"/>
+
+</odoo>

@@ -1,0 +1,27 @@
+<odoo>
+    <record id="view_project_task_stages_form" model="ir.ui.view">
+        <field name="name">project.task.stages.form</field>
+        <field name="model">project.task.stages</field>
+        <field name="arch" type="xml">
+            <form string="Update Stage">
+                <group>
+                    <field name="stage_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit': True}"/>
+                </group>
+                <footer>
+                    <button string="Apply" type="object" name="action_apply_stages" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_update_project_task" model="ir.actions.server">
+        <field name="name">Update Stages</field>
+        <field name="model_id" ref="project.model_project_task"/>
+        <field name="binding_model_id" ref="project.model_project_task"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_project_task_wizard()
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_crm_pipeline_generate_link" model="ir.actions.act_window">
+        <field name="name">Generate a Payment Link</field>
+        <field name="res_model">payment.link.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="payment.payment_link_wizard_view_form"/>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="crm.model_crm_lead"/>
+        <field name="binding_view_types">form</field>
+    </record>
+
+    <!-- <record id="payment_link_wizard_amount" model="ir.ui.view">
+        <field name="name">Payment.link.wizard.amount</field>
+        <field name="model">payment.link.wizard</field>
+        <field name="inherit_id" ref="payment.payment_link_wizard_view_form"/>
+        <field name="arch" type="xml">
+            <field name="amount" position="after">
+                <field name="is_editable" invisible="1"/>
+            </field>
+            <field name='amount' position="attributes">
+                <attribute name="attrs">{'readonly': [('is_editable', '!=', True)]}</attribute>
+            </field>
+        </field>
+    </record> -->
+
+</odoo>

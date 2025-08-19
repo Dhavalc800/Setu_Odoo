@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-inherit="mail.ActivityMenuView" t-inherit-mode="extension">
+        <xpath expr="//a[hasclass('o_ActivityMenuView_dropdownToggle')]/i" position="replace"/>
+        <xpath expr="//a[hasclass('o_ActivityMenuView_dropdownToggle')]/span" position="replace"/>
+        <xpath expr="//a[hasclass('o_ActivityMenuView_dropdownToggle')]" position="inside">
+            <div class="icon-status icon-status-na">
+                <em class="icon osi osi-bell"/>
+                <span t-if="activityMenuView.counter > 0" class="o_ActivityMenuView_counter badge badge-navbar" t-esc="activityMenuView.counter"/>
+            </div>
+        </xpath>
+        <xpath expr="//a[hasclass('o_ActivityMenuView_dropdownToggle')]" position="attributes">
+            <attribute name="class" add="os-quick-nav-icon" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_ActivityMenuView_dropdownMenu')]" position="attributes">
+            <attribute name="class" add="dropdown-menu-xl dropdown-menu-s1 dropdown-menu" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_ActivityMenuView_activityGroups')]" position="before">
+            <div class="dropdown-head">
+                <span class="sub-title os-dropdown-title">Notifications</span>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('o_ActivityMenuView_activityGroups')]" position="attributes">
+            <attribute name="class" add="dropdown-body" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_ActivityMenuView_activityGroupIconContainer')]" position="replace">
+            <div t-if="activityGroupView.activityGroup.irModel.icon" class="os-notification-icon">
+                <t t-if="activityGroupView.activityGroup.irModel.type_icon=='font'">
+                    <em t-attf-class="icon icon-circle bg-primary {{activityGroupView.activityGroup.irModel.icon}}"/>
+                </t>
+                <t t-else="">
+                    <img class="o_mail_preview_image o_mail_preview_app" t-att-src="activityGroupView.activityGroup.irModel.icon" t-att-alt="activityGroupView.activityGroup.irModel.name"/>
+                </t>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

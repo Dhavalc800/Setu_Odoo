@@ -1,0 +1,661 @@
+<odoo>
+
+    <template id="sale_report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//t" position="replace">
+            <t t-call="web.basic_layout">
+                <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
+                <t t-set="forced_vat" t-value="doc.fiscal_position_id.foreign_vat"/>
+                <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
+                <t t-set="forced_vat" t-value="doc.fiscal_position_id.foreign_vat"/> <!-- So that it appears in the footer of the report instead of the company VAT if it's set -->
+                <div class="page">
+                    <!-- <t t-set="call_result" t-value="doc.action_operating_comp()"/> -->
+                    <h2 class="mt-4">
+                        <span t-if="env.context.get('proforma', False) or is_pro_forma">Pro-Forma Invoice # </span>
+                        <span t-elif="doc.state in ['draft','sent']">Proforma Invoice # </span>
+                        <span t-else="" align="center">Proforma Invoice # </span>
+                    </h2>
+                    <div class="oe_structure"/>
+                    <t t-set="tax_totals" t-value="doc.tax_totals"/>
+                    <table class="table table-sm table-bordered" style="border: 1px solid grey;border-color:grey;margin-top:5%;" width="100%;">
+                        <tr>
+                            <td class="text-start" rowspan="4">
+                                <div class="clearfix">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <table class="table table-sm table-borderless">
+                                                <!--<t t-set="operating_company" t-value="request.env['operating.company'].search([('partner_id', '=', doc.bank_acc_id.partner_id.id)])"/>-->
+                                                <t t-set="operating_company" t-value="request.env['operating.company'].search([('id', '=', doc.operating_company_id.id)])"/>
+                                                <t t-if="operating_company">
+                                                    <tr>
+                                                        <td>
+                                                            <img t-if="operating_company.logo" t-att-src="image_data_uri(operating_company.logo)" style="max-width:100px;"/>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-end">
+                                                                <b>
+                                                                    <span t-esc="operating_company.name"/>
+                                                                </b>
+                                                                <br/>
+                                                                <span t-if="operating_company.street" t-esc='operating_company.street'/>
+                                                                <br/>
+                                                                <span t-if='operating_company.street2' t-esc='operating_company.street2'/>
+                                                                <br/>
+                                                                <span t-if='operating_company.city' t-esc='operating_company.city'/>
+                                                                <span t-if='operating_company.state_id' t-esc='operating_company.state_id.name'/>
+                                                                <span t-if='operating_company.zip' t-esc='operating_company.zip'/>
+                                                                <span t-if='operating_company.country_id' t-esc='operating_company.country_id.name'/>
+                                                                <span> GSTIN: <span t-if="operating_company.partner_id.vat" t-esc="operating_company.partner_id.vat"/>
+                                                                </span>
+                                                                <br/>
+                                                                <span> PAN: <span t-if="operating_company.partner_id.l10n_in_pan" t-esc="operating_company.partner_id.l10n_in_pan"/>
+                                                                </span>
+                                                                <br/>
+                                                                <span> State:<span t-if='operating_company.state_id' t-esc='operating_company.state_id.name'/>   Code:<span t-esc='operating_company.state_id.name'/>
+                                                                </span>
+                                                                <br/>
+                                                                <span> CIN: <span t-if="operating_company.company_registry" t-esc="operating_company.company_registry"/>
+                                                                </span>
+                                                                <br/>
+                                                                <span> Email: <span t-if="operating_company.email" t-esc="operating_company.email"/>
+                                                                </span>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                                <t t-else=''>
+                                                    <tr>
+                                                        <td>
+                                                            <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" style="max-width:100px;"/>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-end">
+                                                                <b>
+                                                                    <span t-field="doc.company_id"/>
+                                                                </b>
+                                                                <br/>
+                                                                <span t-esc='doc.company_id.street'/>
+                                                                <br/>
+                                                                <span t-esc='doc.company_id.street2'/>
+                                                                <br/>
+                                                                <span t-esc='doc.company_id.city'/>
+                                                                <span t-esc='doc.company_id.state_id.name'/>
+                                                                <span t-esc='doc.company_id.zip'/>
+                                                                <span t-esc='doc.company_id.country_id.name'/>
+                                                                <br/>
+                                                                <span> GSTIN: <span t-esc="doc.company_id.partner_id.vat"/>
+                                                                </span>
+                                                                <br/>
+                                                                <span> PAN: <span t-if="operating_company.partner_id.l10n_in_pan" t-esc="operating_company.partner_id.l10n_in_pan"/>
+                                                                </span>
+                                                                <br/>
+                                                                <span> State:<span t-esc='doc.company_id.state_id.name'/>   Code:<span t-esc='doc.company_id.state_id.name'/>
+                                                                </span>
+                                                                <br/>
+                                                                <span> CIN: <span t-esc="doc.company_id.company_registry"/>
+                                                                </span>
+                                                                <br/>
+                                                                <span> Email: <span t-esc="doc.company_id.email"/>
+                                                                </span>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span>No. </span>
+                                <b>
+                                    <span t-esc="doc.name"/>
+                                </b>
+                            </td>
+                            <td>
+                                <span>Dated. </span>
+                                <b>
+                                    <span style="font-size:13px;" t-esc="datetime.date.today().strftime('%Y-%m-%d')"/>
+                                </b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%;">
+                                <span>Delivery Note.: </span>
+                            </td>
+                            <td style="width:20%;">
+                                <span>Mode/ Terms of Payment.: </span>
+                                <span t-field="doc.payment_term_id"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%;">
+                                <span>Reference No. &amp; Date: </span>
+                                <span t-field="doc.origin"/>
+                            </td>
+                            <td style="width:20%;">
+                                <span>Other Reference: </span>
+                                <span t-field="doc.other_ref"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%;">
+                                <span>Buyer's Order No.:</span>
+                                <span t-field="doc.client_order_ref"/>
+                            </td>
+                            <td style="width:20%;">
+                                <span>Dated.: </span>
+                                    <span t-field="doc.date"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:50%;" rowspan="3">
+                                <span>Buyer (Bill to):
+                                </span>
+                                <br/>
+                                <span t-field="doc.partner_id.name"/>
+                                <br/>
+                                <t t-if="doc.partner_id.city">
+                                    <span t-esc='doc.partner_id.city'/>
+                                </t>
+                                <br/>
+                                <t t-if="doc.partner_id.vat">
+                                    <span t-esc='doc.partner_id.vat'/>
+                                </t>
+                                <br/>
+                                <t t-if="doc.partner_id.l10n_in_pan">
+                                    <span t-esc='doc.partner_id.l10n_in_pan'/>
+                                </t>
+                                <br/>
+                                <span>
+                                    <t t-if="doc.partner_invoice_id">
+                                        State: <span t-if="doc.partner_invoice_id.state_id" t-esc='doc.partner_invoice_id.state_id.name'/>
+                                        Code: <span t-if="doc.partner_invoice_id.state_id" t-esc='doc.partner_invoice_id.state_id.code'/>
+                                    </t> 
+                                    <t t-else="">
+                                        State: <span t-if="doc.partner_id.state_id" t-esc='doc.partner_id.state_id.name'/>
+                                        Code: <span t-if="doc.partner_id.state_id" t-esc='doc.partner_id.state_id.name'/>
+                                    </t>
+                                </span>
+                                <br/>
+                                <span> Place to Supply:
+                                    <t t-if="doc.partner_invoice_id">
+                                        <span t-if="doc.partner_invoice_id.state_id" t-esc='doc.partner_invoice_id.state_id.name'/>
+                                    </t>
+                                    <t t-else="">
+                                        <span t-if="doc.partner_id.state_id" t-esc='doc.partner_id.state_id.name'/>
+                                    </t>
+                                </span>
+                            </td>
+                            <td style="width:30%;">
+                                <span>Dispatch Doc No.:</span>
+                            </td>
+                            <td style="width:20%;">
+                                <span>Delivery Note Date:</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%;">
+                                <span>Dispatched Through:</span>
+                            </td>
+                            <td style="width:20%;">
+                                <span>Destination:</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%;" colspan="2">
+                                <span>Terms of Delivery:</span>
+                                <span t-field="doc.note"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- Is there a discount on at least one line? -->
+                    <t t-set="lines_to_report" t-value="doc._get_order_lines_to_report()"/>
+                    <t t-set="display_discount" t-value="any(l.discount for l in lines_to_report)"/>
+
+                    <table class="table table-sm table-bordered mt-4">
+                        <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                        <thead style="display: table-row-group">
+                            <tr>
+                                <th name="th_sr_no" class="text-start">SR No</th>
+                                <th name="th_description" class="text-start">Description</th>
+                                <th name="th_quantity" class="text-end">Quantity</th>
+                                <th name="th_hsn_sac" class="text-end">HSN/SAC</th>
+                                <th name="th_priceunit" class="text-end">Unit Price</th>
+                                <th name="th_taxes" class="text-end">Taxes</th>
+                                <th name="th_discount" t-if="display_discount" class="text-end">
+                                    <span>Disc.%</span>
+                                </th>
+                                <th name="th_subtotal" class="text-end">
+                                    <span groups="account.group_show_line_subtotals_tax_excluded">Amount</span>
+                                    <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="sale_tbody">
+
+                            <t t-set="current_subtotal" t-value="0"/>
+                            <t t-set="line_total" t-value="0"/>
+                            <t t-set="sr_no" t-value="0"/>
+                            <t t-foreach="lines_to_report" t-as="line">
+                                <t t-if="not line.display_type">
+                                    <t t-set="sr_no" t-value="sr_no + 1"/>
+                                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                </t>
+
+                                <t t-set="line_total" t-value="line_total + line.price_total"/>
+
+                                <tr t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                    <t t-if="not line.display_type">
+                                        <td>
+                                            <span t-esc="sr_no"/>
+                                        </td>
+                                        <td name="td_name">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <td name="td_quantity" class="text-end">
+                                            <span t-field="line.product_uom_qty"/>
+                                        </td>
+                                        <td name="td_hsn/sac" class="text-end">
+                                            <span t-field="line.product_template_id.l10n_in_hsn_code"/>
+                                        </td>
+                                        <td name="td_priceunit" class="text-end">
+                                            <span t-field="line.price_unit"/>
+                                        </td>
+                                        <td name="td_taxes" class="text-end">
+                                            <span t-out="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>
+                                        </td>
+                                        <td t-if="display_discount" class="text-end">
+                                            <span t-field="line.discount"/>
+                                        </td>
+                                        <td t-if="not line.is_downpayment" name="td_subtotal" class="text-end o_price_total">
+                                            <span t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                            <span t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                        </td>
+                                    </t>
+                                    <t t-elif="line.display_type == 'line_section'">
+                                        <td name="td_section_line" colspan="99">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <t t-set="current_section" t-value="line"/>
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                    </t>
+                                    <t t-elif="line.display_type == 'line_note'">
+                                        <td name="td_note_line" colspan="99">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                            <tr>
+                                <t t-if="display_discount">
+                                    <td class="text-end" colspan = "7">
+                                        <b>Total</b>
+                                    </td>
+                                    <td class="text-end">
+                                        <span t-field="doc.currency_id.symbol"/><span t-esc="current_subtotal"/>
+                                    </td>
+                                </t>
+                                <t t-else="not display_discount">
+                                    <td class="text-end" colspan = "6">
+                                        <b>Total</b>
+                                    </td>
+                                    <td class="text-end">
+                                        <span t-esc="line_total" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                    </td>
+                                </t>
+                            </tr>
+                            <tr>
+                                <td colspan = "8">
+                                    <b>Amount (In <span t-field="doc.currency_id.name"/>):</b> <span t-esc="doc.currency_id.amount_to_text(line_total)"/> only.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table-sm table-bordered" style="border-color:grey;border: 1px solid grey;" width="100%;">
+                        <tr>
+                            <td rowspan="2">Taxable Value
+                            </td>
+
+                            <td colspan="2">
+                                <span>Central Tax</span>
+                            </td>
+                            <td colspan="2">
+                                <span>State Tax</span>
+                            </td>
+                            <td rowspan="2">Total Tax Amount</td>
+                        </tr>
+                        <tr>
+                            <td>Rate</td>
+                            <td>Amount</td>
+
+                            <td>Rate</td>
+                            <td>Amount</td>
+                        </tr>
+                        <tr t-foreach="lines_to_report.filtered(lambda l: not l.is_downpayment)" t-as="line">
+                            <td>
+                                <span t-esc="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                            </td>
+                            <td>
+                                <t t-foreach="line.tax_id.children_tax_ids" t-as="tax">
+                                    <t t-if="tax.tax_group_id.name == 'CGST'">
+                                        <t t-esc="tax.amount"/>
+                                    </t>
+                                </t>
+                            </td>
+                            <td>
+                                <t t-foreach="line.tax_id.children_tax_ids" t-as="tax">
+                                    <t t-if="tax.tax_group_id.name == 'CGST'">
+                                        <span t-esc="(line.price_subtotal*tax.amount)/100"
+                                            t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                    </t>
+                                </t>
+                            </td>
+                            <td>
+                                <t t-foreach="line.tax_id.children_tax_ids" t-as="tax">
+                                    <t t-if="tax.tax_group_id.name == 'SGST'">
+                                        <t t-esc="tax.amount"/>
+                                    </t>
+                                </t>
+                            </td>
+                            <td>
+                                <t t-foreach="line.tax_id.children_tax_ids" t-as="tax">
+                                    <t t-if="tax.tax_group_id.name == 'SGST'">
+                                        <span t-esc="(line.price_subtotal*tax.amount)/100"
+                                            t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                    </t>
+                                </t>
+                            </td>
+                            <td>
+                                <span t-esc="line.price_tax" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                            </td>
+                        </tr>
+
+                    </table>
+<!--                    <br/>-->
+<!--                    <br/>-->
+
+                    <span>Tax Amount(in words):
+                        <t t-esc="doc.currency_id.amount_to_text(doc.amount_tax)"/>
+                    </span>
+<!--                    <br/>-->
+<!--                    <br/>-->
+                    <!-- <table class="table table-borderless">
+                        <tr>
+                            <td rowspan="4">
+                                <span>Company's PAN:
+                                    <t t-esc="doc.operating_company_id.partner_id.l10n_in_pan"/>
+                                </span>
+                            </td>
+                            <td colspan="4">
+                                <span>Company's Bank Details
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>Bank Name :
+                                    <t t-esc="doc.bank_acc_id.bank_id.name"/>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>A/c No.:
+                                    <t t-if="doc.bank_acc_id">
+                                        <t t-esc="doc.bank_acc_id.acc_number"/>
+                                    </t>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>Branch and IFS Code:
+                                    <t t-if="doc.bank_acc_id">
+                                        <t t-esc="doc.bank_acc_id.bank_id.street"/> <t t-esc="doc.bank_acc_id.bank_id.bic"/>
+                                    </t>
+                                </span>
+                            </td>
+                        </tr>
+                    </table> -->
+<!--                    <br/>-->
+<!--                    <br/>-->
+                    <table class="table table-sm table-bordered" style="border: 1px solid grey;border-color:grey;" width="100%;">
+                        <tr>
+                            <td colspan="4">
+                                <span>Customer's seal and Signature:
+                                </span>
+<!--                                <br/>-->
+<!--                                <br/>-->
+                            </td>
+                            <td class="text-end" colspan="4" align="right">
+                                <t t-set="operating_company" t-value="request.env['operating.company'].search([('partner_id', '=', doc.bank_acc_id.partner_id.id)])"/>
+                                <img  t-if="operating_company and operating_company.stamp" t-att-src="image_data_uri(operating_company.stamp)" style="max-height:90pt;max-width:130%"/>
+                                <br/>
+                                <span>Authorised Signatory
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                    <p class="text-center">
+                        This is a Computer Generated Invoice
+                    </p>
+                </div>
+
+                <p style="page-break-before:always;"> </p>
+
+                <t t-if="doc.operating_company_id.name in [
+                    'SETU SERVICES PRIVATE LIMITED - AHMEDABAD',
+                    'SETU SERVICES PRIVATE LIMITED - DELHI',
+                    'SETU SERVICES PRIVATE LIMITED - CHENNAI',
+                    'SETU SERVICES PRIVATE LIMITED - BANGALORE'
+                ]">
+                    <div class="page" style="font-family: Arial, sans-serif; padding: 40px;">
+                        <!-- Header with Logo -->
+                        <div style="text-align: center; margin-bottom: 40px;">
+                            <div style="font-size: 36px; font-weight: bold; color: #1f5582; letter-spacing: 2px; margin-bottom: 20px;">
+                                <span style="color: #1f5582;">EG</span><span style="color: #e74c3c;">N</span><span style="color: #1f5582;">IOL</span>
+                                <sup style="font-size: 12px; vertical-align: super;">®</sup>
+                            </div>
+                            <h2 style="color: #4a90e2; font-size: 18px; text-decoration: underline; margin: 0; font-weight: normal;">
+                                Bank Details of Setu Services Private Limited
+                            </h2>
+                        </div>
+
+                        <!-- Bank Details Tables -->
+                        <!-- Bank 1: ICICI Bank -->
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 12px;">
+                            <tr style="background-color: #ff6b35;">
+                                <td style="border: 1px solid #ccc; padding: 8px; font-weight: bold; color: white; width: 25%;">1. Bank Name</td>
+                                <td style="border: 1px solid #ccc; padding: 8px; font-weight: bold;">ICICI bank Limited</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Account Name</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;"> Setu Services Private Limited</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Account Number</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">182605001955</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">IFSC Code</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">ICIC0001826</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Branch</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">Science City Road</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Swift Code</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">ICICINBBCTS</td>
+                            </tr>
+                        </table>
+
+                        <!-- Bank 2: Standard Chartered -->
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 12px;">
+                            <tr style="background-color: #ff6b35;">
+                                <td style="border: 1px solid #ccc; padding: 8px; font-weight: bold; color: white; width: 25%;">2. Bank Name</td>
+                                <td style="border: 1px solid #ccc; padding: 8px; font-weight: bold;">Standard Chartered bank</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Account Name</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;"> Setu Services Private Limited</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Account Number</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">23305278872</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">IFSC Code</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">SCBL0036051</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Branch</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">Mithakhali Six Road</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Swift Code</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">SCBLINBB</td>
+                            </tr>
+                        </table>
+
+                        <!-- Bank 3: Deutsche Bank -->
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 12px;">
+                            <tr style="background-color: #ff6b35;">
+                                <td style="border: 1px solid #ccc; padding: 8px; font-weight: bold; color: white; width: 25%;">3. Bank Name</td>
+                                <td style="border: 1px solid #ccc; padding: 8px; font-weight: bold;">Deutsche Bank</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Account Name</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;"> Setu Services Private Limited</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Account Number</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">000041559160019</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">IFSC Code</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">DEUT0406PBC</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Branch</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">Gulbai Tekra</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Swift Code</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">DEUTINBBPBC</td>
+                            </tr>
+                        </table>
+
+                        <!-- QR Code and UPI Section -->
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 30px;">
+                            <div style="flex: 1;">
+                                <h3 style="color: #4a90e2; font-size: 16px; text-decoration: underline; margin-bottom: 15px; font-weight: normal;">
+                                    QR CODE &amp; UPI ID :-
+                                </h3>
+                                <p style="font-size: 12px; margin: 0; font-weight: bold;">
+                                    UPI ID - mssetuservicesprivatelimited.ezypay@icici
+                                </p>
+                            </div>
+                            <div style="margin-left: 20px;">
+                                <img t-att-src="'/scs_sale/static/img/qr_setu_serv.png'"
+                                    style="width: 200px; height: 200px; border: 2px solid #000; background-color: #fff;" />
+                            </div>
+                        </div>
+                    </div>
+                </t>
+
+                <t t-if="doc.operating_company_id.name == 'SETU FINANCIAL SERVICES PRIVATE LIMITED'">
+                    <div class="page" style="font-family: Arial, sans-serif; padding: 40px;">
+                        <!-- Header with Logo -->
+                        <div style="text-align: center; margin-bottom: 40px;">
+                            <div style="font-size: 36px; font-weight: bold; color: #1f5582; letter-spacing: 2px; margin-bottom: 20px;">
+                                <span style="color: #1f5582;">EG</span><span style="color: #e74c3c;">N</span><span style="color: #1f5582;">IOL</span>
+                                <sup style="font-size: 12px; vertical-align: super;">®</sup>
+                            </div>
+                            <h2 style="color: #4a90e2; font-size: 18px; text-decoration: underline; margin: 0; font-weight: normal;">
+                                Bank Details of Setu Financial Services Pvt Ltd
+                            </h2>
+                        </div>
+
+                        <!-- Bank Details Tables -->
+                        <!-- Bank 1: ICICI Bank -->
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 12px;">
+                            <tr style="background-color: #ff6b35;">
+                                <td style="border: 1px solid #ccc; padding: 8px; font-weight: bold; color: white; width: 25%;">1. Bank Name</td>
+                                <td style="border: 1px solid #ccc; padding: 8px; font-weight: bold;">ICICI bank Limited</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Account Name</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">Setu Financial Services Private Limited</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Account Number</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">182605001980</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">IFSC Code</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">ICIC0001826</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Branch</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">Science City Road</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Swift Code</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">ICICINBBCTS</td>
+                            </tr>
+                        </table>
+
+                        <!-- Bank 2: Standard Chartered -->
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 12px;">
+                            <tr style="background-color: #ff6b35;">
+                                <td style="border: 1px solid #ccc; padding: 8px; font-weight: bold; color: white; width: 25%;">2. Bank Name</td>
+                                <td style="border: 1px solid #ccc; padding: 8px; font-weight: bold;">Deutsche Bank</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Account Name</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">Setu Financial Services Private Limited</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Account Number</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">000041560220019</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">IFSC Code</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">DEUT0406PBC</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Branch</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">Gulbai Tekra</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ccc; padding: 8px; background-color: #f9f9f9;">Swift Code</td>
+                                <td style="border: 1px solid #ccc; padding: 8px;">DEUTINBBPBC</td>
+                            </tr>
+                        </table>
+
+                        <!-- QR Code and UPI Section -->
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 30px;">
+                            <div style="flex: 1;">
+                                <h3 style="color: #4a90e2; font-size: 16px; text-decoration: underline; margin-bottom: 15px; font-weight: normal;">
+                                    QR CODE &amp; UPI ID :-
+                                </h3>
+                                <p style="font-size: 12px; margin: 0; font-weight: bold;">
+                                    UVPI ID - mssetufinancialservicesprivatelimited.eazypay@icici
+                                </p>
+                            </div>
+                            <div style="margin-left: 20px;">
+                                <img t-att-src="'/scs_sale/static/img/qr_setu_finance.png'"
+                                    style="width: 200px; height: 200px; border: 2px solid #000; background-color: #fff;" />
+                            </div>
+                        </div>
+                        <t t-set="call_result" t-value="doc.action_operating_comp()"/>
+                        <!-- <t esc="" -->
+                    </div>
+                </t>
+            </t>
+        </xpath>
+    </template>
+</odoo>

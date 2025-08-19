@@ -1,0 +1,19 @@
+
+
+.chatter-position-normal {
+  .o_form_view.o_xxl_form_view {
+    flex-flow: column nowrap !important;
+
+    .o_form_view_container {
+      width: 100%;
+    }
+
+    .o_FormRenderer_chatterContainer {
+      border-left-color: transparent !important;
+      max-width: 100%!important;
+      width: 100%!important;
+    }
+  }
+
+
+}

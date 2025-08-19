@@ -1,0 +1,122 @@
+.excel-style-tree {
+    .o_list_view {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 13px;
+        
+        thead {
+            background-color: #f8f9fa;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            
+            th {
+                border: 1px solid #dee2e6;
+                padding: 8px 6px;
+                text-align: center;
+                font-weight: 600;
+                background-color: #e9ecef;
+                white-space: nowrap;
+                vertical-align: middle;
+                
+                &:hover {
+                    background-color: #dde2e6;
+                }
+            }
+        }
+        
+        tbody {
+            tr {
+                &:nth-child(odd) {
+                    background-color: #ffffff;
+                }
+                
+                &:nth-child(even) {
+                    background-color: #f8f9fa;
+                }
+                
+                &:hover {
+                    background-color: #e8f4f8;
+                }
+                
+                &.text-info {
+                    background-color: #e3f2fd !important;
+                }
+                
+                td {
+                    border: 1px solid #dee2e6;
+                    padding: 6px 8px;
+                    vertical-align: middle;
+                    height: 38px;
+                    
+                    &.o_list_record_selector {
+                        width: 40px;
+                        text-align: center;
+                        background-color: #f8f9fa;
+                    }
+                    
+                    .btn {
+                        padding: 2px 8px;
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+    
+    .o_data_cell {
+        border: 1px solid #dee2e6 !important;
+        transition: background-color 0.2s;
+        
+        &:focus-within {
+            background-color: #fffde7;
+        }
+    }
+    
+    .o_column_sortable {
+        position: relative;
+        padding-right: 15px !important;
+        
+        &:after {
+            position: absolute;
+            right: 4px;
+            color: #6c757d;
+        }
+    }
+    
+    .o_list_record_selector {
+        font-weight: 600;
+        text-align: center;
+    }
+    
+    .table-responsive {
+        border-radius: 0 !important;
+    }
+    
+    .o_field_widget.o_field_CopyClipboardChar {
+        display: inline-flex;
+        align-items: center;
+    }
+    
+    button.btn-link {
+        padding: 0 6px;
+        line-height: 1.5;
+        height: 24px;
+        
+        &:hover {
+            text-decoration: none;
+            background-color: rgba(0, 123, 255, 0.1);
+            border-radius: 4px;
+        }
+    }
+    
+    .o_field_widget {
+        width: 100%;
+        
+        input, select {
+            height: 28px;
+            min-height: 28px;
+            padding: 2px 6px;
+        }
+    }
+}

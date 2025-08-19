@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_fetch_lead_user_form" model="ir.ui.view">
+        <field name="name">fetch.lead.user.form</field>
+        <field name="model">fetch.lead.user</field>
+        <field name="arch" type="xml">
+            <form string="Campaigns List">
+                <header class="custom_nav_header">
+                    <nav class="custom_nav">
+                        <ul class="custom_nav_tabs">
+                            <!-- <li class="custom_nav_item">
+                                <button name="action_view_calls" 
+                                        string="Call" 
+                                        type="object" 
+                                        class="custom_nav_link"/>
+                            </li> -->
+                            <!-- <li class="custom_nav_item">
+                                <button name="action_view_sale_orders" 
+                                        string="Sale Order" 
+                                        type="object" 
+                                        class="custom_nav_link"/>
+                            </li>
+                            <li class="custom_nav_item">
+                                <button name="action_view_crm" 
+                                        string="CRM" 
+                                        type="object" 
+                                        class="custom_nav_link"/>
+                            </li> -->
+                        </ul>
+                    </nav>
+                </header>
+                <sheet>
+                    <!-- Desktop View -->
+                    <div class="d-none d-md-block">
+                        <div class="row g-4">
+
+                            <!-- LEFT PANEL: Calling Section -->
+                            <div class="col-12 col-md-4">
+                                <div class="card shadow rounded-3 p-3 h-100">
+                                    <h4 class="mb-3 text-primary">📞 Calling Section</h4>
+
+                                    <!-- Fetch Lead & Phone Link -->
+                                    <div class="d-flex gap-2 mb-3">
+                                        <button name="action_fetch_lead" string="Fetch Lead" type="object" class="btn btn-primary w-50"/>
+                                        <button name="action_send_whatsapp"
+                                            type="object"
+                                            string="Whatsapp"
+                                            class="btn btn-success w-50"
+                                            icon="fa-whatsapp"/>
+                                        <button name="action_make_call" string="Call" attrs="{'invisible': [('lead_id', '=', False)]}" type="object" groups="setu_dialer.group_call_application" class="btn-primary" style="
+                                            background-color: #1f8ef1;
+                                            color: white;
+                                            padding: 8px 16px;
+                                            text-decoration: none;
+                                            border-radius: 6px;
+                                            font-weight: bold;
+                                            display: inline-block;
+                                        "/>
+                                        <div class="w-50">
+                                            <field name="call_id" invisible="1" />
+                                            <field name="phone_link_html" widget="html" nolabel="1"/>
+                                        </div>
+                                    </div>
+
+                                    <!-- Hidden Fields -->
+                                    <field name="is_disposition_interested" invisible="1"/>
+                                    <field name="is_disposition_callback" invisible="1"/>
+                                    <field name="has_callback_lead" invisible="1"/>
+                                    <field name="allowed_disposition_ids" invisible="1"/>
+
+                                    <!-- Disposition Selection -->
+                                    <div attrs="{'invisible': [('lead_id', '=', False)]}" class="mb-3">
+                                        <span><b>Disposition</b></span>
+                                        <field name="disposition_id"
+                                            domain="[('id', 'in', allowed_disposition_ids)]"
+                                            options="{'no_create': True, 'no_open': True}"
+                                            class="form-control"/>
+                                    </div>
+
+                                    <!-- Callback Fields -->
+                                    <div class="mb-3" attrs="{'invisible': [('is_disposition_callback', '=', False)]}">
+                                        <span><b>Callback Time</b></span>
+                                        <field name="callback_datetime"/>
+                                    </div>
+
+                                    <!-- Opportunity Fields -->
+                                    <div class="mb-3" attrs="{'invisible': [('is_disposition_interested', '=', False)]}">
+                                        <span><b>Opportunity  </b></span>
+                                        <field name="opportunity_name"/>
+                                    </div>
+                                    <div class="mb-3" attrs="{'invisible': [('is_disposition_interested', '=', False)]}">
+                                        <span><b>Expected Revenue  </b></span>
+                                        <field name="expected_revenue"/>
+                                    </div>
+
+                                    <!-- Remark -->
+                                    <div class="mb-3" attrs="{'invisible': [('lead_id', '=', False)]}">
+                                        <span><b>Remark</b></span>
+                                        <field name="remark" placeholder="Enter your remark here..." class="form-control"/>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <button name="action_submit_disposition" string="Submit" type="object"
+                                                class="btn btn-success" t-on-click="onClickSubmitDisposition"
+                                                attrs="{'invisible': ['|', ('is_disposition_callback', '!=', False), ('disposition_id', '=', False)]}"/>
+                                        <button name="action_call_back_lead" string="Call Back" type="object"
+                                                class="btn btn-secondary"
+                                                attrs="{'invisible': [('is_disposition_callback', '=', False)]}"/>
+                                    </div>
+
+                                    <div class="mt-3">
+                                        <button name="action_fetch_callback_lead" string="Fetch Callback Lead" type="object"
+                                                class="btn btn-warning w-100"
+                                                attrs="{'invisible': [('has_callback_lead', '=', False), ('lead_id', '!=', False)]}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CENTER PANEL: Lead Info -->
+                            <div class="col-12 col-md-4">
+                                <div class="card shadow rounded-3 p-3 h-100">
+                                    <h4 class="mb-3 text-primary">🧾 Lead Information</h4>
+
+                                    <!-- Lead Info -->
+                                    <p class="text-danger" attrs="{'invisible': [('lead_id', '!=', False)]}">
+                                        Click on “Fetch Lead” to begin.
+                                    </p>
+                                    <div attrs="{'invisible': [('lead_id', '=', False)]}">
+                                        <div class="mb-3" attrs="{'invisible': [('lead_id', '!=', False)]}">
+                                            <span><b>Lead Name</b></span><span> : </span>
+                                            <field name="lead_id"/>
+                                        </div>
+                                        <div>
+                                            <span>User Assign campaign : </span> <field name="campaigns_ids" readonly="1" widget="many2many_tags"/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <span><b>Lead Campaign</b></span><span> : </span>
+                                            <field name="campaigns_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                        </div>
+                                        <field name="dynamic_field_values" widget="text" class="form-control"/>
+                                    </div>
+
+                                    <!-- Phone Search -->
+                                    <div class="card p-3 mt-4 border border-info">
+                                        <h5 class="text-info">🔍 Search by Phone</h5>
+                                        <div class="d-flex gap-2 mb-2">
+                                            <field name="search_number" placeholder="Enter phone number" class="form-control"/>
+                                            <button name="action_set_searched_lead" string="Search &amp; Add" type="object" class="btn btn-info"/>
+                                        </div>
+                                        <div attrs="{'invisible': [('searched_lead_id', '=', False)]}">
+                                            <b>Found:</b>
+                                            <field name="searched_lead_id" options="{'no_open': True}" readonly="1"/>
+                                        </div>
+                                    </div>
+
+                                    <!-- Call History -->
+                                    <h5 class="mt-4 text-secondary">📅 Call Disposition History (Today)</h5>
+                                    <p attrs="{'invisible': [('call_history_ids', '!=', [])]}">No data available.</p>
+                                    <div style="max-height: 250px; overflow-y: auto;" attrs="{'invisible': [('call_history_ids', '=', [])]}">
+                                        <field name="call_history_ids">
+                                            <tree>
+                                                <field name="disposition_id"/>
+                                                <field name="lead_id"/>
+                                                <field name="phone"/>
+                                                <field name="user_id"/>
+                                            </tree>
+                                        </field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- RIGHT PANEL: Callback Leads -->
+                            <div class="col-12 col-md-4">
+                                <div class="card shadow rounded-3 p-3 h-100">
+                                    <h4 class="mb-3 text-primary">⏱️ Pending Callbacks</h4>
+                                    <div style="max-height: 400px; overflow-y: auto;" attrs="{'invisible': [('pending_callback_lead_ids', '=', [])]}">
+                                        <field name="pending_callback_lead_ids" readonly="1">
+                                            <tree>
+                                                <field name="name" string="Name"/>
+                                                <field name="phone"/>
+                                                <field name="callback_time"/>
+                                                <button name="action_load_callback_lead" 
+                                                    string="USE" 
+                                                    type="object" 
+                                                    class="oe_highlight"/>
+                                            </tree>
+                                        </field>
+                                        <p attrs="{'invisible': [('pending_callback_lead_ids', '!=', [])]}">No callback selected.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <field name="show_warning" invisible="1"/>
+                            <div class="card p-3">
+                                <div class="btn btn-outline-info w-100 text-center"
+                                    onclick="this.nextElementSibling.classList.toggle('d-none');">
+                                    🚨 Inbound Calls Without Disposition
+                                </div>
+
+                                <div class="d-none mt-3">
+                                    <field name="inbound_call_ids" readonly="1" attrs="{'invisible': [('inbound_call_ids', '=', [])]}">
+                                        <tree editable="bottom" limit="6">
+                                            <field name="phone"/>
+                                            <field name="caller_number" invisible="1"/>
+                                            <field name="call_type"/>
+                                            <field name="recording"/>
+                                            <button name="action_use_inbound_call" type="object" string="Use" class="btn-primary"/>
+                                        </tree>
+                                    </field>
+                                    <p attrs="{'invisible': [('inbound_call_ids', '!=', [])]}">No inbound call without disposition.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile View -->
+                    <div class="d-block d-md-none o_form_sheet_bg" style="padding: 0;">
+                        <!-- <h4 class="mb-3">📞 Calling Panel</h4> -->
+                        <!-- Search Lead by Phone for Mobile View -->
+                        <div class="card p-3 mb-3">
+                            <h5>Search Lead by Phone</h5>
+                            <div class="d-flex align-items-center gap-2">
+                                <field name="search_number" placeholder="Enter phone number" class="w-100"/>
+                                <button name="action_set_searched_lead"
+                                    string="Search &amp; Add"
+                                    type="object"
+                                    class="btn btn-info"/>
+                            </div>
+                            <div attrs="{'invisible': [('searched_lead_id', '=', False)]}" class="mt-2">
+                                <span><b>Found:</b> <field name="searched_lead_id" options="{'no_open': True}" readonly="1"/></span>
+                            </div>
+                        </div>
+                        
+                        <div class="card p-3 mb-3">
+                            <field name="lead_id"/>
+                            <field name="phone_link_html" widget="html" nolabel="1" class="mt-2"/>
+                            <div>
+                                <span>User Assign campaign : </span> <field name="campaigns_ids" readonly="1" widget="many2many_tags"/>
+                            </div>
+                            <button name="action_fetch_lead"
+                                string="Fetch Lead"
+                                type="object"
+                                class="btn btn-primary w-100 mt-3"/>
+                            
+                            <button name="action_send_whatsapp"
+                                type="object"
+                                string="Whatsapp"
+                                class="btn btn-success w-100 mt-3"
+                                icon="fa-whatsapp"/>
+
+                            <button name="action_make_call" string="Call" attrs="{'invisible': [('lead_id', '=', False)]}" type="object" groups="setu_dialer.group_call_application" class="btn-primary w-100 mt-3" style="
+                                    background-color: #1f8ef1;
+                                    color: white;
+                                    padding: 8px 16px;
+                                    text-decoration: none;
+                                    border-radius: 6px;
+                                    font-weight: bold;
+                                    display: inline-block;
+                                "/>
+
+                            <div class="card p-3 mb-3"  attrs="{'invisible': [('dynamic_field_values', '=', False)]}">
+                                <h5>Lead Info</h5>
+                                <div>
+                                    <span>Lead Campaigns : </span><field name="campaigns_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                </div>
+                                <field name="dynamic_field_values" widget="text" readonly="1"/>
+                            </div>
+
+                            <div class="mt-3">
+                                <div>
+                                    <span>Disposition  </span>
+                                    <field name="disposition_id"
+                                        domain="[('id', 'in', allowed_disposition_ids)]"
+                                        options="{'no_create': True, 'no_open': True}"/>
+                                </div>
+
+                                <div class="form-group mt-2" attrs="{'invisible': [('is_disposition_callback', '=', False)]}">
+                                    <span>Callback Date &amp; Time</span>
+                                    <field name="callback_datetime"/>
+                                </div>
+
+                                <div class="form-group mt-2" attrs="{'invisible': [('is_disposition_interested', '=', False)]}">
+                                    <span>Opportunity Name  </span>
+                                    <field name="opportunity_name"/>
+                                </div>
+
+                                <div class="form-group mt-2" attrs="{'invisible': [('is_disposition_interested', '=', False)]}">
+                                    <span>Expected Revenue  </span>
+                                    <field name="expected_revenue"/>
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <span>Remark</span>
+                                    <field name="remark" placeholder="Enter your remark here..."/>
+                                </div>
+                            </div>
+
+                            <button name="action_submit_disposition"
+                                    type="object"
+                                    string="Submit"
+                                    class="btn btn-primary w-100 mt-3"
+                                    attrs="{'invisible': ['|', ('is_disposition_callback', '!=', False), ('disposition_id', '=', False)]}"/>
+
+                            <button name="action_call_back_lead"
+                                    string="Call Back"
+                                    type="object"
+                                    class="btn btn-success w-100 mt-2"
+                                    attrs="{'invisible': [('is_disposition_callback', '=', False)]}"/>
+
+                            <button name="action_fetch_callback_lead"
+                                    string="Fetch Callback Lead"
+                                    type="object"
+                                    class="btn btn-warning w-100 mt-2"
+                                    attrs="{'invisible': [('has_callback_lead', '=', False), ('lead_id', '!=', False)]}"/>
+                        </div>
+
+                        <!-- Collapsible Call History -->
+                        <div class="card p-3">
+                            <div class="btn btn-secondary w-100 text-center"
+                                onclick="this.nextElementSibling.classList.toggle('d-none');">
+                                View Call History
+                            </div>
+
+                            <div class="d-none mt-3">
+                                <field name="call_history_ids" attrs="{'invisible': [('call_history_ids', '=', [])]}">
+                                    <tree editable="false">
+                                        <field name="disposition_id"/>
+                                        <field name="lead_id"/>
+                                        <field name="phone"/>
+                                        <field name="user_id"/>
+                                    </tree>
+                                </field>
+                                <p attrs="{'invisible': [('call_history_ids', '!=', [])]}">No call history available.</p>
+                            </div>
+                        </div>
+
+                        <!-- Collapsible Call Back Details -->
+                        <div class="card p-3">
+                            <div class="btn btn-outline-info w-100 text-center"
+                                onclick="this.nextElementSibling.classList.toggle('d-none');">
+                                ⏰ View Callback Leads
+                            </div>
+
+                            <div class="d-none mt-3">
+                                <field name="pending_callback_lead_ids" readonly="1" attrs="{'invisible': [('pending_callback_lead_ids', '=', [])]}">
+                                    <tree editable="false">
+                                        <field name="name" string="Name"/>
+                                        <field name="phone"/>
+                                        <field name="callback_time"/>
+                                        <button name="action_load_callback_lead"
+                                            string="USE"
+                                            type="object"
+                                            class="oe_highlight"/>
+                                    </tree>
+                                </field>
+                                <p attrs="{'invisible': [('pending_callback_lead_ids', '!=', [])]}">No call back selected.</p>
+                            </div>
+                        </div>
+
+                        <div class="card p-3">
+                            <div class="btn btn-outline-info w-100 text-center"
+                                onclick="this.nextElementSibling.classList.toggle('d-none');">
+                                🚨 Inbound Calls Without Disposition
+                            </div>
+
+                            <div class="d-none mt-3">
+                                <field name="inbound_call_ids" readonly="1" attrs="{'invisible': [('inbound_call_ids', '=', [])]}">
+                                    <tree editable="bottom" limit="6">
+                                        <field name="lead_id"/>
+                                        <field name="phone"/>
+                                        <field name="caller_number" invisible="1"/>
+                                        <field name="call_type"/>
+                                        <field name="recording" widget="audio_field"/>
+                                        <button name="action_use_inbound_call" type="object" string="Use" class="btn-primary"/>
+                                    </tree>
+                                </field>
+                                <p attrs="{'invisible': [('inbound_call_ids', '!=', [])]}">No inbound call without disposition.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="card p-3 mt-4">
+                        <div class="btn btn-outline-danger w-100 text-center"
+                            onclick="this.nextElementSibling.classList.toggle('d-none');">
+                            🚨 Inbound Calls Without Disposition
+                        </div>
+
+                        <div class="d-none mt-3">
+                            <field name="inbound_call_ids" readonly="1" attrs="{'invisible': [('inbound_call_ids', '=', [])]}">
+                                <tree editable="bottom" limit="6">
+                                    <field name="phone"/>
+                                    <field name="caller_number" invisible="1"/>
+                                    <field name="call_type"/>
+                                    <button name="action_use_inbound_call" type="object" string="Use" class="btn-primary"/>
+                                </tree>
+                            </field>
+                            <p attrs="{'invisible': [('inbound_call_ids', '!=', [])]}">No inbound call without disposition.</p>
+                        </div>
+                    </div> -->
+
+                    <!-- <div class="oe_chatter d-none d-md-block">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div> -->
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fetch_lead_user" model="ir.actions.act_window">
+        <field name="name">Call</field>
+        <field name="res_model">fetch.lead.user</field>
+        <field name="view_mode">form</field>
+    </record>
+</odoo>

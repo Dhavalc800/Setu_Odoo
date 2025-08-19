@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="sale_inherit_form_view" model="ir.ui.view">
+        <field name="name">sale.order.inherit.form.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="payment_term_id" position="after">
+                <field name="bank_acc_id" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+            </field>
+            <field name= "product_template_id" position="attributes">
+                <attribute name="options">{'no_open': True ,'no_create': True}</attribute>
+            </field>
+            <xpath expr="//page[@name='other_information']//field[@name='client_order_ref']" position="after">
+                <field name="other_ref"/>
+                <field name="date"/>
+                <field name="link_generated_by" readonly="1"/>
+                <field name="link_generated_on" readonly="1"/>
+                <field name="payment_link" readonly="1"/>
+                <field name="lock_date" readonly="1"/>
+                <field name="locked_by" readonly="1"/>
+            </xpath>
+            <field name="payment_term_id" position="after">
+                <field name="payment_plan_id" required="0" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+            </field>
+            <xpath expr="//notebook" position="inside">
+                <page string="Payment Details">
+                    <field name='payment_plan_line_ids' nolabel="1">
+                        <tree editable="bottom">
+                            <field name="state"/>
+                            <field name="percentage"/>
+                            <field name="is_advance"/>
+                            <field name="amount"/>
+                            <field name="sale_id" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="State History">
+                    <field name="state_history_ids" readonly="1">
+                        <tree>
+                            <field name="order_id" invisible="1"/>
+                            <field name="substate_id" invisible="1"/>
+                            <field name="state"/>
+                            <field name="create_date"/>
+                            <field name="duration" widget="float_time" string="Duration (minutes)" width="1.5"/>
+                            <field name="user"/>
+                            <field name="current_state" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom']" position="after">
+                <field name="distribution_amount"/>
+            </xpath>
+            <field name="partner_id" position="attributes">
+                <attribute name="options">{"always_reload": True, 'no_quick_create': True}</attribute>
+                <!-- <attribute name="context">{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True, 'sale_order_view': True}</attribute> -->
+            </field>
+            <field name="partner_invoice_id" position="attributes">
+                <attribute name="options">{"always_reload": True, 'no_quick_create': True}</attribute>
+                <attribute name="context">{'default_type':'invoice', 'sale_order_view': True}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="sale_order_view_search_inherit" model="ir.ui.view">
+        <field name="name">sale.order.inherit.search.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="arch" type="xml">
+            <filter name="my_quotation" position="attributes">
+                <attribute name="string">My Booking</attribute>
+            </filter>
+            <filter name="draft" position="attributes">
+                <attribute name="string">My Booking</attribute>
+            </filter>
+        </field>
+    </record>
+
+    <record id="sale.action_quotations_with_onboarding" model="ir.actions.act_window">
+        <field name="name">Booking</field>
+    </record>
+
+    <record id="sale.model_sale_order_action_quotation_sent" model="ir.actions.server">
+        <field name="name">Mark Booking as Sent</field>
+    </record>
+
+    <menuitem id="sale.menu_sale_quotations"
+        parent="sale.sale_order_menu"
+        name="Booking"/>
+
+    <record id="view_order_product_search_inherit" model="ir.ui.view">
+        <field name="name">sale.report.search.view.inherit</field>
+        <field name="model">sale.report</field>
+        <field name="inherit_id" ref="sale.view_order_product_search"/>
+        <field name="arch" type="xml">
+            <filter name="Quotations" position="attributes">
+                <attribute name="string">Booking</attribute>
+            </filter>
+        </field>
+    </record>
+
+    <!-- Archived contact menu -->
+    <record model="ir.ui.menu" id="contacts.menu_contacts">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record model="ir.ui.menu" id="contacts.menu_config_bank_accounts">
+        <field name='parent_id' ref="account.menu_finance_configuration"/>
+    </record>
+
+    <record id="view_partner_bank_search_inherit" model="ir.ui.view">
+        <field name="name">res.partner.bank.search.inherit</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

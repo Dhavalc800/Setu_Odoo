@@ -1,0 +1,45 @@
+<odoo>
+    <record id="document_form" model="ir.ui.view">
+        <field name="name">industry.sector.form</field>
+        <field name="model">industry.sector</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="industry_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="document_tree" model="ir.ui.view">
+        <field name="name">industry.sector.tree</field>
+        <field name="model">industry.sector</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name" />
+                <field name="industry_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_industry_sector" model="ir.actions.act_window">
+        <field name="name">Sector</field>
+        <field name="res_model">industry.sector</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="industry_sector_menu"
+        name="Sector"
+        parent="contacts.res_partner_menu_config"
+        sequence="100"
+        action="action_industry_sector"
+    />
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="action_fetch_lead_view_form" model="ir.ui.view">
+        <field name="name">action.fetch.lead.view.form</field>
+        <field name="model">fetch.lead</field>
+        <field name="arch" type="xml">
+            <form>
+                <footer>
+                    <button string="Fetch Lead" name="get_lead_lists" type="object" class="oe_highlight"/>
+                    <button string="Fetch Call Record Details" name="get_call_records_detail" type="object" class="oe_highlight"/>
+                    <button string="Fetch Broadcast List" name="fetch_lead" type="object" class="oe_highlight"/>
+                    <button string="Fetch Campaign List" name="get_campaign" type="object" class="oe_highlight"/>
+<!--                    <button string="Fetch Agent List" name="get_agents_list" type="object" class="oe_highlight"/>-->
+                    <button string="Fetch Departments" name="get_departments" type="object" class="oe_highlight"/>
+<!--                    <button string="Fetch Multiple Users" name="get_users" type="object" class="oe_highlight"/>-->
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fetch_lead" model="ir.actions.act_window">
+        <field name="name">Fetch Lead</field>
+        <field name="res_model">fetch.lead</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+</odoo>

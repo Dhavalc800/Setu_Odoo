@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="sale_order_portal_content_inherit" inherit_id="sale.sale_order_portal_content">
+        <xpath expr="//div[@id='informations']/div[@id='so_date']/div[1]/t[2]" position="replace">
+            <strong>Booking Date:</strong>
+        </xpath>
+    </template>
+</odoo>

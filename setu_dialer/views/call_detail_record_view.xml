@@ -1,0 +1,91 @@
+<odoo>
+    <data>
+
+        <!-- Tree View -->
+        <record id="view_call_detail_record_tree" model="ir.ui.view">
+            <field name="name">call.detail.record.tree</field>
+            <field name="model">call.detail.record</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="client_name"/>
+                    <field name="caller_number"/>
+                    <field name="destination_number"/>
+                    <field name="overall_call_status"/>
+                    <field name="call_duration"/>
+                    <field name="call_date"/>
+                    <field name="recording"/>
+                    <field name="user_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_call_detail_record_form" model="ir.ui.view">
+            <field name="name">call.detail.record.form</field>
+            <field name="model">call.detail.record</field>
+            <field name="arch" type="xml">
+                <form string="Call Detail Record">
+                    <sheet>
+                        <group>
+                            <group string="Call Parties" col="2">
+                                <field name="client_name"/>
+                                <field name="lead_id" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="campaign_id" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="lead_list_id" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="disposition_id" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="remark"/>
+                                <!-- <field name="interested" invisible="1"/> -->
+                                <field name="call_datetime"/>
+                                <field name="opportunity_name"/>
+                                <field name="expected_revenue"/>
+                                <field name="client_correlation_id"/>
+                                <field name="call_type"/>
+                                <field name="caller_number"/>
+                                <field name="destination_number"/>
+                                <field name="caller_operator_name"/>
+                                <field name="destination_operator_name"/>
+                                <field name="caller_circle"/>
+                                <field name="destination_circle"/>
+                            </group>
+
+                            <group string="Call Status &amp; Timing" col="2">
+                                <field name="overall_call_status"/>
+                                <field name="call_date"/>
+                                <field name="call_duration"/>
+                                <field name="conversation_duration"/>
+                                <field name="caller_status"/>
+                                <field name="destination_status"/>
+                                <field name="hangup_cause"/>
+                                <field name="user_id"/>
+                            </group>
+
+                            <group string="Recording">
+                                <field name="recording" widget="url"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_call_detail_record_pivot" model="ir.ui.view">
+            <field name="name">call.detail.record.pivot</field>
+            <field name="model">call.detail.record</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <pivot string="Call Detail Analysis">
+                    <field name="client_name"/>
+                    <field name="caller_status"/>
+                </pivot>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_call_detail_record" model="ir.actions.act_window">
+            <field name="name">Call Details</field>
+            <field name="res_model">call.detail.record</field>
+            <field name="view_mode">tree,form,pivot</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,38 @@
+<odoo>
+    <record id="view_closer_name_tree" model="ir.ui.view">
+        <field name="name">closer.name.tree</field>
+        <field name="model">closer.name</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="closer_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_closer_name_form" model="ir.ui.view">
+        <field name="name">closer.name.form</field>
+        <field name="model">closer.name</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="closer_id"/>
+                        <field name="user_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_closer_name" model="ir.actions.act_window">
+        <field name="name">Closer List</field>
+        <field name="res_model">closer.name</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Closer Found!
+            </p>
+        </field>
+    </record>
+
+</odoo>

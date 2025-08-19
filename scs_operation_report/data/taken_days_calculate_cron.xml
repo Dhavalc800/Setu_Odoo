@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--  Cron Job: To check taken days  -->
+    <record id="taken_days_calculate_operation_task_activity" model="ir.cron">
+        <field name="name">Taken Days Calculate For Task Activity</field>
+        <field name="model_id" ref="model_operation_task_activity"/>
+        <field name="state">code</field>
+        <field name="code">model.taken_days_calculate()</field>
+        <field name='interval_number'>1</field>
+        <field name='interval_type'>days</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+</odoo>

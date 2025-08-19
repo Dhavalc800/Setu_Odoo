@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="account_tally_report_wizard_form" model="ir.ui.view">
+        <field name="name">account.tally.report.wizard.form</field>
+        <field name="model">account.tally.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                        </group>
+                        <group>
+                            <field name="date_to"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="generate_xlsx" type="object" string="Report" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_account_tally_report_wizard" model="ir.actions.act_window">
+        <field name="name">Account Tally Report</field>
+        <field name="res_model">account.tally.report.wizard</field>
+        <field name="view_id" ref="account_tally_report_wizard_form"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

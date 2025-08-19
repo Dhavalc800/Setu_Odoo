@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template>
+    <t t-name="os_theme_butterfly.ViewReloader" owl="1">
+        <nav class="oe_refresher" aria-label="Pager">
+            <span aria-atomic="true">
+                <button
+                    class="fa fa-refresh btn btn-icon os_pager_reload"
+                    aria-label="Refresh"
+                    t-on-click="_doReload"
+                    title="Refresh"
+                    tabindex="-1"
+                />
+            </span>
+        </nav>
+    </t>
+</template>

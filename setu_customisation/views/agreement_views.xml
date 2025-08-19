@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="partner_agreement_form_view_inherit" model="ir.ui.view">
+        <field name="name">partner.agreement.form.view.inherit</field>
+        <field name="model">agreement</field>
+        <field name="inherit_id" ref="agreement_legal.partner_agreement_form_view"/>
+        <field name="arch" type="xml">
+            <!-- <xpath expr="//header" position="after">
+                <header name="substate">
+                    <field name="verification_state" widget="statusbar"/>
+                </header>
+            </xpath> -->
+
+            <xpath expr="//field[@name='agreement_date']" position="before">
+                <field name="rm_employee_id"/>
+                <field name="rm_remark"/>
+            </xpath>
+
+            <!-- <xpath expr="//field[@name='verification_state']" position="after">
+                <field name="by_ai_verification_state" readonly="1"/>
+                <field name="not_verified_summary"/>
+            </xpath> -->
+        </field>
+    </record>
+</odoo>

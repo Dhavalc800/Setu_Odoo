@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="web.ListRenderer" t-inherit-mode="extension" owl="1">
+        <xpath expr="//thead//th[1]" position="before">
+            <th t-if="hasSelectors and !props.list.isGrouped" class="o_list_record_number text-center cursor-pointer">#</th>
+        </xpath>
+        <xpath expr="//tfoot//tr//td[1]" position="before">
+            <th t-if="hasSelectors and !props.list.isGrouped"/>
+        </xpath>
+    </t>
+    <t t-inherit="web.ListRenderer.RecordRow" t-inherit-mode="extension" owl="1">
+         <xpath expr="//td[hasclass('o_list_record_selector')]" position="before">
+            <th t-if="hasSelectors and !props.list.isGrouped" class="o_list_record_number align-middle text-center cursor-pointer p-1">
+                <t t-esc="record_index + 1"/>
+            </th>
+        </xpath>
+    </t>
+</templates>

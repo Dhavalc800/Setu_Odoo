@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- menu for parent menu of checklist head and checklist -->
+    <menuitem id="root_menu_chcklist" parent="hr.menu_human_resources_configuration" name="Check List"/>
+
+    <!-- Form view of Hr Checklist Head -->
+    <record id="hr_check_list_head_form" model="ir.ui.view">
+        <field name="name">hr.check.list.head.form</field>
+        <field name="model">hr.checklist.head</field>
+        <field name="arch" type="xml">
+            <form string="Checklist head Detail">
+                <sheet string="Checklist Detail">
+                    <group colspan="2" col="4">
+                        <field name="name" required="1" />
+                        <field name="code" />
+                        <field name="text" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view of Hr Checklist Head -->
+    <record id="hr_check_list_head_tree" model="ir.ui.view">
+        <field name="name">hr.check.list.head.tree</field>
+        <field name="model">hr.checklist.head</field>
+        <field name="arch" type="xml">
+            <tree string="Checklist Detail">
+                <field name="name" />
+                <field name="code" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action of Hr Checklist Head -->
+    <record id="action_hr_check_list_head" model="ir.actions.act_window">
+        <field name="name">Checklist Head</field>
+        <field name="res_model">hr.checklist.head</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu of Hr Checklist Head -->
+    <menuitem id="menu_hr_check_list_head" action="action_hr_check_list_head" parent="root_menu_chcklist"/>
+
+    <!-- Form view of Hr Checklist -->
+    <record id="hr_checklist_form" model="ir.ui.view">
+        <field name="name">hr.checklist.form</field>
+        <field name="model">hr.checklist</field>
+        <field name="arch" type="xml">
+            <form string="Checklist Detail">
+                <sheet string="Checklist Detail">
+                    <group colspan="2" col="2">
+                        <field name="name" required="1" />
+                    </group>
+                    <notebook>
+                        <page name='check_list_head' string="Check List Heads">
+                            <field name="chklst_ids" nolable="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view of Hr Checklist -->
+    <record id="hr_checklist_tree" model="ir.ui.view">
+        <field name="name">hr.checklist.tree</field>
+        <field name="model">hr.checklist</field>
+        <field name="arch" type="xml">
+            <tree string="Checklist Detail">
+                <field name="name" />
+                <field name="chklst_ids" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action of Hr Checklist -->
+    <record id="action_hr_checklist" model="ir.actions.act_window">
+        <field name="name">Checklist</field>
+        <field name="res_model">hr.checklist</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu of Hr Checklist -->
+    <menuitem id="menu_hr_checklist" action="action_hr_checklist" parent="root_menu_chcklist"/>
+
+    <!-- Form view of Hr Checklist Line -->
+    <record id="hr_checklist_line_form" model="ir.ui.view">
+        <field name="name">hr.checklist.line.form</field>
+        <field name="model">hr.checklist.line</field>
+        <field name="arch" type="xml">
+            <form string="Checklist Line Detail">
+                <sheet string="Checklist Detail">
+                    <group colspan="2" col="4">
+                        <field name="head_id" />
+                        <field name="check" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view of Hr Checklist Line -->
+    <record id="hr_checklist_line_tree" model="ir.ui.view">
+        <field name="name">hr.checklist.line.tree</field>
+        <field name="model">hr.checklist.line</field>
+        <field name="arch" type="xml">
+            <tree string="Checklist Line Detail">
+                <field name="head_id"/>
+                <field name="check" />
+            </tree>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo> 
+    <!-- Inherited Company's view to add default password and HR Team -->
+    <record id ="res_company_view_hr" model="ir.ui.view">
+        <field name="name">res.company.view.hr</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type ="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="hr_configuration" string="HR Configuration">
+                    <group  colspan="4" col="2">
+                        <group name="user" string="User" >
+                            <field name="default_password" password="True" required="1" string="Password"/>
+                        </group>
+                    </group>
+                    <group name="hr_fiscal_grp" string="HR" col="2" colspan="4">
+                        <field name="hr_team_ids" widget="many2many_tags" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+   </record>
+   
+    <menuitem
+        id="calendar.mail_menu_calendar"
+        name="Calendar"
+        sequence="10"
+        action="calendar.action_calendar_event"
+        web_icon="calendar,static/description/icon.png"
+        groups="-base.group_user,hr.group_hr_manager"/>
+        
+</odoo>

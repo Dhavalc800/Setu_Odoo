@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_dispo_list_name_tree" model="ir.ui.view">
+        <field name="name">dispo.list.name.tree</field>
+        <field name="model">dispo.list.name</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="is_dnd"/>
+                <field name="is_intrested"/>
+                <field name="is_callback"/>
+                <field name="is_expo"/>
+                <field name="is_show"/>
+                <field name="show_in_callback" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_dispo_list_name_form" model="ir.ui.view">
+        <field name="name">dispo.list.name.form</field>
+        <field name="model">dispo.list.name</field>
+        <field name="arch" type="xml">
+            <form string="Dispo Name">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="is_dnd"/>
+                        <field name="is_intrested"/>
+                        <field name="is_callback"/>
+                        <field name="is_expo"/>
+                        <field name="is_show"/>
+                        <field name="show_in_callback" invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_dispo_list_name" model="ir.actions.act_window">
+        <field name="name">Dispo List Name</field>
+        <field name="res_model">dispo.list.name</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

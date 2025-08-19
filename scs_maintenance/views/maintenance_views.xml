@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="maintenance_equipment_view_form_inherited_extended" model="ir.ui.view">
+        <field name="name">maintenance.equipment.view.form.inherit.extended</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='serial_no']" position="after">
+                <field name="device_password"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

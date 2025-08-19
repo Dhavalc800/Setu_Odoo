@@ -1,0 +1,13 @@
+<odoo>
+
+    <record id="sales_team_form_view_in_crm" model="ir.ui.view">
+        <field name="name">crm.team.form.inherit</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="before">
+                <field name="branch_manager_id" widget="many2one_avatar_user"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

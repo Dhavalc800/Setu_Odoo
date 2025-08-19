@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_employee_branch_tree" model="ir.ui.view">
+        <field name="name">employee.branch.tree</field>
+        <field name="model">employee.branch</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_employee_branch_form" model="ir.ui.view">
+        <field name="name">employee.branch.form</field>
+        <field name="model">employee.branch</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_employee_branch" model="ir.actions.act_window">
+        <field name="name">Employee Branch</field>
+        <field name="res_model">employee.branch</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item -->
+
+    <menuitem id="menu_employee_branch"
+              name="Employee Branches"
+              parent="hr.menu_human_resources_configuration"
+              action="action_employee_branch"/>
+</odoo>

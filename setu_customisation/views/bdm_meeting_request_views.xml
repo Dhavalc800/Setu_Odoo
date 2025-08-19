@@ -1,0 +1,65 @@
+<odoo>
+    <data>
+        <record id="view_bdm_meeting_tree" model="ir.ui.view">
+            <field name="name">bdm.meeting.request.tree</field>
+            <field name="model">bdm.meeting.request</field>
+            <field name="arch" type="xml">
+                <tree string="BDM Meeting Requests">
+                    <field name="user_id"/>
+                    <field name="city"/>
+                    <field name="area"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="bm_state"/>
+                    <field name="bdm_state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_bdm_meeting_form" model="ir.ui.view">
+            <field name="name">bdm.meeting.request.form</field>
+            <field name="model">bdm.meeting.request</field>
+            <field name="arch" type="xml">
+                <form string="BDM Meeting Request">
+                    <header>
+                        <button name="action_send_request" string="Send to BM" type="object" groups="setu_customisation.group_meeting_user" class="btn-primary"/>
+                        <button name="action_approve" string="Approve" type="object" groups="setu_customisation.group_meeting_admin" class="btn-success"/>
+                        <button name="action_reject" string="Reject" type="object" groups="setu_customisation.group_meeting_admin" class="btn-danger"/>
+                        <field name="bm_state" widget="statusbar" groups="setu_customisation.group_meeting_admin" statusbar_visible="approved,rejected"/>
+                    </header>
+                    <header>
+                        <field name="bdm_state" widget="statusbar" groups="setu_customisation.group_meeting_user" statusbar_visible="requested"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="user_id"/>
+                            <field name="with_user_id"/>
+                            <label for="start_date" string="Date"/>
+                            <div class="o_row">
+                                <field name="start_date" widget="daterange" nolabel="1" class="oe_inline" options="{'related_end_date': 'end_date'}"/>
+                                <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon" title="Arrow" options="{'related_end_date': 'start_date'}"/>
+                                <field name="end_date" widget="daterange" nolabel="1" class="oe_inline"/>
+                            </div>
+                            <field name="city"/>
+                            <field name="area"/>
+                        </group>
+                        <!-- <group>
+                            <field name="bdm_remark" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="bm_remark" attrs="{'readonly': [('state', 'not in', ['requested'])]}"/>
+                        </group> -->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_bdm_meeting_request" model="ir.actions.act_window">
+            <field name="name">BDM Meeting Requests</field>
+            <field name="res_model">bdm.meeting.request</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_bdm_meeting_root" name="Meeting Management" sequence="10"/>
+        <menuitem id="menu_bdm_meeting_request" name="Meeting Requests"
+                parent="menu_bdm_meeting_root" action="action_bdm_meeting_request"/>
+    </data>
+</odoo>

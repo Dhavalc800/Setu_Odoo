@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mail_template_negative_review" model="mail.template">
+            <field name="name">HOD: Negative Review</field>
+            <field name="model_id" ref="quality_feedback_from.model_survey_user_input"/>
+            <field name="subject">Request For Alternative Services</field>
+            <field name="email_from">{{ user.email_formatted }}</field>
+            <field name="email_to">{{ (object.partner_id.email_formatted or object.work_email) }}</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="description">Review Taken by Quality Team is Negative Review</field>
+            <field name="lang">${{object.partner_id.lang}}</field>
+            <field name="body_html" type="html">
+        <div>
+            <t t-set="partner" t-value="object.partner_id"></t>
+            <table border="0" cellpadding="0" cellspacing="0" style="box-sizing:border-box;border-collapse:collapse;width:100%; margin:0;" width="100%">
+            <tbody>
+                <tr><td valign="top" style="font-size: 14px;">
+                 I wanted to bring to your attention a negative review from one of our clients and propose alternative services as potential solutions to address their concerns.
+                <br></br><br></br><br></br>
+                    <a t-att-href="object.create_survey_url()" >
+                        <span>Click hear to show review</span>
+                    </a>
+                    </td></tr>
+            </tbody></table>
+        </div>
+        </field>
+        </record>
+    </data>
+    <data>
+        <record id="mail_template_send_feedback" model="mail.template">
+            <field name="name">Feedback Request</field>
+            <field name="model_id" ref="quality_feedback_from.model_quality_feedback"/>
+            <field name="subject">Feedback Request</field>
+            <field name="email_from">{{ user.email_formatted }}</field>
+            <field name="email_to">{{ (object.user_ids.email_formatted) }}</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="description">A new feedback request has been created</field>
+            <field name="lang">${{object.partner_id.lang}}</field>
+            <field name="body_html" type="html">
+        <div>
+            <t t-set="partner" t-value="object.partner_id"></t>
+            <table border="0" cellpadding="0" cellspacing="0" style="box-sizing:border-box;border-collapse:collapse;width:100%; margin:0;" width="100%">
+            <tbody>
+                <tr><td valign="top" style="font-size: 14px;">
+                A new feedback request has been created for task <t t-esc="object.task_id.name" />
+                <br></br><br></br><br></br>
+                    <a t-att-href="object.get_feedback_url()" >
+                        <span>Click hear to show feedback</span>
+                    </a>
+                    </td></tr>
+            </tbody></table>
+        </div>
+        </field>
+        </record>
+    </data>
+</odoo>

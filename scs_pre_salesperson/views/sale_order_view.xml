@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="sale_order_view_form_pre_salesperson" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="pre_salesman_user_id"/>
+                <field name="pre_sales_percentage" readonly="1"/>
+            </field>
+            <xpath expr="//button[@name='action_cancel']" position="after">
+                <button name="pre_salesperson_wizard"
+                        string="Add Pre-Salesperson"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="1"
+                        attrs="{'invisible': [('state', 'not in', ('draft', 'sent', 'sale'))]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="qualification_criteria_task_form_view_inherit" model="ir.ui.view">
+        <field name="name">qualification.criteria.task.form.view.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='project_id']" position="after">
+                <field name="is_editable" invisible="1"/>
+                <field name="can_edit" invisible="1"/>
+                <field name="sale_order_id"/>
+            </xpath>
+            <field name="stage_id" position="attributes">
+                <attribute name="attrs">{'invisible': [('project_id', '=', False), ('stage_id', '=', False)],'readonly': [('can_edit', '!=', True)]}</attribute>
+            </field>
+            <field name="project_id" position="attributes">
+                <attribute name="attrs">{'readonly': [('is_editable', '!=', True)]}</attribute>
+            </field>
+            <field name="partner_id" position="attributes">
+                <attribute name="attrs">{'readonly': [('is_editable', '!=', True)]}</attribute>
+            </field>
+            <xpath expr="//field[@name='planned_hours']" position="after">
+                <field name="related_sale_price_unit" attrs="{'invisible': [('booking_type', '=', 'hbab')]}"/>
+                <field name="related_sale_amt_received" attrs="{'invisible': [('booking_type', '=', 'hbab')]}"/>
+                <field name="related_sale_pending_amt" attrs="{'invisible': [('booking_type', '=', 'hbab')]}"/>
+                <field name="related_sale_pending_amt" attrs="{'invisible': [('booking_type', '=', 'hbab')]}"/>
+                <field name="total_amount" attrs="{'invisible': [('booking_type', '!=', 'hbab')]}"/>
+                <field name="receive_amount" attrs="{'invisible': [('booking_type', '!=', 'hbab')]}"/>
+                <field name="related_sale_note"/>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_title')]" position="before">
+                <widget name="web_ribbon" title="Payment Pending" bg_color="bg-danger" attrs="{'invisible': [('remaining_amount', '=', 0)]}"/>
+
+                <widget name="web_ribbon" title="Payment Received" bg_color="bg-success" attrs="{'invisible': [('remaining_amount', '!=', 0)]}"/>
+
+                <widget name="web_ribbon" title="Legal Not Verified" bg_color="bg-danger" attrs="{'invisible': [('agreement_verified', '!=', 'not verified')]}"/>
+            </xpath>
+            <xpath expr="//notebook/page[@name='extra_info']//field[@name='date_last_stage_update']" position="after">
+                <field name="related_sale_user_id" options="{'no_open': True}"/>
+                <field name="related_phone"/>
+                <field name="related_email"/>
+            </xpath>
+            <xpath expr="//field[@name='checklist_task_ids']" position="after">
+                <field name="draft_contract"/>
+                <field name="signed_contract"/>
+                <field name="remaining_amount"/>
+                <field name="agreement_verified" invisible="1"/>
+            </xpath>
+         
+            <xpath expr="//notebook/page[@name='extra_info']"
+                    position="after">
+                <page name="qualification_criteria" string="Qualification Criteria">
+                    <field name="qualification_criteria_ids">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <field name="criteria_ans" widget="radio" options="{'horizontal': true}"/>
+                        </tree>
+                    </field>
+                </page>
+                <page name="task_imformation" string="Task Information">
+                    <field name="task_imformation_ids">
+                        <tree>
+                            <field name="name"/>
+                            <field name="information" />
+                        </tree>
+                        <form>
+                            <group>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="type_of_field"/>
+                                    <field name="related_information_id" invisible="1"/>
+                                </group>
+                                <group>
+                                    <field name="information" invisible="1"/>
+                                    <field name="text_value" string="Information" attrs="{'invisible': [('type_of_field', '!=', 'text')]}"/>
+                                    <field name="date_value" string="Information" attrs="{'invisible': [('type_of_field', '!=', 'date')]}"/>
+                                    <field name="integer_value" string="Information" attrs="{'invisible': [('type_of_field', '!=', 'integer')]}"/>
+                                    <field name="float_value" string="Information" attrs="{'invisible': [('type_of_field', '!=', 'float')]}"/>
+                                </group>
+                            </group>
+                        </form>
+                    </field>
+                </page>
+                <page string="State History">
+                    <field name="state_history_ids" readonly="1">
+                        <tree>
+                            <field name="project_task_id" invisible="1"/>
+                            <field name="state"/>
+                            <field name="create_date"/>
+                            <field name="duration" widget="float_time" string="Duration (minutes)" width="1.5"/>
+                            <field name="user"/>
+                            <field name="current_state" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//notebook/page[@name='extra_info']" position="attributes">
+                <attribute name="groups"></attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="projects_inherit_form_view_project_task_main_form" model="ir.ui.view">
+        <field name="name">project.task.form.new</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project_config.inherit_form_view_project_task_main_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='reviewer_id']" position="attributes">
+                <attribute name="required">0</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_sale_project_inherit_form_inherit" model="ir.ui.view">
+        <field name="name">project.task.form.new</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="sale_project.view_sale_project_inherit_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='sale_line_id'][1]" position="attributes">
+                <attribute name="attrs">{'readonly': [('is_editable', '!=', True)]}</attribute>
+                <attribute name="options">{'no_open': True,'no_create_edit': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='sale_line_id'][2]" position="attributes">
+                <attribute name="attrs">{'readonly': [('is_editable', '!=', True)]}</attribute>
+                <attribute name="options">{'no_open': True,'no_create_edit': True}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="project_task_view_search_inherited" model="ir.ui.view">
+        <field name="name">project.task.view.search.inherit.mobile</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_search_form"/>
+        <field name="arch" type="xml">
+            <field name="user_ids" position="after">
+                <field name="related_phone"/>
+                <field name="related_email"/>
+            </field>
+            <xpath expr="//filter[@name='my_tasks']" position='before'>
+                <filter string="Task Starts with S" name="task_starts_with_s" domain="[('name', '=ilike', 'S%')]"/>
+                <filter string="Task Starts Not with S" name="task_starts_not_with_s" domain="[('name', 'not ilike', 'S%')]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_view_task_no_edit" model="ir.actions.act_window">
+        <field name="name">Tasks</field>
+        <field name="res_model">project.task</field>
+        <field name="view_mode">kanban,tree,form,calendar,pivot,graph,activity</field>
+        <field name="context">{'search_default_my_tasks': 1,'edit':0}</field>
+        <field name="domain">[('display_project_id', '!=', False)]</field>
+        <field name="search_view_id" ref="project.view_task_search_form"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No tasks found. Let's create one!
+            </p>
+            <p>
+                Keep track of the progress of your tasks from creation to completion.<br/>
+                Collaborate efficiently by chatting in real-time or via email.
+            </p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,41 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_hbab_data_status_tree" model="ir.ui.view">
+        <field name="name">hbab.data.status.tree</field>
+        <field name="model">hbab.data.status</field>
+        <field name="arch" type="xml">
+            <tree string="HBAB Data Status">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_hbab_data_status_form" model="ir.ui.view">
+        <field name="name">hbab.data.status.form</field>
+        <field name="model">hbab.data.status</field>
+        <field name="arch" type="xml">
+            <form string="HBAB Data Status">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_hbab_data_status" model="ir.actions.act_window">
+        <field name="name">HBAB Data Status</field>
+        <field name="res_model">hbab.data.status</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_hbab_data_status" name="HBAB Data Status" groups="setu_dialer.group_hbab_admin" parent="project.menu_project_config" action="action_hbab_data_status"/>
+</odoo>

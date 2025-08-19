@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_agreement_stage_readonly,stage readonly,model_agreement_stage,group_agreement_readonly,1,0,0,0
+access_agreement_stage_manager,stage manager,model_agreement_stage,group_agreement_manager,1,1,1,1
+access_agreement_subtype_readonly,subtype readonly,model_agreement_subtype,group_agreement_readonly,1,0,0,0
+access_agreement_subtype_manager,subtype manager,model_agreement_subtype,group_agreement_manager,1,1,1,1
+access_agreement_line_readonly,agreement line readonly,model_agreement_line,group_agreement_readonly,1,0,0,0
+access_agreement_line_allusers,agreement line all users,model_agreement_line,group_agreement_user,1,1,1,1
+access_agreement_line_manager,agreement line manager,model_agreement_line,group_agreement_manager,1,1,1,1
+access_create_agreement_wizard_allusers,create agreement wizard users,model_create_agreement_wizard,group_agreement_user,1,1,1,1
+access_agreement_readonly,agreement readonly,model_agreement,group_agreement_readonly,1,0,0,0
+access_agreement_allusers,agreement all users,model_agreement,group_agreement_user,1,1,1,0
+access_agreement_manager,agreement manager,model_agreement,group_agreement_manager,1,1,1,1
+access_agreement_type_readonly,type readonly,model_agreement_type,group_agreement_readonly,1,0,0,0
+access_agreement_type_manager,type manager,model_agreement_type,group_agreement_manager,1,1,1,1
+access_agreement_line_sale_user,agreement line sale users,model_agreement_line,sales_team.group_sale_salesman,1,1,1,1
+access_agreement_sale_user,agreement sale user,model_agreement,sales_team.group_sale_salesman,1,1,1,1
+access_agreement_stage_sale_user,stage sale user,model_agreement_stage,sales_team.group_sale_salesman,1,1,1,1

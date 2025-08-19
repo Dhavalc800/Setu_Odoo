@@ -1,0 +1,20 @@
+<odoo>
+    <record id="sale_order_form_view_refund" model="ir.ui.view">
+        <field name="name">sale.order.form.view.refund</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/form/group/group/field[@name='price_unit']" position="before">
+                <field name="is_refund" string="Refundable"/>
+                <field name="amount_received"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="before">
+                <field name="is_refund" string="Refundable"/>
+                <field name="amount_received"  readonly="0"/>
+            </xpath>
+            <button name="action_view_agreement" position="attributes">
+                <attribute name="groups">agreement_legal.group_agreement_readonly</attribute>
+            </button>
+        </field>
+    </record>
+</odoo>

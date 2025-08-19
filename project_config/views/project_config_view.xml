@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    	<!-- Project Phase Search View -->
+		<record id="project_phase_search_view" model="ir.ui.view" >
+		    <field name="name">Project Phase</field>
+		    <field name="model">project.phase</field>
+		    <field name="arch" type="xml">
+		        <search string="Project Phase">
+		            <field name="name"/>
+		            <field name="code"/>
+		        </search>
+		    </field>
+		</record>
+
+		<!-- Project Phase Form View -->
+		<record id="project_phase_form_view" model="ir.ui.view" >
+		    <field name="name">Project Phase</field>
+		    <field name="model">project.phase</field>
+		    <field name="arch" type="xml">
+		        <form >
+                    <group>
+                        <field name="sequence" required="1"/>
+                        <field name="name" required="1"/>
+                        <field name="code"/>
+                    </group>
+		        </form>
+		    </field>
+		</record>
+
+    <!-- Project Phase Action View -->
+    <record id="project_phase_action" model="ir.actions.act_window">
+        <field name="name">Project Phase</field>
+        <field name="res_model">project.phase</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to add a new Project Phase.
+          </p>
+        </field>
+    </record> 
+
+    <!-- Project Phase Menu item -->
+    <menuitem id="menu_project_phase_act" action="project_phase_action"
+        parent="project.menu_project_config"
+        groups="project_config.group_project_manager_custom"/>
+
+    <!-- Project Development Model  -->
+    <record id="project_dev_search_view" model="ir.ui.view" >
+        <field name="name">Project Development Model</field>
+        <field name="model">project.dev.model</field>
+        <field name="arch" type="xml">
+            <search string="Project Development Model">
+                <field name="name"/>
+                <field name="code"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Project Development Model Form view -->
+    <record id="project_dev_form_view" model="ir.ui.view" >
+        <field name="name">Project Development Model</field>
+        <field name="model">project.dev.model</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name" required="1"/>
+                    <field name="code"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Project Development Model Action -->
+     <record id="project_dev_action" model="ir.actions.act_window">
+        <field name="name">Project Development Model</field>
+        <field name="res_model">project.dev.model</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to add a new Project Development Model.
+          </p>
+        </field>
+    </record>
+
+    <!-- Project Development Model Menu item -->
+    <menuitem id="menu_project_dev_act" action="project_dev_action"
+        name="Project Model" 
+        parent="project.menu_project_config"/>
+
+    <!-- Project Type Search View  -->
+    <record id="project_type_search_view" model="ir.ui.view">
+        <field name="name">Project Type</field>
+        <field name="model">project.type</field>
+        <field name="arch" type="xml">
+            <search string="Project Type">
+                <field name="name" />
+                <field name="code" />
+            </search>
+        </field>
+    </record>
+
+    <!-- Project Type Form view -->
+    <record id="project_type_form_view" model="ir.ui.view">
+        <field name="name">Project Type</field>
+        <field name="model">project.type</field>
+        <field name="arch" type="xml">
+            <form string="Project Type">
+                <group >
+                    <field name="name" required="1"/>
+                    <field name="code" />
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Project Type Action -->
+     <record id="project_type_action" model="ir.actions.act_window">
+        <field name="name">Project Type</field>
+        <field name="res_model">project.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to add a new Project Type.
+          </p>
+        </field>
+    </record>
+
+    <!-- Project Type Menu item -->
+    <menuitem id="menu_project_type_act" action="project_type_action" 
+        parent="project.menu_project_config" />
+
+     <menuitem name="My Tasks" id="project.menu_project_management" parent="project.menu_main_pm"
+            action="project.action_view_all_task" sequence="2" />
+            
+    <!-- Inherit project.task.type form view to add user_ids and state -->
+    <record id="view_project_task_type_users_form" model="ir.ui.view">
+        <field name="name">project.task.type.form.view.inherit</field>
+        <field name="model">project.task.type</field>
+        <field name="inherit_id" ref="project.task_type_edit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group/group[1]/field[@name='name']" position="after">
+                <field name="state"/>
+            </xpath>
+            <xpath expr="//form//sheet/group/group[2]/field[@name='project_ids']" position="replace">
+            </xpath>
+            <xpath expr="//form/sheet/group[2]" position="after">
+                <notebook >
+                    <page string="Projects">
+                        <field name="project_ids">
+                            <tree>
+                                <field name="display_name"/>
+                                <field name="partner_id"/>
+                                <field name="date_start"/>
+                                <field name="date"/>
+                                <field name="user_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit project.task.type Tree view to add state -->
+    <record id ="project_task_type_stage_feature_inherit_tree_view" model="ir.ui.view">
+        <field name="name">project.task.stage.feature.tree.extended</field>
+        <field name="model">project.task.type</field>
+        <field name ="inherit_id" ref="project.task_type_tree"/>   
+        <field name="arch" type ="xml">
+            <xpath expr="//tree/field[2]" position="after">
+                <field name="state"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

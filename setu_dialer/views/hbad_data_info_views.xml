@@ -1,0 +1,59 @@
+<odoo>
+    <record id="view_hbad_data_info_tree" model="ir.ui.view">
+        <field name="name">hbad.data.info.tree</field>
+        <field name="model">hbad.data.info</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+                <field name="booking_id"/>
+                <field name="allocation_date"/>
+                <field name="contact_number"/>
+                <field name="customer_name"/>
+                <field name="structure"/>
+                <field name="location"/>
+                <field name="status"/>
+                <field name="remarks"/>
+                <field name="brief"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hbad_data_info_form" model="ir.ui.view">
+        <field name="name">hbad.data.info.form</field>
+        <field name="model">hbad.data.info</field>
+        <field name="arch" type="xml">
+            <form string="HBAD Data Info">
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                        <field name="booking_id"/>
+                        <field name="allocation_date"/>
+                        <field name="contact_number"/>
+                        <field name="customer_name"/>
+                        <field name="customer_type"/>
+                        <field name="services_type"/>
+                        <field name="structure"/>
+                        <field name="product_ids" widget="many2many_tags"/>
+                        <field name="location"/>
+                        <field name="status"/>
+                        <field name="remarks"/>
+                        <field name="brief"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hbad_data_info" model="ir.actions.act_window">
+        <field name="name">HBAB Data Info</field>
+        <field name="res_model">hbad.data.info</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_hbad_data_info" name="HBAB Data Info" groups="setu_dialer.group_hbab_admin" parent="project.menu_main_pm" action="action_hbad_data_info"/>
+</odoo>

@@ -1,0 +1,471 @@
+<odoo>
+	
+	<template id="report_invoice_pro_forma_document">
+		<t t-call="web.basic_layout">
+            <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)"/>
+            <t t-set="forced_vat" t-value="doc.fiscal_position_id.foreign_vat"/>
+            <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
+            <t t-set="forced_vat" t-value="doc.fiscal_position_id.foreign_vat"/>
+            <div class="page">
+                <h2 class="mt-4">
+                    <span t-if="env.context.get('proforma', False) or is_pro_forma">Pro-Forma Invoice # </span>
+                    <span t-field="doc.name"/>
+                </h2>
+            </div>
+            <div class="oe_structure"/>
+            <t t-set="tax_totals" t-value="doc.tax_totals"/>
+            <t t-set="sale_order" t-value="doc.invoice_line_ids.mapped('sale_line_ids').mapped('order_id')"/>
+            <table class="table table-sm table-bordered" style="border: 1px solid grey;border-color:grey;margin-top:5%;" width="100%;">
+                <tr>
+                	<td class="text-start" rowspan="4">
+                        <div class="clearfix">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <table class="table table-sm table-borderless">
+                                        <t t-if="doc.operating_company_id">
+                                            <tr>
+                                                <td>
+                                                    <img t-if="doc.operating_company_id.logo" t-att-src="image_data_uri(doc.operating_company_id.logo)" style="max-width:100px;"/>
+                                                </td>
+                                                <td>
+                                                    <span class="text-end">
+                                                        <b>
+                                                            <span t-field="doc.operating_company_id"/>
+                                                        </b>
+                                                        <br/>
+                                                        <span t-esc='doc.operating_company_id.street'/>
+                                                        <br/>
+                                                        <span t-esc='doc.operating_company_id.street2'/>
+                                                        <br/>
+                                                        <span t-esc='doc.operating_company_id.city'/>
+                                                        <span t-esc='doc.operating_company_id.state_id.name'/>
+                                                        <span t-esc='doc.operating_company_id.zip'/>
+                                                        <span t-esc='doc.operating_company_id.country_id.name'/>
+                                                        <span> GSTIN: <span t-esc="doc.operating_company_id.partner_id.vat"/>
+                                                        </span>
+                                                        <span> State:<span t-esc='doc.operating_company_id.state_id.name'/>   Code:<span t-esc='doc.operating_company_id.state_id.name'/>
+                                                        </span>
+                                                        <br/>
+                                                        <span> CIN: <span t-esc="doc.operating_company_id.company_registry"/>
+                                                        </span>
+                                                        <br/>
+                                                        <span> Email: <span t-esc="doc.operating_company_id.email"/>
+                                                        </span>
+                                                    </span>
+                                                </td>
+
+                                            </tr>
+                                        </t>
+                                        <t t-else=''>
+                                            <tr>
+                                                <td>
+                                                    <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" style="max-width:100px;"/>
+                                                </td>
+                                                <td>
+                                                    <span class="text-end">
+                                                        <b>
+                                                            <span t-field="doc.company_id"/>
+                                                        </b>
+                                                        <br/>
+                                                        <span t-esc='doc.company_id.street'/>
+                                                        <br/>
+                                                        <span t-esc='doc.company_id.street2'/>
+                                                        <br/>
+                                                        <span t-esc='doc.company_id.city'/>
+                                                        <span t-esc='doc.company_id.state_id.name'/>
+                                                        <span t-esc='doc.company_id.zip'/>
+                                                        <span t-esc='doc.company_id.country_id.name'/>
+                                                        <span> GSTIN: <span t-esc="doc.company_id.partner_id.vat"/>
+                                                        </span>
+                                                        <span> State:<span t-esc='doc.company_id.state_id.name'/>   Code:<span t-esc='doc.company_id.state_id.name'/>
+                                                        </span>
+                                                        <br/>
+                                                        <span> CIN: <span t-esc="doc.company_id.company_registry"/>
+                                                        </span>
+                                                        <br/>
+                                                        <span> Email: <span t-esc="doc.company_id.email"/>
+                                                        </span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span><b>No.</b> </span>
+                        <span t-esc="doc.name"/>
+                    </td>
+                    <td>
+                        <span><b>Dated:</b> </span>
+                        <span style="font-size:13px;" t-esc="datetime.datetime.now().strftime('%Y-%m-%d %H:%M')"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:30%;">
+                        <span><b>Delivery Note:</b> </span>
+                    </td>
+                    <td style="width:20%;">
+                        <span><b>Mode/ Terms of Payment: </b></span>
+                        <span t-field="doc.invoice_payment_term_id"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:30%;">
+                        <span><b>Reference No. &amp; Date:</b> </span>
+                        <span t-field="sale_order.origin"/>
+                    </td>
+                    <td style="width:20%;">
+                        <span><b>Other Reference:</b> </span>
+                        <span t-field="sale_order.other_ref"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:30%;">
+                        <span><b>Buyer's Order No:</b></span>
+                        <span t-field="sale_order.client_order_ref"/>
+                    </td>
+                    <td style="width:20%;">
+                        <span><b>Dated:</b> </span>
+                            <span t-field="sale_order.date"/>
+                    </td>
+                </tr>                
+                <tr>
+                    <td style="width:50%;" rowspan="3">
+                        <span><b>Buyer (Bill to):</b>
+                        </span>
+                        <br/>
+                        <span t-field="doc.partner_id.name"/>
+                        <br/>
+                        <t t-if="doc.operating_company_id">
+                            <span t-esc='doc.operating_company_id.city'/>
+                        </t>
+                        <t t-else="">
+                            <span t-esc='doc.company_id.city'/>
+                        </t>
+                            
+                        <br/>
+                            <t t-if="doc.operating_company_id">
+                                <span t-esc='doc.operating_company_id.partner_id.vat'/>
+                            </t>
+                            <t t-else="">
+                                <span t-esc="doc.company_id.partner_id.vat"/>
+                            </t>
+                        <br/>
+                        <span>
+                            <t t-if="doc.operating_company_id">
+                                State: <span t-esc='doc.operating_company_id.state_id.name'/>
+                                Code: <span t-esc='doc.operating_company_id.state_id.name'/>
+                            </t> 
+                            <t t-else="">
+                                State: <span t-esc='doc.company_id.state_id.name'/>
+                                Code: <span t-esc='doc.company_id.state_id.name'/>
+                            </t>
+                        </span>
+                        <br/>
+                        <span> Place to Supply:
+                            <t t-if="doc.operating_company_id"> 
+                                <span t-esc='doc.operating_company_id.state_id.name'/>
+                            </t>
+                            <t t-else="">
+                                <span t-esc='doc.company_id.state_id.name'/>
+                            </t>
+                        </span>
+                    </td>
+                    <td style="width:30%;">
+                        <span>Dispatch Doc No.:</span>
+                    </td>
+                    <td style="width:20%;">
+                        <span>Delivery Note Date:</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:30%;">
+                        <span>Dispatched Through:</span>
+                    </td>
+                    <td style="width:20%;">
+                        <span>Destination:</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:30%;" colspan="2">
+                        <span>Terms:</span>
+                        <span t-field="doc.narration"/>
+                    </td>
+                </tr>
+            </table>                
+            <t t-set="display_discount" t-value="any(l.discount for l in doc.invoice_line_ids)"/>
+
+            <table class="table table-sm table-bordered mt-4">
+                <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                <thead style="display: table-row-group">
+                    <tr>
+                        <th name="th_sr_no" class="text-start">SR No</th>
+                        <th name="th_description" class="text-start">Description</th>
+                        <th name="th_quantity" class="text-end">Quantity</th>
+                        <th name="th_hsn_sac" class="text-end">HSN/SAC</th>
+                        <th name="th_priceunit" class="text-end">Unit Price</th>
+                        <th name="th_taxes" class="text-end">Taxes</th>
+                        <th name="th_discount" t-if="display_discount" class="text-end">
+                            <span>Disc.%</span>
+                        </th>
+                        <th name="th_subtotal" class="text-end">
+                            <span groups="account.group_show_line_subtotals_tax_excluded">Amount</span>
+                            <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="sale_tbody">
+
+                    <t t-set="current_subtotal" t-value="0"/>
+                    <t t-set="lines" t-value="doc.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+
+                    <t t-foreach="lines" t-as="line">
+
+                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+
+                        <tr t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
+                            <t t-if="line.display_type == 'product'">
+                                <td><span t-esc="line_index + 1"/></td>
+                                <td name="td_name"><span t-field="line.name"/></td>
+                                <td name="td_quantity" class="text-end">
+                                    <span t-field="line.quantity"/>
+                                </td>
+                                <td name="td_hsn/sac" class="text-end">
+                                    <span t-field="line.product_id.l10n_in_hsn_code"/>
+                                </td>
+                                <td name="td_priceunit" class="text-end">
+                                    <span t-field="line.price_unit"/>
+                                </td>
+                                <td name="td_taxes" class="text-end">
+                                	<span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))" id="line_tax_ids"/>
+                                </td>
+                                <td t-if="display_discount" class="text-end">
+                                    <span t-field="line.discount"/>
+                                </td>
+                                <td  name="td_subtotal" class="text-end o_price_total">
+                                    <span t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                    <span t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                </td>
+                            </t>
+                            <t t-elif="line.display_type == 'line_section'">
+                                <td name="td_section_line" colspan="99">
+                                    <span t-field="line.name"/>
+                                </td>
+                                <t t-set="current_section" t-value="line"/>
+                                <t t-set="current_subtotal" t-value="0"/>
+                            </t>
+                            <t t-elif="line.display_type == 'line_note'">
+                                <td name="td_note_line" colspan="99">
+                                    <span t-field="line.name"/>
+                                </td>
+                            </t>
+                        </tr>
+                    </t>
+                    <tr>
+                        <t t-if="display_discount">
+                            <td class="text-end" colspan = "7">
+                                <b>Total</b>
+                            </td>
+                            <td class="text-end">
+                                <span t-field="doc.currency_id.symbol"/><span t-esc="current_subtotal"/>
+                            </td>
+                        </t>
+                        <t t-else="not display_discount">
+                            <td class="text-end" colspan = "6">
+                                <b>Total</b>
+                            </td>
+                            <td class="text-end">
+                                <span t-esc="current_subtotal" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                            </td>
+                        </t>
+                    </tr>
+                    <tr>
+                        <td colspan = "8">
+                            <b>Amount (In <span t-field="doc.currency_id.name"/>):</b> <span t-esc="doc.amount_in_words"/> only.
+                        </td>
+
+                        <!-- <td colspan = "8">
+                            <b>Amount (In <span t-field="doc.currency_id.name"/>):</b> <span t-esc="doc.currency_id.amount_to_text(current_subtotal)"/> only.
+                        </td> -->
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table-sm table-bordered" style="border-color:grey;border: 1px solid grey;" width="100%;">
+                <tr>
+                    <th rowspan="2">Taxable Value
+                    </th>
+
+                    <th colspan="2" class="text-center">
+                        <span>Central Tax</span>
+                    </th>
+                    <th colspan="2" class="text-center">
+                        <span>State Tax</span>
+                    </th>
+                    <th class="text-center" rowspan="2">Total Tax Amount</th>
+                </tr>
+                <tr class="text-center">
+                    <td>Rate</td>
+                    <td>Amount</td>
+
+                    <td>Rate</td>
+                    <td>Amount</td>
+                </tr>
+                <tr class="text-center" t-foreach="lines.filtered(lambda l: l.tax_ids)" t-as="line">
+                	<t t-set="price_tax" t-value="0"/>
+                    <td>
+                        <span t-esc="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                    </td>
+                    <td>
+                        <t t-foreach="line.tax_ids.children_tax_ids" t-as="tax">
+                            <t t-if="tax.tax_group_id.name == 'CGST'">
+                                <t t-esc="tax.amount"/>
+                                
+                            </t>
+                        </t>
+                    </td>
+                    <td>
+                        <t t-foreach="line.tax_ids.children_tax_ids" t-as="tax">
+                            <t t-if="tax.tax_group_id.name == 'CGST'">
+                            	<t t-set="price_tax" t-value="price_tax + (line.price_subtotal*tax.amount)/100"/>
+                                <span t-esc="(line.price_subtotal*tax.amount)/100"
+                                    t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                            </t>
+                        </t>
+                    </td>
+                    <td>
+                        <t t-foreach="line.tax_ids.children_tax_ids" t-as="tax">
+                            <t t-if="tax.tax_group_id.name == 'SGST'">
+                                <t t-esc="tax.amount"/>
+                            </t>
+                        </t>
+                    </td>
+                    <td>
+                        <t t-foreach="line.tax_ids.children_tax_ids" t-as="tax">
+                            <t t-if="tax.tax_group_id.name == 'SGST'">
+                            	<t t-set="price_tax" t-value="price_tax + (line.price_subtotal*tax.amount)/100"/>
+                                <span t-esc="(line.price_subtotal*tax.amount)/100"
+                                    t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                            </t>
+                        </t>
+                    </td>
+                    <td>
+                        <span t-esc="price_tax" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                    </td>
+                </tr>
+
+            </table>
+            <br/>
+            <br/>
+
+            <span> <b>Tax Amount(in words):</b>
+                <t t-esc="doc.currency_id.amount_to_text(doc.amount_tax)"/>
+            </span>
+            <br/>
+            <br/>
+             <table class="table table-borderless">
+                <tr>
+                    <td rowspan="4">
+                        <span><b>Company's PAN:</b>
+                            <t t-esc="doc.operating_company_id.partner_id.l10n_in_pan"/>
+                        </span>
+                    </td>
+                    <td colspan="4">
+                        <span><b>Company's Bank Details</b>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span><b>Bank Name:</b>
+                            <t t-esc="doc.partner_bank_id.bank_id.name"/>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span><b>A/c No.:</b>
+                            <t t-if="doc.partner_bank_id">
+                                <t t-esc="doc.partner_bank_id.acc_number"/>
+                            </t>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span><b>Branch and IFS Code:</b>
+                            <t t-if="doc.partner_bank_id">
+                                <t t-esc="doc.partner_bank_id.bank_id.street"/> <t t-esc="doc.partner_bank_id.bank_id.bic"/>
+                            </t>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            <br/>
+            <table class="table table-sm table-bordered" style="border: 1px solid grey;border-color:grey;margin-top:5%;" width="100%;">
+                <tr>
+                    <td colspan="4">
+                        <span><b>Customer's seal and Signature:</b>
+                        </span>
+                        <br/>
+                        <br/>
+                    </td>
+                    <td class="text-end" colspan="4">
+                        <br/>
+                        <br/>
+                        <br/>
+                        <span><b>Authorised Signatory</b>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+            <p class="text-center">
+                This is a Computer Generated Invoice
+            </p>
+        </t>
+	</template>
+
+	<template id="report_invoice_pro_forma">
+	    <t t-call="web.html_container">
+	        <t t-set="is_pro_forma" t-value="True"/>
+	        <t t-set="docs" t-value="docs.with_context(proforma=True)"/>
+	        <t t-foreach="docs" t-as="doc">
+	            <t t-call="scs_sale.report_invoice_pro_forma_document" t-lang="doc.partner_id.lang"/>
+	        </t>
+	    </t>
+	</template>
+
+    <record id="paperformat_euro_pro_forma" model="report.paperformat">
+            <field name="name">A4</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+	<record id="action_report_pro_forma_invoice_account_move" model="ir.actions.report">
+        <field name="name">PRO-FORMA Invoice</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">scs_sale.report_invoice_pro_forma</field>
+        <field name="report_file">scs_sale.report_invoice_pro_forma</field>
+        <field name="print_report_name">'PRO-FORMA - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_account_move"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="scs_sale.paperformat_euro_pro_forma"/> 
+        <!-- <field name="groups_id" eval="[(4, ref('sale.group_proforma_sales'))]"/> -->
+    </record>
+</odoo>

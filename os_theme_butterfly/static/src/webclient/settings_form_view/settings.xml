@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="web.SettingsPage" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('icon')]" position="replace">
+            <div class="icon d-none d-md-block">
+                <t t-if="getIconType()=='font'">
+                    <i t-att-class="getIconUrl(module.key)"/>
+                </t>
+                <t t-else="">
+                   <img class="icon" t-att-src="getIconUrl(module.key)"/>
+                </t>
+            </div>
+        </xpath>
+    </t>
+</templates>

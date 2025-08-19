@@ -1,0 +1,46 @@
+<odoo>
+    <record id="view_lead_dnd_tree" model="ir.ui.view">
+        <field name="name">lead.dnd.tree</field>
+        <field name="model">lead.dnd</field>
+        <field name="arch" type="xml">
+            <tree string="DND Leads">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_lead_dnd_form" model="ir.ui.view">
+        <field name="name">lead.dnd.form</field>
+        <field name="model">lead.dnd</field>
+        <field name="arch" type="xml">
+            <form string="DND Lead">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_lead_dnd" model="ir.actions.act_window">
+        <field name="name">DND Leads</field>
+        <field name="res_model">lead.dnd</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No DND leads found!
+            </p>
+        </field>
+    </record>
+
+</odoo>

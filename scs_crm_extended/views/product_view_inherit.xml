@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="product_template_inherit_min_price" model="ir.ui.view">
+        <field name="name">Inherit Product Template: Product Min Price</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <field name='taxes_id' position="before">
+                <field name="min_price" string="Min Product Price" required="True"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">Partner form (with sales info in contacts)</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="priority" eval="17" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='child_ids']/form" position="inside">
+                <field name="user_id" invisible="1" />
+                <field name="team_id" invisible="1" />
+            </xpath>
+            <field name="phone" position="attributes">
+                <attribute name="string">CA number</attribute>
+            </field>
+        </field>
+    </record>
+
+
+    <menuitem id="sale.report_sales_team"
+        name="Sales Team"
+        parent="sale.sale_order_menu"
+        groups="sales_team_security.group_sale_team_manager"/>
+
+    <menuitem id="sale.menu_sale_order_invoice"
+            name="Orders to Invoice"
+            parent="sale.menu_sale_invoicing"
+            groups="sales_team_security.group_sale_team_manager"/>
+
+    <menuitem id="sale.menu_sale_order_upselling"
+            name="Orders to Upsell"
+            parent="sale.menu_sale_invoicing"
+            groups="sales_team_security.group_sale_team_manager"/>
+
+    <menuitem
+        id="sale_loyalty.menu_discount_loyalty_type_config"
+        name="Discount &amp; Loyalty"
+        parent="sale.product_menu_catalog"
+        groups="sales_team_security.group_sale_team_manager"/>
+
+    <menuitem
+        id="sale_loyalty.menu_gift_ewallet_type_config"
+        name="Gift cards &amp; eWallet"
+        parent="sale.product_menu_catalog"
+        groups="sales_team_security.group_sale_team_manager"/>
+
+    <menuitem id="sale.menu_sale_config"
+            name="Configuration"
+            parent="sale.sale_menu_root"
+            groups="sales_team_security.group_sale_team_manager"/>
+
+</odoo>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="sale_person_target_form_view" model="ir.ui.view">
+        <field name="name">sale.person.target.form.view</field>
+        <field name="model">sale.person.target</field>
+        <field name="arch" type="xml">
+            <form string="Log">
+                <header>
+                    <button name="review_sale_person_target" type="object" string="Review" class="oe_highlight" states="draft"/>
+                    <button name="confirm_sale_person_target" type="object" string="Confirm" class="oe_highlight" states="review"/>
+                    <button name="cancel_sale_person_target" type="object" string="Cancel" class="oe_highlight" states="draft,review"/>
+                    <button name="set_to_draft" type="object" string="Set to Draft" class="oe_highlight" states="review,confirm,cancel"/>
+                    <field name="state" widget="statusbar" nolabel="1" readonly="1" statusbar_visible="draft,review,confirm"/>
+                </header>
+                <sheet>
+                    <group name="target_master_config" string="Target Master Configuration">
+                        <group col="3">
+                            <field name="name" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="start_date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        </group>
+                        <group col="3">
+                            <field name="company_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="end_date" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="sale_person_target_lines"
+                            string="Sale Person Monthly Target Lines">
+                            <field name="sale_person_target_line_ids" widget="one2many"
+                                context="{'sale_person_target_line_ids': sale_person_target_line_ids}"
+                                nolabel="1" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree editable="bottom">
+                                    <field name="user_id" />
+                                    <field name="employee_id" />
+                                    <field name="amount" />
+                                    <field name="sale_person_target_id" invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sale_person_target_tree_view" model="ir.ui.view">
+        <field name="name">sale.person.target.tree.view</field>
+        <field name="model">sale.person.target</field>
+        <field name="arch" type="xml">
+            <tree string="Monthly Target">
+                <field name="name" />
+                <field name="start_date" />
+                <field name="end_date" />
+                <field name="company_id" />
+                <field name="state" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_target_master_config">
+        <field name="name">Monthly Target Configuration</field>
+        <field name="res_model">sale.person.target</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="sale_person_target_tree_view" />
+    </record>
+
+    <menuitem id="sale_person_target_master_config"
+        parent="sale.menu_sale_config"
+        action="action_target_master_config"
+        name="Target Master Configuration" />
+
+    <menuitem id="incentive_report_menu"
+              name="Incentive Reports"
+              parent="sale.sale_menu_root"
+              sequence="46"
+              groups="-sales_team.group_sale_manager"/>
+
+    <menuitem id="sales_person_target_report_menu"
+              name="Sales Person Target Report"
+              parent="incentive_report_menu"
+              sequence="45"
+              action="scs_sales_person_report.action_sales_person_target_wizard"/>
+    <menuitem id="sales_person_collection_report_menu"
+              name="Sales Person Collection Report"
+              parent="incentive_report_menu"
+              sequence="46"
+              action="scs_sales_person_report.action_sales_person_collection_wizard"/>
+
+</odoo>

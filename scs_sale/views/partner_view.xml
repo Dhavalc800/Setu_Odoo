@@ -1,0 +1,95 @@
+<odoo>
+    <record model="ir.ui.view" id="partner_view_buttons">
+        <field name="name">partner.view.buttons</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="priority" eval="11" />
+        <field name="arch" type="xml">
+            <xpath expr="//span[@class='o_form_label o_td_label'][1]" position="before">
+                <field name="proprietorship_type"
+                    attrs="{'invisible': [('company_type', '!=', 'company')], 'required': [('company_type', '=', 'company')]}"></field>
+            </xpath>
+            <xpath expr="//notebook[1]" position="before">
+                <group>
+                    <group>
+                        <field name="industry_id" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                        <field name="cinn" attrs="{'invisible': ['|',('proprietorship_type', 'not in', ('foundation', 'limited','private_ltd')),('company_type', '!=', 'company')]}"></field>
+                        <field name="llp_no" attrs="{'invisible': [('proprietorship_type', 'not in', ('llp'))]}"></field>
+                        <field name="firm_no" attrs="{'invisible': [('proprietorship_type', 'not in', ('partnership'))]}"></field>
+                        <field name="msme_number" attrs="{'invisible': [('proprietorship_type', '!=', 'sole')]}"></field>
+                    </group>
+                    <group>
+                        <field name="sector_id" domain="[('industry_id','=', industry_id)]" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
+                        <field name="incorporation_date" attrs="{'invisible': ['|',('company_type', '!=', 'company'),('proprietorship_type', '==', False)]}"></field>
+                    </group>
+                </group>
+            </xpath>
+            <xpath expr="//group[@name='misc']/field[@name='industry_id']" position="replace">
+            </xpath>
+            <field name="state_id" position="attributes">
+                <attribute name="options">{'no_open': True, 'no_quick_create': True, 'no_create_edit':True}</attribute>
+            </field>
+            <field name="mobile" position="attributes">
+                <attribute name="required">context.get('sale_order_view', False)</attribute>
+            </field>
+            <!-- <field name="email" position="attributes">
+                <attribute name="required">context.get('sale_order_view', False)</attribute>
+            </field> -->
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="partner_view_buttons_inherit">
+        <field name="name">partner.view.buttons.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="sms.res_partner_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <field name="hide_mobile" invisible="1"></field>
+            </xpath>
+            <xpath expr="//label[@for='mobile']" position="attributes">
+                <attribute name="attrs">{'invisible': [('hide_mobile', '!=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//div[2][hasclass('o_row_readonly')]" position="attributes">
+                <attribute name="attrs">{'invisible': [('hide_mobile', '!=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//form" position="inside">
+                <field name="hide_ca_number" invisible="1"></field>
+            </xpath>
+            <xpath expr="//label[@for='phone']" position="attributes">
+                <attribute name="attrs">{'invisible': [('hide_ca_number', '!=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//div[1][hasclass('o_row_readonly')]" position="attributes">
+                <attribute name="string">CA number</attribute>
+                <attribute name="attrs">{'invisible': [('hide_ca_number', '!=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="l10n_in_tcs_tds_view_partner_form_inherit_scs">
+        <field name="name">partner.view.pan.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="l10n_in_tcs_tds.l10n_in_tcs_tds_view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="l10n_in_pan" position="attributes">
+                <attribute name="required">context.get('sale_order_view', False)</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="res_partner_view_form_inherit_mail_inherit_scs">
+        <field name="name">partner.view.email.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="mail.res_partner_view_form_inherit_mail" />
+        <field name="arch" type="xml">
+            <field name="email" position="attributes">
+                <attribute name="required">context.get('sale_order_view', False)</attribute>
+            </field>
+        </field>
+    </record>
+
+    
+
+
+
+</odoo>

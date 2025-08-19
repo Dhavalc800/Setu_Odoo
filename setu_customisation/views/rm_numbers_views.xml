@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+        <record id="job_position_num_tree" model="ir.ui.view">
+            <field name="name">rm.numbers.tree</field>
+            <field name="model">rm.numbers</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="phone"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="job_position_num_form" model="ir.ui.view">
+            <field name="name">rm.numbers.form</field>
+            <field name="model">rm.numbers</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="phone" widget="phone"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_rm_numbers" model="ir.actions.act_window">
+            <field name="name">RM Numbers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">rm.numbers</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            action="action_rm_numbers"
+            id="menu_rm_numbers"
+            parent="sale.menu_sale_config"
+            sequence="15"/>
+    </data>
+</odoo>

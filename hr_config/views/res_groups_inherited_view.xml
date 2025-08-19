@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo> 
+    <!-- Inherited Groups's view to add New Botton -->
+    <record id ="res_groups_inherited_view_hr" model="ir.ui.view">
+        <field name="name">res.groups.inherited.view.hr</field>
+        <field name="model">res.groups</field>
+        <field name ="inherit_id" ref="base.view_groups_form"/>
+        <field name="arch" type ="xml">
+            <xpath expr="//form/sheet/group" position="after">
+                <button name="delete_all_users"
+                           string="Remove All Users"
+                           class="oe_highlight"
+                           type="object"
+                           confirm="Are you sure you want to remove all the users from this group?"
+                           />
+            </xpath>
+           </field>
+   </record>
+</odoo>

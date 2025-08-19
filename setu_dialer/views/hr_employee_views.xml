@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="view_employee_form_attendance" model="ir.ui.view">
+            <field name="name">hr.employee.form.attendance</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='coach_id']" position="after">
+                    <field name="is_manually_attendance" groups="base.group_system"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

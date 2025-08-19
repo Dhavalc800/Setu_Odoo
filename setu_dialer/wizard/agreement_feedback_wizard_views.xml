@@ -1,0 +1,27 @@
+<odoo>
+    <record id="view_agreement_feedback_wizard_form" model="ir.ui.view">
+        <field name="name">agreement.feedback.wizard.form</field>
+        <field name="model">agreement.feedback.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Assign Feedback User">
+                <group>
+                    <field name="user_id"/>
+                </group>
+                <footer>
+                    <button string="Apply" type="object" name="action_apply_feedback_user" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_assign_agreement_feedback" model="ir.actions.server">
+        <field name="name">Assign to Agreement Feedback User</field>
+        <field name="model_id" ref="agreement.model_agreement"/>
+        <field name="binding_model_id" ref="agreement.model_agreement"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_agreement_feedback_wizard()
+        </field>
+    </record>
+</odoo>

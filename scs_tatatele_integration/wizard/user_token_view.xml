@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="user_token_generate_form" model="ir.ui.view">
+        <field name="name">user.token.generate.view.form</field>
+        <field name="model">user.token</field>
+        <field name="arch" type="xml">
+        <form>
+            <group>
+                <group>
+                    <field name="user_email" string="Email"/>
+                    <field name="user_password" string="Password"/>
+                </group>
+                <group>
+<!--                        <field name="generate_user_token" nolabel="1" widget="radio"/>-->
+                </group>
+            </group>
+            <footer>
+                <button name="generate_token" type="object" string="Generate Token" colspan="2"/>
+            </footer>
+        </form>
+        </field>
+    </record>
+
+    <record id="action_user_token" model="ir.actions.act_window">
+        <field name="name">Access Token</field>
+        <field name="res_model">user.token</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+</odoo>

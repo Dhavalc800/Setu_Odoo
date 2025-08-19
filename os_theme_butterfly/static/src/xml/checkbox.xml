@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-inherit="web.CheckBox" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('o-checkbox')]" position="attributes">
+            <attribute name="class" add="custom-control custom-checkbox custom-control-sm" separator=" "/>
+        </xpath>
+        <xpath expr="//input" position="attributes">
+            <attribute name="class" add="custom-control-input" separator=" "/>
+        </xpath>
+        <xpath expr="//label" position="attributes">
+            <attribute name="class" add="custom-control-label" separator=" "/>
+        </xpath>
+     </t>
+</templates>

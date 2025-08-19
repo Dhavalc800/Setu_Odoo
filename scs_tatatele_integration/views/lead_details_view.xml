@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="lead_details_tree_view" model="ir.ui.view">
+        <field name="name">lead.details.tree</field>
+        <field name="model">lead.details</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="lead_id"/>
+                <field name="listId" string="ListID"/>
+                <field name="broadcast_list_id"/>
+                <field name="phone_number"/>
+                <field name="lead_name"/>
+                <field name="lead_email"/>
+                <field name="lead_address"/>
+                <field name="lead_company_name"/>
+                <field name="list_name"/>
+                <field name="lead_picked"/>
+                <field name="time_group"/>
+                <field name="added_by"/>
+            </tree>
+        </field>
+    </record>
+    <record id="lead_details_form_view" model="ir.ui.view">
+        <field name="name">lead.details.form</field>
+        <field name="model">lead.details</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="lead_id"/>
+                            <field name="listId" string="ListID"/>
+                            <field name="broadcast_list_id"/>
+                            <field name="phone_number"/>
+                            <field name="lead_name"/>
+                            <field name="lead_email"/>
+                            <field name="lead_address"/>
+                        </group>
+                        <group>
+                            <field name="lead_company_name"/>
+                            <field name="list_name"/>
+                            <field name="lead_picked"/>
+                            <field name="time_group"/>
+                            <field name="added_by"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_lead_details_search" model="ir.ui.view">
+        <field name="name">lead.details.search</field>
+        <field name="model">lead.details</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="lead_id" string="LeadID"/>
+                <separator/>
+                <field name="listId" string="ListID"/>
+                <field name="broadcast_list_id" string="ListID"/>
+                <field name="lead_name" string="Lead Name"/>
+                <field name="lead_email" string="Lead Email"/>
+                <field name="list_name" string="List Name"/>
+                <field name="lead_company_name" string="Lead company Name"/>
+                <group string="Group By">
+                    <filter
+                            string="ListID"
+                            name="listId"
+                            context="{'group_by':'listId'}"
+                    />
+                    <filter
+                            string="ListID"
+                            name="broadcast_list_id"
+                            context="{'group_by':'broadcast_list_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="lead_details_act_window" model="ir.actions.act_window">
+        <field name="name">Lead Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lead.details</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_lead_details_search"/>
+    </record>
+</odoo>

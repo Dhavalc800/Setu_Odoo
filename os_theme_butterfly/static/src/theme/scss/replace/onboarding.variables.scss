@@ -1,0 +1,32 @@
+$o-onboarding-base-time: 0.5s !default;
+$o-onboarding-dot-size: 20px !default;
+$o-onboarding-progress-size: 2px !default;
+//Onboarding
+$odoo-onboarding-blue-bg-1: #0008C1;
+$odoo-onboarding-blue-bg-2: #2D31FA;
+$odoo-onboarding-blue-ui-1: #E6CBA8;
+$odoo-onboarding-blue-ui-2: #FDF0E0;
+
+$odoo-onboarding-orange-bg-1: #fb8b24;
+$odoo-onboarding-orange-bg-2: #fb5607;
+$odoo-onboarding-orange-ui-1: #599FF1;
+$odoo-onboarding-orange-ui-2: #68B3C9;
+
+$odoo-onboarding-violet-bg-1: #a663cc;
+$odoo-onboarding-violet-bg-2: #6f2dbd;
+$odoo-onboarding-violet-ui-1: #F39D9B;
+$odoo-onboarding-violet-ui-2: #FBEEC8;
+$o-onboarding-colors: (
+        'blue': (
+                'bg': ($odoo-onboarding-blue-bg-1, $odoo-onboarding-blue-bg-2),
+                'ui': ($odoo-onboarding-blue-ui-1, $odoo-onboarding-blue-ui-2),
+        ),
+        'orange': (
+                'bg': ($odoo-onboarding-orange-bg-1, $odoo-onboarding-orange-bg-2),
+                'ui': ($odoo-onboarding-orange-ui-1, $odoo-onboarding-orange-ui-2),
+        ),
+        'violet': (
+                'bg': ($odoo-onboarding-violet-bg-1, $odoo-onboarding-violet-bg-2),
+                'ui': ($odoo-onboarding-violet-ui-1, $odoo-onboarding-violet-ui-1),
+        ),
+) !default;

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!-- Inherited form view of project -->
+    <record id="inhert_form_view_project" model="ir.ui.view">
+        <field name="name">inherit.form.view.project</field>
+        <field name="model">project.project</field>
+        <field name ="inherit_id" ref="project.edit_project"/>   
+        <field name="arch" type ="xml">
+            <xpath expr="/form/sheet/notebook/page[@name='settings']" position="after">
+             	<page string = "Project Info.">
+                     <group string="Project Information">
+                        <field name="privacy_visibility" />
+                        <field name ="proj_type"/>
+                        <field name ="proj_dev_id" />
+                     </group>
+                </page> 
+                <page string = "Project History">
+                    <field name ="proj_hist_ids" readonly="1">
+                        <tree string="Project History" >
+                            <field name="phase_id"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string = "Project Phases">
+                    <!-- <group> -->
+                        <field name="phase_type_ids" nolabel="1"/>
+                    <!-- </group> -->
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Filter for project.project -->
+    <record id="project_project_filter_inherit_view_type" model="ir.ui.view">
+        <field name="name">project.project.filter.inherit.view.type</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_project_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/group/filter[@name='Partner']" position="after">
+                <filter string="Project Type" name="project_type" context="{'group_by':'proj_type'}"/>
+                <filter string="Project Model" name="proj_model" context="{'group_by':'proj_dev_id'}"/>
+                <filter string="Project Phase" name="project_phase" context="{'group_by':'phase_project_id'}"/>
+                <filter string="Country" name="country" context="{'group_by':'country_id'}"/>
+           </xpath>
+        </field>
+    </record>
+
+     <!-- Project Kanban inherit  -->
+    <record id="view_project_kanban_inherit" model="ir.ui.view">
+            <field name="name">project.project.kanban</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project_kanban"/>
+            <field name="arch" type="xml">
+            <xpath expr="//a[hasclass('o_kanban_manage_toggle_button')]" position ="attributes"> 
+                <attribute name='groups'>project_config.group_project_manager_custom,hr_config.group_reporting_manager
+                </attribute>
+            </xpath>
+            <xpath expr="//div[hasclass('o_kanban_card_manage_pane')]" position ="attributes">
+                <attribute name='groups'>project_config.group_project_manager_custom,hr_config.group_reporting_manager
+                </attribute> 
+            </xpath>
+            </field>
+    </record>
+
+</odoo>

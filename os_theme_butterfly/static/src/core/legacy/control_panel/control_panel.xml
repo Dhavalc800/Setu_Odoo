@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+        <!-- Legacy control panel templates -->
+    <t t-inherit="web.Legacy.ControlPanel" t-inherit-mode="extension" owl="1">
+         <xpath expr="//SearchBar" position="attributes">
+             <attribute name="isToggleSearch">true</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('o_cp_top_left')]//ol" position="before">
+            <h3 class="os-block-title page-title my-2">
+                <span t-if="props.title" t-esc="props.title"/>
+            </h3>
+        </xpath>
+        <xpath expr="//div[hasclass('o_cp_top_right')]//div[hasclass('o_cp_searchview')]" position="attributes">
+            <attribute name="t-att-data-search" add="props.withSearchBar ? 'odoo-search' : ''" separator=" "/>
+            <attribute name="t-att-class" add="props.withSearchBar ? 'search-wrap' : ''" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_cp_top_right')]//div[hasclass('o_cp_searchview')]" position="after">
+            <a t-if="props.withSearchBar" t-on-click="ev=>this.openSearch(ev)" class="btn btn-light search-toggle toggle-search ml-auto"
+               data-target="odoo-search" title="Click to open search">
+                <i class="small me-1 fa fa-search"/>
+                <span class="o_dropdown_title font-weight-bold">Search</span>
+            </a>
+        </xpath>
+
+        <xpath expr="//div[hasclass('o_cp_bottom_right')]//div[hasclass('o_search_options')]" position="replace"/>
+
+        <xpath expr="//div[hasclass('o_cp_top_right')]" position="attributes">
+            <attribute name="class" add="justify-content-end" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_cp_bottom_right')]" position="attributes">
+            <attribute name="class" add="justify-content-end" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_cp_top_left')]//ol" position="attributes">
+            <attribute name="t-if" add="and props.breadcrumbs.length > 0" separator=" "/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_cp_top_right')]" position="after">
+            <div class="btn-group o_search_options position-static d-inline-flex justify-content-end flex-nowrap"
+                 role="search"
+                 t-ref="searchViewButtons">
+                    <t t-if="props.withSearchBar">
+                        <FilterMenu t-if="props.searchMenuTypes.includes('filter')" fields="fields"/>
+                        <GroupByMenu t-if="props.searchMenuTypes.includes('groupBy')" fields="fields"/>
+                        <ComparisonMenu t-if="props.searchMenuTypes.includes('comparison') and model.get('filters', f => f.type === 'comparison').length"/>
+                        <FavoriteMenu t-if="props.searchMenuTypes.includes('favorite')"/>
+                    </t>
+                </div>
+          </xpath>
+        <xpath expr="//div[hasclass('o_cp_bottom')]" position="attributes">
+            <attribute name="class" add="mt-3" separator=" "/>
+        </xpath>
+    </t>
+
+</templates>
+
+

@@ -1,0 +1,34 @@
+<odoo>
+    <record id="view_update_assignee_wizard_form" model="ir.ui.view">
+        <field name="name">update.assignee.wizard.form</field>
+        <field name="model">update.assignee.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Update Assignee Wizard">
+                <group>
+                    <field name="booking_files"/>
+                    <field name="stage_ids" widget="many2many_tags"/>
+                    <field name="project_team_ids" widget="many2many_tags"/>
+                    <field name="assignee_ids" widget="many2many_tags"/>
+                </group>
+                <footer>
+                    <button string="Apply" type="object" name="action_apply" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_update_assignee_wizard" model="ir.actions.act_window">
+        <field name="name">Update Assignee</field>
+        <field name="res_model">update.assignee.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_update_assignee_wizard_root"
+          name="Update Assignee"
+          parent="project.menu_project_config"
+          action="action_update_assignee_wizard"
+          sequence="50"/>
+
+</odoo>

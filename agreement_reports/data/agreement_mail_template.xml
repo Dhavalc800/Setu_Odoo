@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- You have been assigned email -->
+        <template id="agreement_message_user_assigned">
+    <span>Dear <t t-esc="assignee_name"/>,</span>
+    <br/><br/>
+    <span style="margin-top: 8px;">You have been assigned to the <t t-esc="model_description or 'document'"/> <t t-esc="object.display_name"/>.</span>
+    <br/>
+        </template>
+
+        <record id="agreement_creation_mail" model="mail.template">
+            <field name="name">Agreement Created</field>
+            <field name="model_id" ref="agreement_reports.model_agreement"/>
+            <field name="subject">Agreement (Ref {{ object.name or 'n/a' }})</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="body_html" type="html">
+                <div>
+                    <table border="0" cellpadding="0" cellspacing="0"
+                           style="box-sizing:border-box;border-collapse:collapse;width:100%; margin:0;" width="100%">
+                        <tbody>
+                            <tr>
+                                <td valign="top" style="font-size: 14px;">
+                                    A new Agreement has been created for Booking
+                                    <t t-esc="object.sale_id.name"/>
+                                    <br></br>
+                                    <br></br>
+                                    <br></br>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </field>
+        </record>
+
+    <record id="model_update_operating_company" model="ir.actions.server">
+        <field name="name">Update Operating Company</field>
+        <field name="model_id" ref="agreement_reports.model_agreement"/>
+        <field name="binding_model_id" ref="agreement_reports.model_agreement"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">records.update_operating_company()</field>
+    </record>
+
+    </data>
+</odoo>

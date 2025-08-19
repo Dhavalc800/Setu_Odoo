@@ -1,0 +1,46 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_funding_service_month_tree" model="ir.ui.view">
+        <field name="name">funding.service.month.tree</field>
+        <field name="model">funding.service.month</field>
+        <field name="arch" type="xml">
+            <tree string="Funding Service Months">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_funding_service_month_form" model="ir.ui.view">
+        <field name="name">funding.service.month.form</field>
+        <field name="model">funding.service.month</field>
+        <field name="arch" type="xml">
+            <form string="Funding Service Month">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="month_number"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_funding_service_month" model="ir.actions.act_window">
+        <field name="name">Funding Service Months</field>
+        <field name="res_model">funding.service.month</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Funding Service Month
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_funding_service_month"
+        name="Funding Months"
+        parent="sale.menu_sale_config"
+        action="action_funding_service_month"
+        sequence="16"/>
+</odoo>

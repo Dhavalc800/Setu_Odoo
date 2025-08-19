@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+scs_operation_report.access_activity_type_config,access_activity_type_config,scs_operation_report.model_activity_type_config,base.group_user,1,1,1,1
+scs_operation_report.access_operation_task_activity,access_operation_task_activity,scs_operation_report.model_operation_task_activity,base.group_user,1,1,1,1
+scs_operation_report.access_operation_activity_wizard,access_operation_activity_wizard,scs_operation_report.model_operation_activity_wizard,base.group_user,1,1,1,1

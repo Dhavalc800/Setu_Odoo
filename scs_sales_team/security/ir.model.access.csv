@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_crm_tl_manager,crm.team.tl.manager,sales_team.model_crm_team,sales_team_security.group_sale_team_manager,1,1,1,1
+access_crm_branch_manager,crm.team.branch.manager,sales_team.model_crm_team,sales_team_security.group_booking_branch_manager,1,1,1,1
+access_crm_member_tl_manager,access.crm.team.member.team.leader,sales_team.model_crm_team_member,sales_team_security.group_sale_team_manager,1,1,1,1
+access_crm_member_bm_manager,access.crm.team.member.bm.leader,sales_team.model_crm_team_member,sales_team_security.group_booking_branch_manager,1,1,1,1
+
+access_user_bm_manager,access.res.users.bm,base.model_res_users,sales_team_security.group_booking_branch_manager,1,1,1,1
+access_user_tl_manager,access.res.users.tl,base.model_res_users,sales_team_security.group_sale_team_manager,1,1,1,1
+
+

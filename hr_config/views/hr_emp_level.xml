@@ -1,0 +1,63 @@
+<odoo>
+
+    <!-- form view for employee level -->
+    <record id="emp_level_form_view" model="ir.ui.view">
+        <field name="name">emp.level.form</field>
+        <field name="model">hr.emp.level</field>
+        <field name="arch" type="xml">
+            <form string="Employee Level">
+                <sheet>
+                    <group col="4" colspan="2">
+                        <field name="name" required='1' />
+                        <field name="code" />
+                        <field name="parent_id"/>
+                        <field name="company_id"/>
+                    </group>
+                    <separator string="Employees"/>
+                    <field name="emp_ids" readonly="1" nolabel="1"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tree view for employee level -->
+    <record id="emp_level_tree_view" model="ir.ui.view">
+        <field name="name">emp.level.tree</field>
+        <field name="model">hr.emp.level</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Level">
+                <field name="name" />
+                <field name="code" />
+                <field name="parent_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search view for employee level -->     
+    <record id="emp_level_search_view" model="ir.ui.view">
+        <field name="name">emp.level.search</field>
+        <field name="model">hr.emp.level</field>
+        <field name="arch" type="xml">
+            <search string="Employee Level">
+                <field name="name" />
+                <field name="code" />
+                <field name="parent_id"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- action for employee level -->
+    <record id="action_emp_level" model="ir.actions.act_window">
+        <field name="name">Employee Levels</field>
+        <field name="res_model">hr.emp.level</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- menu for employee level -->
+    <menuitem 
+        id="menu_emp_level" 
+        action="action_emp_level" 
+        parent="hr.menu_human_resources_configuration"/>
+
+
+</odoo>

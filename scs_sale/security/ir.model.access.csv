@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+scs_sale.access_payment_plan,access_payment_plan,scs_sale.model_payment_plan,base.group_user,1,1,1,1
+scs_sale.access_payment_plan_line,access_payment_plan_line,scs_sale.model_payment_plan_line,base.group_user,1,1,1,1
+scs_sale.access_sale_payment_line,access_sale_payment_line,scs_sale.model_sale_payment_line,base.group_user,1,1,1,1
+access_industry_sector,access_industry_sector,model_industry_sector,base.group_user,1,1,1,1
+access_state_history,access_state_history,model_state_history,base.group_user,1,1,1,1
+scs_sale.access_url_shortener,access_url_shortener,scs_sale.model_url_shortener,base.group_user,1,1,1,1

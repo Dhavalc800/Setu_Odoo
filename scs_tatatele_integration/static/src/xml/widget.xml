@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="web.AudioField" owl="1">
+        <audio
+            class="o_field_audio d-flex"
+            controls="controls"
+            preload="metadata"
+            style="height:30px"
+        >
+            <source t-att-src="props.value" type="audio/mpeg" />
+            <p>Your browser does not support HTML5.</p>
+        </audio>
+    </t>
+</templates>

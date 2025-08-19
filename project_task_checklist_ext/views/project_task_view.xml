@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="project_task_checklist_inherit" model="ir.ui.view">
+        <field name="name">project.task.checklist.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="projects_task_checklists.project_task_progress_notebook"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='checklist_id']" position="replace">
+                <field name="checklist_task_ids" domain="[('project_id', '=', project_id)]"
+                 widget="many2many_tags" options="{'no_create': True}"/>
+            </xpath>
+            <xpath expr="//field[@name='checklists']/.." position="attributes">
+                <attribute name="attrs">{'invisible': [('checklist_task_ids', '=', [])]}</attribute>
+                <attribute name="domain">[('project_id', '=', checklist_task_ids.project_id)]</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_ids']" position="before">
+                <field name="project_team_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                <field name="team_members_ids" widget="many2many_tags" options="{'no_create': True}" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='user_ids']" position="attributes">
+                <attribute name="domain">
+                    [('id', 'in', team_members_ids)]
+                </attribute>
+                <attribute name="options">{'no_edit': 1,'no_create': 1}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

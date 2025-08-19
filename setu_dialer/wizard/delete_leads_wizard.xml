@@ -1,0 +1,31 @@
+<odoo>
+    <record id="view_delete_leads_wizard" model="ir.ui.view">
+        <field name="name">delete.leads.wizard.form</field>
+        <field name="model">delete.leads.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Delete Leads by Phone" enctype="multipart/form-data">
+                <group>
+                    <field name="lead_list_id"/>
+                    <field name="file"/>
+                </group>
+                <footer>
+                    <button string="Delete Leads" type="object" name="action_process_csv" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="action_delete_leads_wizard" model="ir.actions.act_window">
+        <field name="name">Delete Leads by Phone</field>
+        <field name="res_model">delete.leads.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_lead_config"
+        name="Delete Leads by Phone"
+        parent="setu_dialer.menu_root_configuration"
+        action="action_delete_leads_wizard"/>
+
+</odoo>

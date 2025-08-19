@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="operation_activity_wizard_form_new" model="ir.ui.view">
+            <field name="name">operation.activity.wizard.form</field>
+            <field name="model">operation.activity.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date_from"/>
+                            </group>
+                            <group>
+                                <field name="date_to"/>
+                            </group>
+                            <group>
+                                <field name="team_ids" widget="many2many_tags" context="{'is_employee': True, 'skip_record_rule': True}"/>
+                            </group>
+                            <!-- <group> -->
+                                <!-- <field name="employee_ids"  readonly="1" widget="many2many_tags" context="{'is_employee': True, 'skip_record_rule': True}"/> -->
+                            <!-- </group> -->
+                            <group>
+                                <field name="status" />
+                            </group>
+                            <group>
+                                <field name="taken_days" />
+                            </group>
+                            <group>
+                                <field name="operation_activity_ids" widget="many2many_tags" context="{'skip_context': True}"/>
+                            </group>
+                        </group>
+                        <footer>
+                            <button name="fetch_data" type="object" string="Report" class="btn-primary"/>
+                            <button string="Cancel" class="btn-default" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_operation_activity_wizard_new" model="ir.actions.act_window">
+            <field name="name">action.operation.activity.wizard</field>
+            <field name="res_model">operation.activity.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="operation_activity_wizard_form_new"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="operation_activity_wizard_menu_main"
+              name="Operation Activity Report"
+              parent="project.menu_project_report"
+              sequence="45"
+              action="scs_operation_report.action_operation_activity_wizard_new"/>
+
+     </data>
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_project_task_assignees" model="ir.ui.view">
+        <field name="name">Assignees</field>
+        <field name="model">project.task.assignees</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="project_team_id"/>
+                    <field name="user_ids" widget="many2many_tags"/>
+                    <field name="stage_id"/>
+                    <field name="team_member_ids" invisible="1"/>
+                    <field name="default_stage_ids" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="add_assignees" type="object"
+                        string="Add" class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_project_task_assignees" model="ir.actions.act_window">
+        <field name="name">Add Assignees</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.task.assignees</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="project.model_project_task"/>
+        <field name="binding_view_types">list</field>
+    </record>
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+    <record id="view_order_form_inherit_sale_project_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.sale.project</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_project.view_order_form_inherit_sale_project"/>
+        <field name="arch" type="xml">
+            <button name="action_view_project_ids" position="replace">
+                <button type="object" name="action_view_project_ids" class="oe_stat_button" icon="fa-puzzle-piece" attrs="{'invisible': ['|', ('state', 'in', ['draft', 'sent']), ('project_ids', '=', [])]}">
+                    <field name="project_count" widget="statinfo" string="Projects"/>
+                </button>
+            </button>
+            <button name="action_view_task" position="replace">
+                <button type="object" name="action_view_task" class="oe_stat_button" icon="fa-tasks" attrs="{'invisible': [('tasks_count', '=', 0)]}">
+                    <field name="tasks_count" widget="statinfo" string="Tasks"/>
+                </button>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_sales_order_filter_inherited" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="related_phone"/>
+                <field name="related_email"/>
+            </field>
+            <xpath expr="//filter[@name='my_sale_orders_filter']" position='before'>
+                <filter string="Order Starts with S" name="order_starts_with_s" domain="[('name', '=ilike', 'S%')]"/>
+                <filter string="Order Starts Not with S" name="order_starts_not_with_s" domain="[('name', 'not ilike', 'S%')]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

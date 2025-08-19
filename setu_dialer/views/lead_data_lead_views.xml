@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_lead_data_lead_tree" model="ir.ui.view">
+        <field name="name">lead.list.data.tree</field>
+        <field name="model">lead.data.lead</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="x_name"/>
+                <field name="x_email"/>
+                <field name="x_phone"/>
+                <field name="campaign_id"/>
+                <field name="lead_list_id"/>
+                <field name="lead_usage_status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_lead_data_lead_form" model="ir.ui.view">
+        <field name="name">lead.data.lead</field>
+        <field name="model">lead.data.lead</field>
+        <field name="arch" type="xml">
+            <form string="Campaigns List">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_lead_list"
+                            type="object"
+                            string="Lead List"
+                            icon="fa-list"
+                            attrs="{'invisible': [('lead_list_id', '=', False)]}"/>
+                    </div>
+                    <group>
+                        <field name="x_name"/>
+                        <field name="x_email"/>
+                        <field name="x_phone"/>
+                        <field name="dynamic_field_values"/>
+                        <field name="is_fetch" invisible="1"/>
+                        <field name="fetch_date"/>
+                        <field name="fetch_user_id"/>
+                        <field name="fetch_reset_time" invisible="1"/>
+                        <field name="lead_list_id" options="{'no_create': True}"/>
+                        <field name="campaign_id"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_lead_data_lead_pivot" model="ir.ui.view">
+        <field name="name">lead.data.lead.pivot</field>
+        <field name="model">lead.data.lead</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="lead_list_id" type="row"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_lead_data_lead" model="ir.actions.act_window">
+        <field name="name">Leads</field>
+        <field name="res_model">lead.data.lead</field>
+        <field name="view_mode">tree,form,pivot</field>
+    </record>
+
+</odoo>
