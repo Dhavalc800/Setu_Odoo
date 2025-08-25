@@ -23,9 +23,9 @@
         <field name="target">new</field>
     </record>
 
-    <menuitem id="menu_lead_config"
+    <!-- <menuitem id="menu_lead_config"
         name="Delete Leads by Phone"
         parent="setu_dialer.menu_root_configuration"
-        action="action_delete_leads_wizard"/>
+        action="action_delete_leads_wizard"/> -->
 
 </odoo>
