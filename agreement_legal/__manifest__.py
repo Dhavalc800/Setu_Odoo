@@ -26,7 +26,7 @@
         "views/agreement_type.xml",
         "views/res_partner.xml",
         "views/agreement.xml",
-        # "views/menu.xml",
+        "views/menu.xml",
         "wizards/create_agreement_wizard.xml",
     ],
     "assets": {
