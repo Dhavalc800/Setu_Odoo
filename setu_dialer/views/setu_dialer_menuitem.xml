@@ -1,12 +1,12 @@
 <odoo>
-    <menuitem id="menu_setu_dialer" name="Setu Dialer" sequence="10"/>
+    <menuitem id="menu_setu_dialer" name="Dialer" sequence="10"/>
         <!-- <menuitem id="menu_dashboard_overview" name="Overview" parent="menu_setu_dialer" action="action_dashboard_overview" sequence="1"/> -->
-        <menuitem id="menu_branch_manager_assignment_items" name="Branch Manager Overview"
-                parent="menu_setu_dialer" action="action_branch_manager_assignment" sequence="2"/>
-        <menuitem id="menu_lead_management_disposition" name="Lead Management Dispositions" groups="setu_dialer.group_lead_admin,setu_dialer.group_lead_user"
-                parent="menu_setu_dialer" action="action_lead_management" sequence="3"/>
-        <menuitem id="menu_pysical_meeting" name="Physical Meetings"
-                parent="menu_setu_dialer" action="action_pysical_meeting" sequence="4"/>
+        <!-- <menuitem id="menu_branch_manager_assignment_items" name="Branch Manager Overview"
+                parent="menu_setu_dialer" action="action_branch_manager_assignment" sequence="2"/> -->
+        <!-- <menuitem id="menu_lead_management_disposition" name="Lead Management Dispositions" groups="setu_dialer.group_lead_admin,setu_dialer.group_lead_user"
+                parent="menu_setu_dialer" action="action_lead_management" sequence="3"/> -->
+        <!-- <menuitem id="menu_pysical_meeting" name="Physical Meetings"
+                parent="menu_setu_dialer" action="action_pysical_meeting" sequence="4"/> -->
         <menuitem id="menu_campaigns_list_action" name="Campaigns" groups="setu_dialer.group_call_admin"
                 parent="menu_setu_dialer" action="action_campaigns_list" sequence="5"/>
         <menuitem id="menu_lead_list_data" name="Lead List" groups="setu_dialer.group_call_admin"
@@ -23,19 +23,19 @@
                 parent="menu_setu_dialer" action="action_lead_callback_info" sequence="11"/>
         <menuitem id="menu_call_detail_record" name="Call Details" groups="setu_dialer.group_call_admin,setu_dialer.group_call_user"
                 parent="menu_setu_dialer" action="action_call_detail_record" sequence="12"/>
-        <menuitem id="menu_lean_manual_lead" name="Manual Leads" groups="setu_dialer.group_call_admin,setu_dialer.group_call_user"
-                parent="menu_setu_dialer" action="action_lean_manual_lead" sequence="13"/>
-        <menuitem id="menu_call_detail_report" name="Call Details Report" groups="setu_dialer.group_call_admin,setu_dialer.group_lead_management"
-            parent="menu_setu_dialer" sequence="14"/>
-            <menuitem id="menu_call_detail_record1" name="Call Details Report" groups="setu_dialer.group_call_admin,setu_dialer.group_lead_management"
-                parent="menu_call_detail_report" action="view_lead_call_merged_action" sequence="1"/>
+        <!-- <menuitem id="menu_lean_manual_lead" name="Manual Leads" groups="setu_dialer.group_call_admin,setu_dialer.group_call_user"
+                parent="menu_setu_dialer" action="action_lean_manual_lead" sequence="13"/> -->
+        <!-- <menuitem id="menu_call_detail_report" name="Call Details Report" groups="setu_dialer.group_call_admin,setu_dialer.group_lead_management"
+            parent="menu_setu_dialer" sequence="14"/> -->
+            <!-- <menuitem id="menu_call_detail_record1" name="Call Details Report" groups="setu_dialer.group_call_admin,setu_dialer.group_lead_management"
+                parent="menu_call_detail_report" action="view_lead_call_merged_action" sequence="1"/> -->
             <!-- <menuitem id="menu_disposition_queue" name="Disposition Queue" parent="menu_call_detail_report" action="action_disposition_queue"/> -->
             <!-- <menuitem id="menu_disposition_master" name="Disposition Master" parent="menu_call_detail_report" action="action_disposition_master"/> -->
         <menuitem id="menu_root_configuration" name="Configuration" parent="menu_setu_dialer" groups="setu_dialer.group_lead_admin" sequence="14"/>
             <menuitem id="menu_lead_dnd_root" name="DND Leads" groups="setu_dialer.group_call_admin"
                 parent="setu_dialer.menu_root_configuration" action="action_lead_dnd" sequence="2"/>
-            <menuitem id="menu_lean_manual_upload_wizard" name="Upload Manual Leads" groups="setu_dialer.group_call_admin" 
-                parent="setu_dialer.menu_root_configuration" action="action_lean_manual_upload_wizard" sequence="3"/>
+            <!-- <menuitem id="menu_lean_manual_upload_wizard" name="Upload Manual Leads" groups="setu_dialer.group_call_admin" 
+                parent="setu_dialer.menu_root_configuration" action="action_lean_manual_upload_wizard" sequence="3"/> -->
             <menuitem id="menu_lead_transfer_wizard" name="Transfer Leads" groups="setu_dialer.group_call_admin"
                 parent="setu_dialer.menu_root_configuration" action="action_lead_transfer_wizard" sequence="4"/>
             <menuitem id="menu_disposition_list_action" name="Disposition List" groups="setu_dialer.group_call_admin"
@@ -46,8 +46,8 @@
                 parent="menu_root_configuration" action="action_upload_leads_window" sequence="7"/>
             <menuitem id="menu_report_column" name="CSV Column" groups="setu_dialer.group_call_admin"
                 parent="menu_root_configuration" action="action_report_column" sequence="8"/>
-            <menuitem id="menu_closer_list" name="Closer" groups="setu_dialer.group_call_admin"
-                parent="menu_root_configuration" action="action_closer_name" sequence="8"/>
+            <!-- <menuitem id="menu_closer_list" name="Closer" groups="setu_dialer.group_call_admin"
+                parent="menu_root_configuration" action="action_closer_name" sequence="8"/> -->
             <menuitem id="menu_csv_lead_status" name="Csv Lead Status"
                 parent="menu_root_configuration" action="action_csv_lead_status" sequence="9"/>
             <menuitem id="menu_csv_lead_reason" name="Csv Lead Reason"
