@@ -61,7 +61,7 @@
         'wizard/hbad_data_import_wizard_views.xml',
         'wizard/agreement_feedback_wizard_views.xml',
         'wizard/project_task_wizard_views.xml',
-        'wizard/delete_leads_wizard.xml',
+        # 'wizard/delete_leads_wizard.xml',
         'views/setu_dialer_menuitem.xml',
     ],
     
