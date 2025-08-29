@@ -67,11 +67,11 @@
                             </t>
                             <t t-out="0"/>
                             <div class="text-center small mt-2 pt-3 border-top" t-if="not disable_footer">
-                                <t t-if="not disable_database_manager">
+                                <!-- <t t-if="not disable_database_manager">
                                     <a class="border-end pe-2 me-1" href="/web/database/manager">Manage Databases</a>
-                                </t>
-                                <a href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth" target="_blank">Powered by
-                                    <span>Odoo</span>
+                                </t> -->
+                                <a href="https://www.instabizweb.com/" target="_blank">Powered by
+                                    <span>Insta Biz Web</span>
                                 </a>
                             </div>
                         </div>
@@ -109,11 +109,11 @@
                                         </t>
                                         <t t-out="0"/>
                                         <div class="text-center small mt-2 pt-3 border-top" t-if="not disable_footer">
-                                            <t t-if="not disable_database_manager">
+                                            <!-- <t t-if="not disable_database_manager">
                                                 <a class="border-end pe-2 me-1" href="/web/database/manager">Manage Databases</a>
-                                            </t>
-                                            <a href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth" target="_blank">Powered by
-                                                <span>Odoo</span>
+                                            </t> -->
+                                            <a href="https://www.instabizweb.com/" target="_blank">Powered by
+                                                <span>Insta Biz Web</span>
                                             </a>
                                         </div>
                                     </div>
@@ -191,11 +191,11 @@
                             </t>
                             <t t-out="0"/>
                             <div class="text-center small mt-2 pt-3 border-top" t-if="not disable_footer">
-                                <t t-if="not disable_database_manager">
+                                <!-- <t t-if="not disable_database_manager">
                                     <a class="border-end pe-2 me-1" href="/web/database/manager">Manage Databases</a>
-                                </t>
-                                <a href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth" target="_blank">Powered by
-                                    <span>Odoo</span>
+                                </t> -->
+                                <a href="https://www.instabizweb.com/" target="_blank">Powered by
+                                    <span>Insta Biz Web</span>
                                 </a>
                             </div>
                         </div>
