@@ -18,7 +18,7 @@
 
 <!--            </xpath>-->
             <xpath expr="//group[@id='header_right_group']" position="inside">
-                <field name="partner_bank_id" options="{'no_create': True, 'no_open': True}" context="{'default_partner_id': bank_partner_id}"
+                <field name="partner_bank_id" context="{'default_partner_id': bank_partner_id}"
                        attrs="{'readonly': [('state', '!=', 'draft')]}"/>
             </xpath>
         </field>

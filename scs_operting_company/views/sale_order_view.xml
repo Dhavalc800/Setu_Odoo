@@ -6,9 +6,7 @@
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
             <group name="partner_details" position="inside">
-                <field name="operating_company_id" domain="[('id', 'in', operating_company_ids)]" force_save="1" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}" readonly="0" required="0"/>
-                 <!-- context="{'is_opc_m2o': True}" -->
-                <field name="operating_company_ids" invisible="1" widget="many2many_tags"/>
+                <field name="operating_company_id" force_save="1" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}" readonly="0" required="1" context="{'is_opc_m2o': True}"/>
             </group>
             <button id="create_invoice_percentage" position='attributes'>
                 <attribute name="attrs">{'invisible': ['|',('invoice_status', '!=', 'no'), ('state',

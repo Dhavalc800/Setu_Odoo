@@ -4,51 +4,12 @@ from odoo import api, fields, models
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    # @api.model
-    # def _default_operating_company_id(self):
-    #     return self.env.company.operating_company_ids and self.env.company.operating_company_ids[0].id
     @api.model
-    def default_get(self, fields_list):
-        """Call `_compute_operating_companies` when creating a new record."""
-        defaults = super().default_get(fields_list)
+    def _default_operating_company_id(self):
+        return self.env.company.operating_company_ids and self.env.company.operating_company_ids[0].id
 
-        # Simulate `user_id` onchange behavior in `default_get`
-        if "user_id" in fields_list:
-            user = self.env.user
-            branch_company = self.env["employee.branch"].search([
-                ("name", "=", user.employee_id.branch_id.name)
-            ], limit=1)
+    operating_company_id = fields.Many2one("operating.company", copy=False, default=_default_operating_company_id)
 
-            if branch_company:
-                defaults["operating_company_ids"] = [(6, 0, branch_company.company_ids.ids)]
-            else:
-                defaults["operating_company_ids"] = [(5, 0, 0)]
-
-        return defaults
-
-    @api.onchange('user_id', 'operating_company_id')
-    def _compute_operating_companies(self):
-        """Update operating_company_ids based on user_id's branch"""
-        branch_company = self.env['employee.branch'].search([
-            ('name', '=', self.env.user.employee_id.branch_id.name)
-        ], limit=1)
-        if branch_company:
-            self.operating_company_ids = [(6, 0, branch_company.company_ids.ids)]
-        else:
-            self.operating_company_ids = [(5, 0, 0)]
-        
-    operating_company_id = fields.Many2one(
-        "operating.company",
-        string="Operating Company",
-        copy=False
-    )
-
-    operating_company_ids = fields.Many2many(
-        'operating.company',
-        string="Available Operating Companies",
-        compute="_compute_operating_companies",
-        store=True
-    )
     payment_received_amount = fields.Monetary(
         string="Payment Received",
         compute="_compute_get_payment_received",

@@ -66,8 +66,6 @@ class OperatingCompany(models.Model):
             "The default value comes from the customer.")
 
     sequence_id = fields.Many2one("ir.sequence", "Operating Sequence", copy=False)
-    # bank_account_id = fields.Many2one('res.partner.bank', string="Bank Account")
-
     _sql_constraints = [
         ("name_uniq", "unique (name)", "The Operating company name must be unique !")
     ]
@@ -156,19 +154,19 @@ class OperatingCompany(models.Model):
 
         return super().create(vals_list)
 
-    # @api.model
-    # def _search(
-    #     self,
-    #     args,
-    #     offset=0,
-    #     limit=None,
-    #     order=None,
-    #     count=False,
-    #     access_rights_uid=None,
-    # ):
-    #     if self._context.get("is_opc_m2o") and self.env.company.operating_company_ids:
-    #         args = [("id", "in", self.env.company.operating_company_ids.ids)]
+    @api.model
+    def _search(
+        self,
+        args,
+        offset=0,
+        limit=None,
+        order=None,
+        count=False,
+        access_rights_uid=None,
+    ):
+        if self._context.get("is_opc_m2o") and self.env.company.operating_company_ids:
+            args = [("id", "in", self.env.company.operating_company_ids.ids)]
 
-    #     return super(OperatingCompany, self)._search(
-    #         args, offset, limit, order, count=count, access_rights_uid=access_rights_uid
-    #     )
+        return super(OperatingCompany, self)._search(
+            args, offset, limit, order, count=count, access_rights_uid=access_rights_uid
+        )

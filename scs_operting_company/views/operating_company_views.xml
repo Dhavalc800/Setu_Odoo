@@ -39,7 +39,6 @@
                                     <field name="website" string="Website" widget="url" placeholder="e.g. https://www.odoo.com"/>
                                     <field name="fiscal_position_id"  options="{'no_create_edit': True, 'no_create': True}"/>
                                     <field name="stamp" />
-                                    <!-- <field name="bank_account_id" options="{'no_create': True, 'no_create_edit': True}"/> -->
                                 </group>
                             </group>
                         </page>
