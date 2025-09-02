@@ -13,8 +13,8 @@
         'project', 'survey',    
     ],
     'data': [
-        'security/ir.model.access.csv',
         'security/security.xml',
+        'security/ir.model.access.csv',
         'data/mail_template.xml',
         'wizard/open_survey.xml',
         'views/feedback_from_view.xml',

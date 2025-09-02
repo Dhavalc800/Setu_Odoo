@@ -1,7 +1,5 @@
 from odoo import api, models, fields, _
-import logging
 
-_logger = logging.getLogger(__name__)
 
 class ProjectTasks(models.Model):
     _inherit = 'project.task'
@@ -103,16 +101,8 @@ class ProjectTasks(models.Model):
                 action['views'] = form_view
             action['res_id'] = complimentary_task.id
         return action
-
+    
     def _search(self, args, offset=0, limit=None, order=None, count=False, access_rights_uid=None):
         if self._context.get("feedback"):
-            _logger.info("Feedback context detected. Adding stage filter to args.")
             args = args + [('stage_id.state', '=', 'done')]
-        _logger.debug("Search args: %s", args)
-        _logger.debug("Offset: %s, Limit: %s, Order: %s, Count: %s, UID: %s", offset, limit, order, count, access_rights_uid)
         return super()._search(args, offset, limit, order, count, access_rights_uid)
-
-    # def _search(self, args, offset=0, limit=None, order=None, count=False, access_rights_uid=None):
-    #     if self._context.get("feedback"):
-    #         args = args + [('stage_id.state', '=', 'done')]
-    #     return super()._search(args, offset, limit, order, count, access_rights_uid)
