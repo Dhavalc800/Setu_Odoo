@@ -16,7 +16,7 @@ class SaleOrder(models.Model):
         [
             ("normal", "Normal"),
             ("normal_combo", "Normal Combo"),
-            ("hbab", "HBAB"),
+            ("gws", "GWS"),
         ],
         copy=False
     )
