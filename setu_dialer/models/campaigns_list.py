@@ -34,20 +34,20 @@ class CampaignsList(models.Model):
     used_lead_count = fields.Integer(string="Used Leads", compute="_compute_lead_usage_counts", tracking=True)
     not_used_lead_count = fields.Integer(string="Not Used Leads", compute="_compute_lead_usage_counts", tracking=True)
     total_lead_count = fields.Integer(string="Total Leads", compute="_compute_lead_usage_counts", tracking=True)
-    active_user_count = fields.Integer(string="Active Users", tracking=True)
+    active_user_count = fields.Integer(string="Active Users", compute="_compute_active_user_count", tracking=True)
 
-    # def _compute_active_user_count(self):
-    #     Lead = self.env['lead.data.lead']
-    #     for record in self:
-    #         active_users = set()
-    #         if record.user_ids:
-    #             leads = Lead.search([
-    #                 ('campaign_id', '=', record.id),
-    #                 ('is_fetch', '=', True),
-    #                 ('fetch_user_id', 'in', record.user_ids.ids)
-    #             ])
-    #             active_users = set(leads.mapped('fetch_user_id').ids)
-    #         record.active_user_count = len(active_users)
+    def _compute_active_user_count(self):
+        Lead = self.env['lead.data.lead']
+        for record in self:
+            active_users = set()
+            if record.user_ids:
+                leads = Lead.search([
+                    ('campaign_id', '=', record.id),
+                    ('is_fetch', '=', True),
+                    ('fetch_user_id', 'in', record.user_ids.ids)
+                ])
+                active_users = set(leads.mapped('fetch_user_id').ids)
+            record.active_user_count = len(active_users)
 
     @api.model
     def create(self, vals):
