@@ -9,6 +9,7 @@
                 <field name="name"/>
                 <field name="is_dnd"/>
                 <field name="is_intrested"/>
+                <field name="is_opportunity"/>
                 <field name="is_callback"/>
                 <field name="is_expo"/>
                 <field name="is_show"/>
@@ -27,6 +28,7 @@
                         <field name="name"/>
                         <field name="is_dnd"/>
                         <field name="is_intrested"/>
+                        <field name="is_opportunity"/>
                         <field name="is_callback"/>
                         <field name="is_expo"/>
                         <field name="is_show"/>

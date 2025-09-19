@@ -18,6 +18,7 @@ class DispoListName(models.Model):
         help="If checked, leads with this disposition will appear in callback list"
     )
     is_show = fields.Boolean(string="Is Show")
+    is_opportunity = fields.Boolean(string="Is Opportunity")
 
 class DNDLead(models.Model):
     _name = 'lead.dnd'

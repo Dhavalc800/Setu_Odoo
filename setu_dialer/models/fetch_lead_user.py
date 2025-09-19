@@ -618,6 +618,7 @@ class FetchLeadUser(models.TransientModel):
             rec.allowed_disposition_ids = rec.lead_id.lead_list_id.campaign_id.disposition_id.disposition_ids or self.env['dispo.list.name']
 
     def action_submit_disposition(self, user=None):
+        print("\n\n\n\nDoneeeeeeeeeee")
         config = self.env['ir.config_parameter'].sudo()
         mysql_checker = config.get_param('external_db.mysql_checker')
         lead_user = self.env['res.users'].sudo().browse(user)
@@ -708,39 +709,75 @@ class FetchLeadUser(models.TransientModel):
                         'phone': record.lead_id.x_phone,
                     })
 
-            if record.disposition_id.is_intrested:
+            # if record.disposition_id.is_intrested:
+            #     if not record.opportunity_name or not record.expected_revenue:
+            #         raise ValidationError("Please provide Opportunity Name and Expected Revenue.")
+
+            #     partner_obj = self.env['res.partner']
+            #     lead_name = record.lead_id.x_name or ''
+            #     lead_email = record.lead_id.x_email or ''
+            #     lead_phone = record.lead_id.x_phone or ''
+
+            #     # 🔍 Try to find existing partner by phone or email
+            #     partner = partner_obj.search([
+            #         '|',
+            #         ('phone', '=', lead_phone),
+            #         ('email', '=', lead_email)
+            #     ], limit=1)
+
+            #     # 🧾 If not found, create a new partner
+            #     if not partner:
+            #         partner = partner_obj.create({
+            #             'name': lead_name,
+            #             'email': lead_email,
+            #             'phone': lead_phone,
+            #         })
+
+            #     # ✅ Create CRM lead and link the partner
+            #     self.env['crm.lead'].create({
+            #         'name': record.opportunity_name,
+            #         'partner_id': partner.id,
+            #         'email_from': lead_email,
+            #         'phone': lead_phone,
+            #         'expected_revenue': record.expected_revenue,
+            #         'description': record.remark or '',
+            #     })
+            #     print("\n\n\n\nSelffffffffffff",record.opportunity_name,partner.id,partner.name,lead_email,lead_phone,record.expected_revenue)
+
+            if record.disposition_id.is_opportunity:
+                _logger.info("Disposition is interested for lead %s", record.lead_id.id)
                 if not record.opportunity_name or not record.expected_revenue:
                     raise ValidationError("Please provide Opportunity Name and Expected Revenue.")
 
                 partner_obj = self.env['res.partner']
-                lead_name = record.lead_id.x_name or ''
-                lead_email = record.lead_id.x_email or ''
-                lead_phone = record.lead_id.x_phone or ''
-
-                # 🔍 Try to find existing partner by phone or email
                 partner = partner_obj.search([
                     '|',
-                    ('phone', '=', lead_phone),
-                    ('email', '=', lead_email)
+                    ('phone', '=', record.lead_id.x_phone),
+                    ('email', '=', record.lead_id.x_email)
                 ], limit=1)
 
-                # 🧾 If not found, create a new partner
                 if not partner:
                     partner = partner_obj.create({
-                        'name': lead_name,
-                        'email': lead_email,
-                        'phone': lead_phone,
+                        'name': record.lead_id.x_name or '',
+                        'email': record.lead_id.x_email or '',
+                        'phone': record.lead_id.x_phone or '',
                     })
+                    _logger.info("New partner created: %s", partner.id)
 
-                # ✅ Create CRM lead and link the partner
-                self.env['crm.lead'].create({
-                    'name': record.opportunity_name,
-                    'partner_id': partner.id,
-                    'email_from': lead_email,
-                    'phone': lead_phone,
-                    'expected_revenue': record.expected_revenue,
+                stage = self.env['crm.stage'].search([('name', '=', 'New')], limit=1)
+
+                vals = {
+                    'name': record.opportunity_name or 'New Opportunity',
+                    'partner_id': partner.id if partner else False,
+                    'email_from': record.lead_id.x_email or False,
+                    'phone': record.lead_id.x_phone or False,
+                    'expected_revenue': record.expected_revenue or 0.0,
                     'description': record.remark or '',
-                })
+                    'stage_id': stage.id if stage else False,
+                    'type': 'opportunity',  # 🔑 Important: ensures it's created as an Opportunity
+                }
+                new_lead = self.env['crm.lead'].create(vals)
+                _logger.info("✅ CRM Lead created with ID %s, values=%s", new_lead.id, vals)
 
             submitted_lead_id = record.lead_id.id if record.lead_id else False
             # ✅ Clear lead data after submission
