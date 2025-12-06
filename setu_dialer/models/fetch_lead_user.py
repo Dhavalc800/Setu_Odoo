@@ -94,6 +94,7 @@ class FetchLeadUser(models.TransientModel):
         'lead_fetch_id',
         string="Inbound Calls"
     )
+    dispo_type_id = fields.Many2one('dispo.lead.type', string="Lead Type")
 
     # def write(self, vals):
     #     disposition_changed = 'disposition_id' in vals
@@ -592,6 +593,7 @@ class FetchLeadUser(models.TransientModel):
                     'callback_time': self.callback_datetime,
                     'user_id': self.env.user.id,
                     'disposition_id': self.disposition_id.id,
+                    'dispo_type_id': self.dispo_type_id.id,
                     'call_time': fields.Datetime.now(),
                     'remark': self.remark,
                     'campaign_id': lead.lead_list_id.campaign_id.id if lead.lead_list_id else False,
@@ -660,6 +662,7 @@ class FetchLeadUser(models.TransientModel):
                 'disposition_id': record.disposition_id.id,
                 'user_id': lead_user.id,
                 'call_time': fields.Datetime.now(),
+                'dispo_type_id': record.dispo_type_id.id,
                 'remark': record.remark,
                 'campaign_id': lead.lead_list_id.campaign_id.id if lead.lead_list_id else False,
                 'lead_list_id': lead.lead_list_id.id if lead.lead_list_id else False,

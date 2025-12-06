@@ -30,6 +30,7 @@ class LeadCallbackInfo(models.Model):
         readonly=True
     )
     lead_list_id = fields.Many2one('lead.list', string="Lead List")
+    dispo_type_id = fields.Many2one('dispo.lead.type', string="Lead Type")
 
     def action_load_callback_lead(self):
         self.ensure_one()

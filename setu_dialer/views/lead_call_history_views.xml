@@ -31,6 +31,7 @@
                         <field name="is_interested" invisible="1"/>
                         <field name="opportunity_name" attrs="{'invisible': [('is_interested', '!=', True)]}"/>
                         <field name="expected_revenue" attrs="{'invisible': [('is_interested', '!=', True)]}"/>
+                        <field name="dispo_type_id"/>
                         <field name="user_id"/>
                         <field name="disposition_id" options="{'no_open': True}"/>
                         <field name="call_time"/>

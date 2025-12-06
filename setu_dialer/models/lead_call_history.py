@@ -17,7 +17,8 @@ class LeadCallHistory(models.Model):
     call_time = fields.Datetime(string='Call Time', default=fields.Datetime.now)
     remark = fields.Text(string="Remark")
     is_interested = fields.Boolean(string="Is Interested", compute="_compute_is_interested")
-
+    dispo_type_id = fields.Many2one('dispo.lead.type', string="Lead Type")
+    
     @api.depends('disposition_id')
     def _compute_is_interested(self):
         for rec in self:

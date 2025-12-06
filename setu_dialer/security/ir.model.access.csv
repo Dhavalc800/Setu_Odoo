@@ -42,3 +42,4 @@ access_agreement_feedback_wizard,access.agreement.feedback.wizard,model_agreemen
 access_project_task_stages,access.project.task.stages,model_project_task_stages,base.group_user,1,1,1,1
 access_sale_order_csv_import,access.sale.order.csv.import,model_sale_order_csv_import,base.group_user,1,1,1,1
 access_delete_leads_wizard,access.delete.leads.wizard,model_delete_leads_wizard,base.group_user,1,1,1,1
+access_dispo_lead_type,access.dispo.lead.type,model_dispo_lead_type,base.group_user,1,1,1,1

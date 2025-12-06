@@ -77,6 +77,13 @@
                                             class="form-control"/>
                                     </div>
 
+                                    <div attrs="{'invisible': [('lead_id', '=', False)]}" class="mb-3">
+                                        <span><b>Lead Type</b></span>
+                                        <field name="dispo_type_id"
+                                            options="{'no_create': True, 'no_open': True}"
+                                            class="form-control"/>
+                                    </div>
+
                                     <!-- Callback Fields -->
                                     <div class="mb-3" attrs="{'invisible': [('is_disposition_callback', '=', False)]}">
                                         <span><b>Callback Time</b></span>
@@ -271,6 +278,12 @@
                                     <span>Disposition  </span>
                                     <field name="disposition_id"
                                         domain="[('id', 'in', allowed_disposition_ids)]"
+                                        options="{'no_create': True, 'no_open': True}"/>
+                                </div>
+
+                                <div>
+                                    <span>Lead Type  </span>
+                                    <field name="dispo_type_id"
                                         options="{'no_create': True, 'no_open': True}"/>
                                 </div>
 

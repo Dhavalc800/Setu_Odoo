@@ -52,4 +52,6 @@
                 parent="menu_root_configuration" action="action_csv_lead_status" sequence="9"/>
             <menuitem id="menu_csv_lead_reason" name="Csv Lead Reason"
                 parent="menu_root_configuration" action="action_csv_lead_reason" sequence="10"/>
+            <menuitem id="menu_dispo_lead_type" name="Dispo Lead Type"
+                parent="menu_root_configuration" action="action_dispo_lead_type" sequence="11"/>
 </odoo>
