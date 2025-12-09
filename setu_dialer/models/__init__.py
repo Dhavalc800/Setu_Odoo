@@ -6,6 +6,7 @@ from . import lead_list_data
 from . import report_column
 from . import lead_data_lead
 from . import fetch_lead_user
+from . import dispo_lead_type
 from . import lead_call_history
 from . import lead_callback_info
 from . import res_config_settings

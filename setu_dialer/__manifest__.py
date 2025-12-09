@@ -47,6 +47,7 @@
         'views/offline_hbab_status_views.xml',
         # 'views/res_users_views.xml',
         'views/sale_order_csv_import_views.xml',
+        'views/dispo_lead_type_views.xml',
         # 'views/disposition_queue_views.xml',
         # 'views/disposition_master_views.xml',
         'wizard/campaidns_upload_wizards_views.xml',
